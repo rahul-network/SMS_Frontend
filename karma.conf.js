@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/datatable-demo'),
+      dir: require('path').join(__dirname, './coverage/LH-UI'),
       subdir: '.',
       reporters: [
         { type: 'html' },
