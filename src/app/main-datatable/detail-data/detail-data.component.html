@@ -1,0 +1,59 @@
+<div class="card-container" style="display: grid;">
+
+    <div style="margin-bottom: 20px;">
+        <form [formGroup]="registerForm" (submit)="submitForm()">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{data.firstName}} - : {{data.cellPhone}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                
+                <mat-form-field appearance="fill" class="fill-container">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput [matTextareaAutosize]="false" formControlName="message"
+                    id="message" name="message" ngModel ></textarea>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+               
+            <button [disabled]="!registerForm.valid" mat-raised-button color="primary" type="submit">
+                <mat-icon>send</mat-icon>
+                send
+            </button>
+            <button mat-raised-button color="accent">
+                <mat-icon>refresh</mat-icon>
+                Refresh
+            </button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+    </div>
+
+    <table mat-table [dataSource]="detailDataSource" matSort class="mat-elevation-z8">
+
+        <!-- Content Column -->
+        <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Content </th>
+            <td mat-cell *matCellDef="let element"> {{element.content}} </td>
+        </ng-container>
+
+        <!-- Sent/Recieved Column -->
+        <ng-container matColumnDef="createdDateTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sent/Recieved </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdDateTime}} </td>
+        </ng-container>
+
+        <!-- SMS Type Column -->
+        <ng-container matColumnDef="smsType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> SMS Type </th>
+            <td mat-cell *matCellDef="let element">
+                {{element.smsType == "2" ? "Inbound" : "OutBound"}}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
