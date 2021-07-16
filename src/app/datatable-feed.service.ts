@@ -32,7 +32,8 @@ export class DatatableFeedService {
   }
 
   sendSms(_id: number,_message:string) {
-    return this.httpClient.post(`http://localhost:12387/api/PatientMessages/SendSms`,{Patientid:_id,Message :_message}).pipe(
+    let serverUrl = environment.apiUrl;
+    return this.httpClient.post(`${serverUrl}/api/PatientMessages/SendSms`,{Patientid:_id,Message :_message}).pipe(
       map((res: any) => {
         console.log(res);
         return res;
