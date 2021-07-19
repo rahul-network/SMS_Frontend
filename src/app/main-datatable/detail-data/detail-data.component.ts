@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
+
 @Component({
   selector: 'app-detail-data',
   templateUrl: './detail-data.component.html',
@@ -37,7 +38,9 @@ export class DetailDataComponent implements OnInit {
     });
   }
   submitForm():void{
-    this.datatableFeedService.sendSms(this.data.id,this.registerForm.get('message')?.value).subscribe((_feedDataDetails) => {
+
+    
+    this.datatableFeedService.sendSms(this.data.id,this.data.smsPhoneNo,this.registerForm.get('message')?.value).subscribe((_feedDataDetails) => {
       this.detailDataSource = new MatTableDataSource(_feedDataDetails);
       this.detailDataSource.sort = this.sort;
       this.registerForm.reset();

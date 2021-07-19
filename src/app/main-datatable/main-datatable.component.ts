@@ -42,7 +42,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         cellPhone: _data.cellPhone,
         firstName :_data.firstName,
         clinicId: _data.clinicId,
-        email : _data.email
+        email : _data.email,
+        smsPhoneNo : _data.clinic.smsPhoneNo
        }
     });
 
