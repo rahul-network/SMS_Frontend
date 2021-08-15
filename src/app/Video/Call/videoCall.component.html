@@ -1,0 +1,34 @@
+<div class="grid-container">
+    
+    <div class="grid-left">
+
+        <div *ngIf="!isRoomExist">
+            <div style="display: block;margin-top: 50%;text-align: center;">
+                <button style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
+                        type="button" 
+                        (click)="sendInvite()">
+                    <i class="far fa-plus-square"></i> Send Invite
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isRoomExist">
+            <div style="display: block;margin-top: 50%;text-align: center;">
+                <button style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
+                        type="button" 
+                        (click)="joinMeeting()">
+                    <i class="far fa-plus-square"></i> Join
+                </button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="grid-content">
+        <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
+        <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
+        (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
+        [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants>
+    </div>
+    <div class="grid-right">
+        <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
+    </div>
+</div>

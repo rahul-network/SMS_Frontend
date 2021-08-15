@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
+import {VideoCallComponent   } from '../Video/Call/videoCall.component'
 
 @Component({
   selector: 'app-main-datatable',
@@ -12,7 +13,7 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
 })
 export class MainDatatableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['action',  'email','firstName','clinicId','cellPhone'];
+  displayedColumns: string[] = ['video','sms',  'email','firstName','clinicId','cellPhone'];
   dataSource = new MatTableDataSource([]);
   
   @ViewChild(MatSort) sort: MatSort;
@@ -51,6 +52,27 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
       console.log('The dialog was closed', result);
 
     });
+  }
+
+  openCall(_data: any) {
+    window.open(`${location.origin}/#/videocall/${_data.id}`, "_blank");
+    
+    // const dialogRef = this.dialog.open(VideoCallComponent, {
+    //   width: '100%',
+    //   data: { 
+    //     id: _data.id,
+    //     cellPhone: _data.cellPhone,
+    //     firstName :_data.firstName,
+    //     clinicId: _data.clinicId,
+    //     email : _data.email,
+    //     smsPhoneNo : _data.clinic.smsPhoneNo
+    //    }
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+
+    // });
   }
 
 }

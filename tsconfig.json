@@ -16,11 +16,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
+    "strictNullChecks" : false,
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "path": [
+        "./node_modules/path-browserify"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
