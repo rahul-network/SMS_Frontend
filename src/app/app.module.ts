@@ -8,12 +8,15 @@ import { MainDatatableComponent } from './main-datatable/main-datatable.componen
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailDataComponent } from './main-datatable/detail-data/detail-data.component';
-
+import {CcmFormComponent } from './form/ccm/ccm.component';
+import { TitleCaseDirective} from './form/ccm/TitleCaseDirective'
 @NgModule({
   declarations: [
     AppComponent,
     MainDatatableComponent,
-    DetailDataComponent
+    DetailDataComponent,
+    CcmFormComponent,
+    TitleCaseDirective
   ],
   imports: [
     BrowserModule,
@@ -23,9 +26,8 @@ import { DetailDataComponent } from './main-datatable/detail-data/detail-data.co
     MaterialModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
-  providers: [],
+   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

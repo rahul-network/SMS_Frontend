@@ -2,10 +2,19 @@
 
     <div class="card-container">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z12">
+            <!--CCM Action Column -->
+            <ng-container matColumnDef="ccmForm">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> CCM Form </th>
+                <td mat-cell *matCellDef="let element">
+                    <div style="cursor: pointer;" (click)="openCCMForm(element)">
+                        <mat-icon>description</mat-icon>
+                    </div>
+                </td>
+            </ng-container>
 
             <!-- Action Column -->
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <ng-container matColumnDef="sms">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> SMS </th>
                 <td mat-cell *matCellDef="let element">
                     <div style="cursor: pointer;" (click)="openDetail(element)">
                         <mat-icon>call_made</mat-icon>
