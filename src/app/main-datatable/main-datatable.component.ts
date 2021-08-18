@@ -36,6 +36,7 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   openDetail(_data: any) {
     const dialogRef = this.dialog.open(DetailDataComponent, {
       width: '5000px',
+      disableClose: false,
       data: { 
         id: _data.id,
         cellPhone: _data.cellPhone,

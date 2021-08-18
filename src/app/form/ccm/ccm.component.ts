@@ -17,14 +17,14 @@ export class CcmFormComponent implements OnInit {
     loading = false;
     submitted = false;
     MeasurableTreatmentgoalsover12monthPeriod ={
-        options :["Measurable Treatment goals over 12 month Period"],
+        options :["Measurable treatment goals over 12 month period"],
         data:[
-            "Improve Knowlege defict related to disease process",
-            "Improve Knowlege of medication use/compliance",
+            "Improve knowledge deficit related to disease process",
+            "Improve knowledge of medication use/compliance",
             "Alteration in lifestyle secondary to disease",
-            "Coping related to diagnosis and prognosis.",
+            "Coping related to diagnosis and prognosis",
             "Improved level of independence/function",
-            "Manage co-existing conditions."
+            "Manage co-existing conditions"
         ]
     }
    
@@ -32,68 +32,68 @@ export class CcmFormComponent implements OnInit {
 
     PlannedInterventionsOrConditionsMgmtover12monthperiodfromInitiationofplan =
         [
-            "Understand Life Planning documents ( DPOA, Living Will, Healthcare Proxy)",
-            "Develop Personal Safety Plan (home safety/fall prevention)",
-            "Improve Cognitive Function","Improve Mood", "Support/caregiver resources and involvement",
-            "Control Pain", "Medication Adherence", "Understand Polypharmacy", "Maintain Healthy Body Weight",
-            "Monitor Weight", "Activity Tracking", "Improve Sleep", "Learn about Nurritian Plan",
-            "Desh Diet",
-            "Decrease Salt Intake",
-            "Stop Smoking", "Stop Tovacco Use", "Reduce Alcohol Use", "Monitor glucose at home",
-            "Monitor Blood Pressure at home",
-            "Keep record of Readings","Manage Anxiety", "Manage Stress", "Regularly Keep Doctors Appts", "Community Resource Avaialbility",
-            "Improve Mobility", "Exercise at least 30 min a day"
+            "Understand life planning documents ( DPOA, living will, healthcare proxy)",
+            "Develop personal safety plan (home safety/fall prevention)",
+            "Improve cognitive function","Improve mood", "Support/caregiver resources and involvement",
+            "Control pain", "Medication adherence", "Understand polypharmacy", "Maintain healthy body weight",
+            "Monitor weight", "Activity tracking", "Improve sleep", "Learn about nurritian plan",
+            "Dash Diet",
+            "Decrease salt intake",
+        "Stop smoking", "Stop tobacco use", "Reduce alcohol use", "Monitor glucose at home",
+            "Monitor blood pressure at home",
+        "Keep record of readings", "Manage anxiety", "Manage stress", "Regularly keep doctors appts", "Community resource availability",
+            "Improve mobility", "Exercise at least 30 min a day"
         ];
     DiscussofDiseaseProcess =
         [
             "Assess weight (on patient's own scale if avaialable)",
-            "Evaulate Knowlege of disease process",
+            "Evaluate knowledge of disease process",
             "Instruct on definition"
         ];
     Medication =
         [
             "Instruct on medication schedule",
-            "Evaulate effectiveness of medications/symtopm control",
-            "Educate on purpose, action, side effects, and interations of medications(s)",
+            "Evaluate effectiveness of medications/symptom control",
+            "Educate on purpose, action, side effects, and interations of medications",
             "Instruct on medication changes"
         ]
     NutritionOrHydrationOrElimication =
         [
             "Assess appropriate fluid and dietarty intake",
-            "Evaluate Knowlege of diet restrictions/fluid requirement",
-            "Instruct on diet/fluid reuqirement as appropriate",
+            "Evaluate knowledge of diet restrictions/fluid requirement",
+            "Instruct on diet/fluid requirement as appropriate",
             "Provide assistance with meal planning",
             "Assess bowel and urinary function",
-            "Instruct to avoid straining with bowel movements."
+            "Instruct to avoid straining with bowel movements"
         ]
     Activity =
         [
-            "Assess current acitivity and tolerance levels.",
+            "Assess current acitivity and tolerance levels",
             "Instruct to avoid overexertion",
-            "Instruct on importance of frequent rest periods and pacing activities.",
+            "Instruct on importance of frequent rest periods and pacing activities",
             "Improve sleep quality and duration of sleep"
         ]
     PhychoOrSocial =
         [
             "Assess social support systems",
-            "Evaculated caregiver coping status",
+            "Evacuated caregiver coping status",
             "Completed PHQ9",
             "Completed PHQ2",
             "Completed GADQ2",
-            "Asssess safety and fall risk"
+            "Assess safety and fall risk"
         ]
 
     ProgressOrReductionofBarriersNotedbyPatient =
         [
             "How would you evaluate your progress toward goals ?",
             "How would rate the education information provided this time ?",
-            "How would you rate your mental gealth, including your mood and ability to think?",
-            "How is your follow-up with all meical appointments ?"
+            "How would you rate your mental health, including your mood and ability to think?",
+            "How is your follow-up with all medical appointments ?"
         ];
 
     MeicationAdherence =
         [
-            "Do you forget to take your meication ?",
+            "Do you forget to take your medication ?",
             "Are you confused about how to take your medication?",
             "Have a hard time opening the bottles or self administering the medication ?",
             "You don't know what they are for ?",
@@ -104,7 +104,7 @@ export class CcmFormComponent implements OnInit {
 
     PHQ2ReportedByPatient =
         ["Feeling down, depressed or hopeless",
-            "Little interest or pleasure in doing things."
+            "Little interest or pleasure in doing things"
         ];
 
     GeneralizedAnxietyDisroder2itemGAD2 =
@@ -115,15 +115,15 @@ export class CcmFormComponent implements OnInit {
 
     PatientOrCaregiverOutcomesAchivedThisMonth =
         [
-            "Demonstrates ability to maintain medical condition with appts kept.",
-            "Verbalizes understanding of purpose, action and side effects of each medication instructed.",
-            "Verbalizes general dietary restrictions discussed.",
-            "Verbalizes fluid restrictions such as alcohol or caffiene.",
-            "Achieved optimal GI Function", "Verbalizes plan to meet basic ADL/IADL needs",
-            "Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities.",
+            "Demonstrates ability to maintain medical condition with appts kept",
+            "Verbalizes understanding of purpose, action and side effects of each medication instructed",
+            "Verbalizes general dietary restrictions discussed",
+            "Verbalizes fluid restrictions such as alcohol or caffeine",
+            "Achieved optimal GI function", "Verbalizes plan to meet basic ADL/IADL needs",
+            "Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities",
             "Verbalizes how and when to call for help",
-            "Verbalizes members of support system.",
-            "Verbalizes knowledge of plan.barriers to care."
+            "Verbalizes members of support system",
+            "Verbalizes knowledge of plan.barriers to care"
         ]
 
     constructor(
