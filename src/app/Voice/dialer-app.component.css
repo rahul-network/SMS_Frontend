@@ -1,0 +1,30 @@
+.example-card {
+  max-width: 550px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.mat-form-field.fill-container,
+.mat-form-field.fill-container .mat-form-field-infix,
+.mat-form-field.fill-container .mat-form-field-flex,
+.mat-form-field.fill-container .mat-form-field-wrapper {
+height: 100%;
+width: 100%;
+}
+
+.mat-form-field.fill-container textarea {
+height:100px;
+}
+
+.danger{
+background-color: red;
+color: white;
+}
+
+.primary{
+
+background-color: lightseagreen;
+color: white;
+}

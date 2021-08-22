@@ -1,34 +1,69 @@
-<div class="grid-container">
-    
-    <div class="grid-left">
-
-        <div *ngIf="!isRoomExist">
-            <div style="display: block;margin-top: 50%;text-align: center;">
-                <button style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
-                        type="button" 
-                        (click)="sendInvite()">
-                    <i class="far fa-plus-square"></i> Send Invite
-                </button>
-            </div>
-        </div>
-        <div *ngIf="isRoomExist">
-            <div style="display: block;margin-top: 50%;text-align: center;">
-                <button style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
-                        type="button" 
-                        (click)="joinMeeting()">
-                    <i class="far fa-plus-square"></i> Join
-                </button>
-            </div>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+<div *ngIf="data" class="app-container" >
+  <div class="app-main">
+    <div class="video-call-wrapper">
+      <div class="video-participant">
+        <div class="participant-actions">
+            {{data.firstName}} {{data.lastName}}
         </div>
         
-    </div>
-    <div class="grid-content">
         <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
         <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
         (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
         [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants>
+      </div>
+      <div class="video-participant">
+        <div class="participant-actions">
+            <div style="width: 100%;">
+                <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
+                <button  *ngIf="isRoomExist" style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
+                
+                type="button" (click)="joinMeeting()">
+            Join
+            </button>
+            <button *ngIf="!isRoomExist" [disabled]="disable" style="position: absolute;" class="btn btn-lg btn-outline-secondary twitter-red"
+            type="button" (click)="sendInvite()">
+             Send Invite
+        </button>
+            </div>
+            <div style="width: 40%;">
+               
+            
+        </div>
+      </div>
     </div>
-    <div class="grid-right">
-        <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
-    </div>
+  </div>
+  </div>
 </div>
+
+
+<!-- <div *ngIf="data" class="main" style="height: 100%;">
+    <div  style="height: 10%;">
+    <p><span><strong>Name : </strong>{{data.firstName}} {{data.lastName}}</span></p>
+    <p><span><strong>Cell Phone : </strong>{{data.cellPhone}}</span></p>
+    <button *ngIf="!isRoomExist" style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
+        type="button" (click)="sendInvite()">
+        <i class="far fa-plus-square"></i> Send Invite
+    </button>
+    <button *ngIf="isRoomExist" style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
+        type="button" (click)="joinMeeting()">
+        <i class="far fa-plus-square"></i> Join
+    </button>
+</div>
+<div  style="height: 15%;">
+    <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
+</div>
+<div  style="height: 75%;">
+      
+        <div class="row" style="border: 1px solid #ffc500;">
+          <div class="col-6 col-sm-12">  <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera></div>
+          <div class="col-6 col-sm-12"> <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
+            (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
+            [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants></div>
+        </div>
+    
+
+    
+
+    
+</div> -->

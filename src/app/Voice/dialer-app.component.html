@@ -1,0 +1,48 @@
+
+  <div class="card-container" style="display: grid;">
+    <div style="margin-bottom: 20px;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            
+            <mat-card-title>{{data.firstName}}  {{data.lastName}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div style="margin: 5px;">
+              <p><span><strong>Gender : </strong>{{data.gender}}</span></p>
+              <p><span><strong>Cell Phone : </strong>{{data.cellPhone}}</span></p>
+              <p><span><strong>Home Phone : </strong>{{data.homePhone}}</span></p>
+              <p><span><strong>email : </strong>{{data.email}}</span></p>
+              </div>
+          </mat-card-content>
+          <mat-card-actions>
+             
+            <button *ngIf="data.cellPhone"  mat-raised-button [ngClass]="{'danger': onPhone, 'primary': !onPhone}" (click)="Phonecall(data.cellPhone)">
+              <mat-icon *ngIf="!onPhone"  >call</mat-icon>
+              <mat-icon *ngIf="onPhone"  >phone_in_talk</mat-icon>
+              Cell : {{data.cellPhone}}
+            </button>
+            <button *ngIf="data.cellPhone && onPhone" mat-raised-button color="primary" (click)="toggleMute()">
+              <mat-icon *ngIf="!muted"  >volume_mute</mat-icon>
+              <mat-icon *ngIf="muted"  >volume_off</mat-icon>
+            </button>
+            <button *ngIf="data.homePhone" mat-raised-button [ngClass]="{'danger': onPhone, 'primary': !onPhone}"   (click)="Phonecall(data.homePhone)">
+              <mat-icon *ngIf="!onPhone"  >call</mat-icon>
+              <mat-icon *ngIf="onPhone"  >phone_in_talk</mat-icon>
+              Home : {{data.homePhone}}
+            </button>
+            <button *ngIf="data.homePhone && onPhone"  mat-raised-button color="primary" (click)="toggleMute()">
+              <mat-icon *ngIf="!muted"  >volume_mute</mat-icon>
+              <mat-icon *ngIf="muted"  >volume_off</mat-icon>
+            </button>
+            <button  mat-raised-button primary (click)="close()">
+              <mat-icon>close</mat-icon>
+              Exit
+            </button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+
+
+</div>

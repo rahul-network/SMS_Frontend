@@ -25,9 +25,8 @@ import { VideoChatService } from './services/videochat.service';
 import { DeviceService } from './services/device.service';
 import { StorageService } from './services/storage.service';
 import { VideoCallComponent } from './Video/Call/videoCall.component';
-
 import { SpinnersAngularModule } from 'spinners-angular';
-
+import {DialerAppComponent  } from './Voice/dialer-app.component';
 
 
 @NgModule({
@@ -41,7 +40,8 @@ import { SpinnersAngularModule } from 'spinners-angular';
     RoomsComponent,
     SettingsComponent,
     DeviceSelectComponent,
-    VideoCallComponent
+    VideoCallComponent,
+    DialerAppComponent
     
   ],
   imports: [
@@ -53,6 +53,7 @@ import { SpinnersAngularModule } from 'spinners-angular';
     FormsModule,
     ReactiveFormsModule,
     SpinnersAngularModule,
+    
     
 
   ],

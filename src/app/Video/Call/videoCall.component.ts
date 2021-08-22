@@ -6,8 +6,9 @@ import { SettingsComponent } from '../settings/settings.component';
 import { ParticipantsComponent } from '../participants/participants.component';
 import { VideoChatService } from '../../services/videochat.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import { environment } from "../../../environments/environment" 
+import { environment } from "../../../environments/environment"
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'video-call',
@@ -19,30 +20,31 @@ export class VideoCallComponent implements OnInit {
     @ViewChild('camera', { static: false }) camera: CameraComponent;
     @ViewChild('settings', { static: false }) settings: SettingsComponent;
     @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
-
+    disable :boolean;
     activeRoom: Room;
     isRoomExist: boolean = false;
     roomGuid: string;
+    patientId: number;
+    meetingId: string;
     private notificationHub: HubConnection;
-
+    data:any;
     constructor(
         private readonly videoChatService: VideoChatService,
-        private datatableFeedService: DatatableFeedService) {
-            debugger;
-            let roomSidParams = (new URL(location.href)).hash.substr(1).split('=')[1];
-            if (
-                roomSidParams !== null && roomSidParams != "" && typeof roomSidParams !== "undefined"
-            ) {
-                this.isRoomExist = true;
-                this.roomGuid = roomSidParams;
-            }
-            else
-                this.isRoomExist = false;
-
-
-         }
+        private datatableFeedService: DatatableFeedService, private activatedRoute: ActivatedRoute) {
+        this.patientId = this.activatedRoute.snapshot.params.id as number;
+        this.meetingId = this.activatedRoute.snapshot.params.meetingId;
+        if (
+            this.meetingId !== null && this.meetingId != "" && typeof this.meetingId !== "undefined"
+        ) {
+            this.isRoomExist = true;
+            this.roomGuid = this.meetingId;
+        }
+        else
+            this.isRoomExist = false;
+    }
 
     async ngOnInit() {
+        this.disable = false;
         let serverUrl = environment.apiUrl;
         const builder =
             new HubConnectionBuilder()
@@ -56,10 +58,13 @@ export class VideoCallComponent implements OnInit {
             }
         });
         await this.notificationHub.start();
-debugger;
-        var x =  this.videoChatService.getAllRooms().then((res)=>{
-            console.log(res)
+        this.videoChatService.getAllRooms().then((result) => {
+            console.log(result)
         });
+        
+        this.datatableFeedService.getPatient(this.patientId).subscribe((result) => {
+            this.data = result;
+          });
 
     }
 
@@ -91,7 +96,7 @@ debugger;
 
             this.activeRoom =
                 await this.videoChatService
-                          .joinOrCreateRoom(roomName, tracks);
+                    .joinOrCreateRoom(roomName, tracks);
 
             this.participants.initialize(this.activeRoom.participants);
             this.registerRoomEvents();
@@ -125,12 +130,11 @@ debugger;
     private isDetachable(track: LocalTrack): track is LocalAudioTrack | LocalVideoTrack {
         return !!track
             && ((track as LocalAudioTrack).detach !== undefined
-            || (track as LocalVideoTrack).detach !== undefined);
+                || (track as LocalVideoTrack).detach !== undefined);
     }
 
     sendInvite() {
-        debugger;
-        
+        this.disable = true;
         this.videoChatService.getNewRoom().subscribe(async (_roomResponse) => {
             if (this.activeRoom) {
                 this.activeRoom.disconnect();
@@ -145,23 +149,22 @@ debugger;
 
             this.participants.initialize(this.activeRoom.participants);
             this.registerRoomEvents();
-
+           
             this.notificationHub.send('RoomsUpdated', true);
-            let partipantURL =  encodeURIComponent(`${location.origin}/videocall/?roomSid=${_roomResponse.name}`) 
+            let partipantURL =  `${location.origin}/#/videocall/${this.patientId}/${_roomResponse.name}`
             
-            this.datatableFeedService.sendSms(156,'+17864633495',`${location.origin}/#/videocall/?roomSid=${_roomResponse.name}`).subscribe((_feedDataDetails) => {
-                alert('Invite Sent Successfully');
-            });
-            
-            
-              
-            console.log("Join Link", `${location.origin}/#/participate/?roomSid=${_roomResponse.name}`);
-          
+             this.datatableFeedService.sendSms(Number(this.patientId), this.data.cellPhone,partipantURL).subscribe((_feedDataDetails) => {
+                this.disable = false;
+                 alert('Invite Sent Successfully');
+             },error=>{
+                this.disable = false;
+             });
         });
     }
 
 
     async joinMeeting() {
+        
         if (this.activeRoom) {
             this.activeRoom.disconnect();
         }

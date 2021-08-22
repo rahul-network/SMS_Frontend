@@ -19,11 +19,19 @@ export class DatatableFeedService {
     );
   }
 
+  getPatient(_id:any): Observable<any> {
+    let serverUrl = environment.apiUrl;
+    return this.httpClient.get(`${serverUrl}/api/patient/${_id}`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
   getDataById(_id: any) {
     let serverUrl = environment.apiUrl;
     return this.httpClient.get(`${serverUrl}/api/PatientMessages/${_id}`).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       })
     );
@@ -35,7 +43,6 @@ export class DatatableFeedService {
     let serverUrl = environment.apiUrl;
     return this.httpClient.post(`${serverUrl}/api/PatientMessages/SendSms`,{Patientid:_id,SMSPhoneNo:smsPhoneNo, Message :_message}).pipe(
       map((res: any) => {
-        console.log(res);
         return res;
       })
     );

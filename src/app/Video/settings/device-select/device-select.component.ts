@@ -39,7 +39,6 @@ export class DeviceSelectComponent {
     }
 
     private find(devices: MediaDeviceInfo[]) {
-        console.log(devices)
         if (devices && devices.length > 0) {
             return devices[0].deviceId;
         }

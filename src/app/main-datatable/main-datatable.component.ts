@@ -4,7 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
-import {VideoCallComponent   } from '../Video/Call/videoCall.component'
+import { DialerAppComponent  } from '../Voice/dialer-app.component';
+
 
 @Component({
   selector: 'app-main-datatable',
@@ -13,7 +14,7 @@ import {VideoCallComponent   } from '../Video/Call/videoCall.component'
 })
 export class MainDatatableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['video','sms',  'email','firstName','clinicId','cellPhone'];
+  displayedColumns: string[] = ['video','call', 'sms',  'email','firstName','clinicId','cellPhone'];
   dataSource = new MatTableDataSource([]);
   
   @ViewChild(MatSort) sort: MatSort;
@@ -49,30 +50,41 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      
 
     });
   }
 
-  openCall(_data: any) {
+  openVideoCall(_data: any) {
     window.open(`${location.origin}/#/videocall/${_data.id}`, "_blank");
+  
+  }
+
+  openCall(_data: any) {
+    debugger;
+    console.log(_data);
+    const dialogRef = this.dialog.open(DialerAppComponent, {
+       disableClose: true ,
+      width: '70%',
+      data: { 
+        id: _data.id,
+        cellPhone: _data.cellPhone,
+        firstName :_data.firstName,
+        clinicId: _data.clinicId,
+        email : _data.email,
+        smsPhoneNo : _data.clinic.smsPhoneNo,
+        lastName :_data.lastName,
+        gender :_data.gender,
+
+       }
+    });
+
     
-    // const dialogRef = this.dialog.open(VideoCallComponent, {
-    //   width: '100%',
-    //   data: { 
-    //     id: _data.id,
-    //     cellPhone: _data.cellPhone,
-    //     firstName :_data.firstName,
-    //     clinicId: _data.clinicId,
-    //     email : _data.email,
-    //     smsPhoneNo : _data.clinic.smsPhoneNo
-    //    }
-    // });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed', result);
+    dialogRef.afterClosed().subscribe(result => {
+      
 
-    // });
+    });
   }
 
 }
