@@ -1,0 +1,695 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-content>
+        <header>
+          <p>
+            <img src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px" width="250px" />
+          </p>
+          <span>
+            <h1>CHRONIC CARE MANAGEMENT PROGRAM</h1>
+          </span>
+        </header>
+        <p>
+          <span>
+            <h2>Care plan review notes</h2>
+          </span>
+        </p>
+        <p>
+          <span>
+            <h2>MEDICAL PRACTICE</h2>
+          </span>
+        </p>
+          <p style="margin-left:40%;margin-right: 40%;">
+            <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
+          </p>
+        
+        <p>
+          <span>
+            <h2>DOCUMENT CREATED</h2>
+          </span>
+        </p>
+        <p style="margin-left:40%;margin-right: 40%;">
+          <input appTitleCase  appTitleCase type="text" formControlName="documentCreated" class="form-control" />
+        </p>
+        
+        <span>PATIENT DETAILS</span>
+      
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <p>First name</p>
+              </td>
+              <td>
+                <p>Last name</p>
+              </td>
+              <td>
+                <p>Date of birth</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                 
+                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="lastName" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="dateOfBirth" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT&rsquo;S CHRONIC CONDITIONS</span>
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <p>Diagnosis 1</p>
+              </td>
+              <td>
+                <p>Diagnosis 2</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="diagnose1" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="diagnose2" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT&rsquo;S CARE TEAM</span>
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <p>Primary care physician</p>
+              </td>
+              <td>
+                <p>Care lead</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="primaryCarePhysician" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="careLead" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Other provider/specialist</p>
+              </td>
+              <td>
+                <p>Podiatrist</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="otherProvideOrSpecialist" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="podiatrist" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT'S CARE PLAN</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgray;">
+              <td *ngFor="let column of MeasurableTreatmentgoalsover12monthPeriod.options let i = index">
+                <p>
+                  <strong>{{column}}</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of MeasurableTreatmentgoalsover12monthPeriod.data let i = index" formArrayName="MeasurableTreatmentgoalsover12monthPeriod">
+                  
+                <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+              </p>
+              </td>
+              
+            </tr>
+          </tbody>
+        </table>
+     
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Planned interventions/conditions mgmt over 12 month period from initiation of plan</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of PlannedInterventionsOrConditionsMgmtover12monthperiodfromInitiationofplan let i = index" formArrayName="PlannedInterventionsOrConditionsMgmtover12monthperiodfromInitiationofplan">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Symptoms management - current month</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Periodic labs and medications review</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Key labs noted this month</strong>
+                </p>
+              </td>
+              <td>
+                <p>
+                  <strong>Medication management - key medication changes noted this month</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+                </p>
+              </td>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Telephone interventions with patient this month</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Discuss of disease process</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of DiscussofDiseaseProcess let i = index" formArrayName="DiscussofDiseaseProcess">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+                </p>
+               
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Medication</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of Medication let i = index" formArrayName="Medication">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Nutrition/hydration/elimication</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of NutritionOrHydrationOrElimication let i = index" formArrayName="NutritionOrHydrationOrElimication">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Activity</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of Activity let i = index" formArrayName="Activity">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Phycho/Social</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p *ngFor="let item of PhychoOrSocial let i = index" formArrayName="PhychoOrSocial">
+                  <mat-checkbox [formControlName]="i" class="checkbox-margin"  value="n.id">{{item}}</mat-checkbox>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <p>
+                  <strong>Patient response for interventions outlined above</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Progress/reduction of barriers noted by patient</span>
+        <table >
+          <thead>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Excellent</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Good</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Poor</strong>
+                </p>
+              </td>
+            </tr>
+            </thead>
+            <tbody>
+              <ng-container  *ngFor="let item of ProgressOrReductionofBarriersNotedbyPatient let i = index" formArrayName="ProgressOrReductionofBarriersNotedbyPatient" >
+            
+            <tr  >
+              <td>
+                <p>{{item}}</p>
+              </td>
+              
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Excellent" [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Good"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Poor"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+           
+            </tr>
+           </ng-container>
+          </tbody>
+        </table>
+        
+        <table >
+          <thead>
+            <tr >
+              <td>
+                <p><strong>Rate level of pain</strong> </p>
+              </td>
+              <td>
+                <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
+              </td>
+            </tr>
+            </thead>
+          
+        </table>
+        <span>Medication adherence</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Yes</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>No</strong>
+                </p>
+              </td>
+            </tr>
+            <tr  *ngFor="let item of MeicationAdherence let i = index" formArrayName="MeicationAdherence">
+              <td>
+                <p>{{item}}</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+           
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>Comments</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <span>PHQ2 reported By patient</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Not at all (0)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Several days (1)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>More than half days (2)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Nearly every day (3)</strong>
+                </p>
+              </td>
+            </tr>
+            <tr  *ngFor="let item of PHQ2ReportedByPatient let i = index" formArrayName="PHQ2ReportedByPatient">
+              <td>
+                <p>{{item}}</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td colspan="2">
+                <strong>PHQ2 patient score</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Greater than 3 is that depressive disorder is likely</td>
+              <td><input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" /></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <span>Generalized anxiety disorder 2-item (GAD-2)</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Not at All(0)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Several Days (1)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>More than Half Days (2)</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Nearly Every Day (3)</strong>
+                </p>
+              </td>
+            </tr>
+            <tr  *ngFor="let item of GeneralizedAnxietyDisroder2itemGAD2 let i = index" formArrayName="GeneralizedAnxietyDisroder2itemGAD2">
+              <td>
+                <p>{{item}}</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td colspan="2">
+                <strong>GAD Patient Scrore</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Greater than 3 is that depressive disorder is likely</td>
+              <td><input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" /></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>Comments</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Patient/caregiver outcomes achieved this month</span>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Met</strong>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <strong>Not Met</strong>
+                </p>
+              </td>
+            </tr>
+            <tr  *ngFor="let item of PatientOrCaregiverOutcomesAchivedThisMonth let i = index" formArrayName="PatientOrCaregiverOutcomesAchivedThisMonth">
+              <td>
+                <p>{{item}}</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"  [name]="item">  </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table >
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>Community or social service orders given this month</strong>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met" >  Yes  </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> No </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <span>ADDITIONAL NOTES</span>
+        <p>
+          <textarea rows="5" style="width: 100%;" formControlName="firstName" class="form-control" >
+          </textarea>
+        </p>
+        <span>PATIENT'S CONSENT</span>
+        <table >
+          <tbody>
+            <tr>
+              <td>
+                <p>Date of verbal consent:</p>
+              </td>
+              <td>
+                <input appTitleCase   type="text" formControlName="medicalPractice" class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table >
+          <tbody>
+            <tr>
+              <td colspan="2">Patient was informed about the availability of CCM services and applicable cost sharing and their right to opt-out anytime. Patient was informed only one practitioner can furnish and be paid for CCM services during a calendar month.</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm">
+      <button type="reset" mat-button mat-raised  class="push-right-xs" >Reset</button>
+      <button type="submit" mat-button mat-raised-button color="primary" [disabled]="form.invalid">Save</button>
+  </div>
+  </form>

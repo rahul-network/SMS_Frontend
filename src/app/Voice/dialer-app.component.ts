@@ -52,9 +52,7 @@ export class DialerAppComponent implements OnInit {
           closeProtection: true, // will warn user if you try to close browser window during an active call
           debug: true
         };
-        console.log(res);
-        let x = Twilio.Device.setup(res, options);
-        console.log(x);
+        Twilio.Device.setup(res, options);
       });
   }
   constructor(public dialogRef: MatDialogRef<DialerAppComponent>,
@@ -77,7 +75,6 @@ export class DialerAppComponent implements OnInit {
     Twilio.Device.on("connect", (connection: any) => {
       console.log("This is a listener that fires when your device is connected to a phone call")
       console.log(connection);
-      debugger;
       let obj: PatientVoiceCall = {
         PatientId: Number( this.data.id),
         CallLength: "00",
@@ -85,7 +82,6 @@ export class DialerAppComponent implements OnInit {
         CalledTo: connection.message.To,
         OutboundConnectionId: connection.outboundConnectionId
       };
-      debugger;
       this.patientVoiceCallService.addOrUpdate(obj).subscribe((res) => {
         console.log(res);
       });
@@ -113,11 +109,7 @@ export class DialerAppComponent implements OnInit {
     if (!this.onPhone) {
       this.onPhone = true;
       this.muted = false;
-      debugger;
-       let c = Twilio.Device.connect({ To: phoneNumber, From :this.data.smsPhoneNo });
-       
-
-      
+       Twilio.Device.connect({ To: phoneNumber, From :this.data.smsPhoneNo });
       this.logtext = `Calling ${this.fullNumber}`;
     } else {
       // hang up call in progress

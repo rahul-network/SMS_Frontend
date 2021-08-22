@@ -8,7 +8,9 @@ import { VideoChatService } from '../../services/videochat.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { environment } from "../../../environments/environment"
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
+import { PatientVideoCallService,PatientVideoCall  } from 'src/app/Video/service/patientvideocall-service';
 import { ActivatedRoute } from '@angular/router';
+import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
 
 @Component({
     selector: 'video-call',
@@ -30,7 +32,10 @@ export class VideoCallComponent implements OnInit {
     data:any;
     constructor(
         private readonly videoChatService: VideoChatService,
-        private datatableFeedService: DatatableFeedService, private activatedRoute: ActivatedRoute) {
+        private datatableFeedService: DatatableFeedService, 
+        private patientVideoCallService: PatientVideoCallService, 
+        
+        private activatedRoute: ActivatedRoute) {
         this.patientId = this.activatedRoute.snapshot.params.id as number;
         this.meetingId = this.activatedRoute.snapshot.params.meetingId;
         if (
@@ -83,6 +88,16 @@ export class VideoCallComponent implements OnInit {
         this.camera.initializePreview(videoDevice);
 
         this.participants.clear();
+        let obj : PatientVideoCall = {
+            MeetingId :  this.roomGuid,
+            PatientId : Number(this.patientId),
+            HasPartiparntJoined : true,
+            CallStartDateTime : new Date(),
+            ParticipantJoinDateTime : new Date(),
+            PartipantLeaveDateTime : null,
+            CreatedBy : 1,
+        }
+        this.patientVideoCallService.Leavemeeting(obj).subscribe();
     }
 
     async onRoomChanged(roomName: string) {
@@ -152,10 +167,20 @@ export class VideoCallComponent implements OnInit {
            
             this.notificationHub.send('RoomsUpdated', true);
             let partipantURL =  `${location.origin}/#/videocall/${this.patientId}/${_roomResponse.name}`
+                
             
              this.datatableFeedService.sendSms(Number(this.patientId), this.data.cellPhone,partipantURL).subscribe((_feedDataDetails) => {
                 this.disable = false;
-                 alert('Invite Sent Successfully');
+                let obj : PatientVideoCall = {
+                    MeetingId :  _roomResponse.name,
+                    PatientId : Number(this.patientId),
+                    HasPartiparntJoined : false,
+                    CallStartDateTime : new Date(),
+                    ParticipantJoinDateTime : null,
+                    PartipantLeaveDateTime : null,
+                    CreatedBy : 1,
+                }
+                this.patientVideoCallService.CreateMeeting(obj).subscribe();
              },error=>{
                 this.disable = false;
              });
@@ -180,5 +205,15 @@ export class VideoCallComponent implements OnInit {
         this.registerRoomEvents();
 
         this.notificationHub.send('RoomsUpdated', true);
+        let obj : PatientVideoCall = {
+            MeetingId :  this.roomGuid,
+            PatientId : Number(this.patientId),
+            HasPartiparntJoined : true,
+            CallStartDateTime : new Date(),
+            ParticipantJoinDateTime : new Date(),
+            PartipantLeaveDateTime : null,
+            CreatedBy : 1,
+        }
+        this.patientVideoCallService.Joinmeeting(obj).subscribe();
     }
 }

@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
 import { DialerAppComponent  } from '../Voice/dialer-app.component';
-
+import {CcmFormComponent  } from '../../app/form/ccm/ccm.component';
 
 @Component({
   selector: 'app-main-datatable',
@@ -14,7 +14,7 @@ import { DialerAppComponent  } from '../Voice/dialer-app.component';
 })
 export class MainDatatableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['video','call', 'sms',  'email','firstName','clinicId','cellPhone'];
+  displayedColumns: string[] = ['ccmForm','video','call', 'sms',  'email','firstName','clinicId','cellPhone'];
   dataSource = new MatTableDataSource([]);
   
   @ViewChild(MatSort) sort: MatSort;
@@ -61,8 +61,6 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   openCall(_data: any) {
-    debugger;
-    console.log(_data);
     const dialogRef = this.dialog.open(DialerAppComponent, {
        disableClose: true ,
       width: '70%',
@@ -84,6 +82,21 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       
 
+    });
+  }
+
+  openCCMForm(_data: any) {
+    const dialogRef = this.dialog.open(CcmFormComponent, {
+      width: '100$',
+      height: '100%',
+      data: { 
+        id: _data.id,
+        cellPhone: _data.cellPhone,
+        firstName :_data.firstName,
+        clinicId: _data.clinicId,
+        email : _data.email,
+        smsPhoneNo : _data.clinic.smsPhoneNo
+       }
     });
   }
 

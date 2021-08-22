@@ -24,7 +24,8 @@ div > p {
 }
 
 .leave-room {
-    background-color: rgba(0, 15, 47, 0.5);
+    /* background-color: rgba(0, 15, 47, 0.5); */
+    background-color:red;
 }
 
 .navbar.shadow {

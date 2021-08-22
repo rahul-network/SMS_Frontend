@@ -27,6 +27,7 @@ import { StorageService } from './services/storage.service';
 import { VideoCallComponent } from './Video/Call/videoCall.component';
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
+import {CcmFormComponent  } from './form/ccm/ccm.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {DialerAppComponent  } from './Voice/dialer-app.component';
     SettingsComponent,
     DeviceSelectComponent,
     VideoCallComponent,
-    DialerAppComponent
+    DialerAppComponent,
+    CcmFormComponent
     
   ],
   imports: [
