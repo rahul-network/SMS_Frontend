@@ -1,695 +1,1297 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-card>
-      <mat-card-content>
-        <header>
-          <p>
-            <img src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px" width="250px" />
-          </p>
-          <span>
-            <h1>CHRONIC CARE MANAGEMENT PROGRAM</h1>
-          </span>
-        </header>
+  <mat-card>
+    <mat-card-content>
+      <header>
         <p>
-          <span>
-            <h2>Care plan review notes</h2>
-          </span>
+          <img src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px" width="250px" />
         </p>
-        <p>
-          <span>
-            <h2>MEDICAL PRACTICE</h2>
-          </span>
-        </p>
-          <p style="margin-left:40%;margin-right: 40%;">
-            <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
-          </p>
-        
-        <p>
-          <span>
-            <h2>DOCUMENT CREATED</h2>
-          </span>
-        </p>
-        <p style="margin-left:40%;margin-right: 40%;">
-          <input appTitleCase  appTitleCase type="text" formControlName="documentCreated" class="form-control" />
-        </p>
-        
-        <span>PATIENT DETAILS</span>
-      
-        <table >
-          <tbody>
-            <tr>
-              <td>
-                <p>First name</p>
-              </td>
-              <td>
-                <p>Last name</p>
-              </td>
-              <td>
-                <p>Date of birth</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                 
-                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="lastName" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="dateOfBirth" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>PATIENT&rsquo;S CHRONIC CONDITIONS</span>
-        <table >
-          <tbody>
-            <tr>
-              <td>
-                <p>Diagnosis 1</p>
-              </td>
-              <td>
-                <p>Diagnosis 2</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="diagnose1" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="diagnose2" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>PATIENT&rsquo;S CARE TEAM</span>
-        <table >
-          <tbody>
-            <tr>
-              <td>
-                <p>Primary care physician</p>
-              </td>
-              <td>
-                <p>Care lead</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="primaryCarePhysician" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="careLead" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>Other provider/specialist</p>
-              </td>
-              <td>
-                <p>Podiatrist</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="otherProvideOrSpecialist" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="podiatrist" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>PATIENT'S CARE PLAN</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgray;">
-              <td *ngFor="let column of MeasurableTreatmentgoalsover12monthPeriod.options let i = index">
-                <p>
-                  <strong>{{column}}</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of MeasurableTreatmentgoalsover12monthPeriod.data let i = index" formArrayName="MeasurableTreatmentgoalsover12monthPeriod">
-                  
-                <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
+        <span>
+          <h1>CHRONIC CARE MANAGEMENT PROGRAM</h1>
+        </span>
+      </header>
+      <p>
+        <span>
+          <h2>Care plan review notes</h2>
+        </span>
+      </p>
+      <p>
+        <span>
+          <h2>MEDICAL PRACTICE</h2>
+        </span>
+      </p>
+      <p style="margin-left:40%;margin-right: 40%;">
+        <input appTitleCase type="text" formControlName="medicalPractice" class="form-control" />
+      </p>
+
+      <p>
+        <span>
+          <h2>DOCUMENT CREATED</h2>
+        </span>
+      </p>
+      <p style="margin-left:40%;margin-right: 40%;">
+        <input appTitleCase appTitleCase type="text" formControlName="documentCreated" class="form-control" />
+      </p>
+      <span>PATIENT DETAILS</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <p>First name</p>
+            </td>
+            <td>
+              <p>Last name</p>
+            </td>
+            <td>
+              <p>Date of birth</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+
+                <input appTitleCase type="text" formControlName="firstName" class="form-control" />
               </p>
-              </td>
-              
-            </tr>
-          </tbody>
-        </table>
-     
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Planned interventions/conditions mgmt over 12 month period from initiation of plan</strong>
-                </p>
-              </td>
-            </tr>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="lastName" class="form-control" />
+              </p>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="dateOfBirth" class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>PATIENT&rsquo;S CHRONIC CONDITIONS</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <p>Diagnosis 1</p>
+            </td>
+            <td>
+              <p>Diagnosis 2</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="diagnose1" class="form-control" />
+              </p>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="diagnose2" class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>PATIENT&rsquo;S CARE TEAM</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <p>Primary care physician</p>
+            </td>
+            <td>
+              <p>Care lead</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="primaryCarePhysician" class="form-control" />
+              </p>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="careLead" class="form-control" />
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Other provider/specialist</p>
+            </td>
+            <td>
+              <p>Podiatrist</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="otherProvideOrSpecialist" class="form-control" />
+              </p>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="podiatrist" class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>PATIENT'S CARE PLAN</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgray;">
+            <td>
+              <p>
+                <strong>Measurable treatment goals over 12 month period</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt1">Improve knowledge deficit
+                  related to disease process
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt2">Improve knowledge of
+                  medication use/compliance</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt3">Alteration in lifestyle
+                  secondary to disease</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt4">Coping related to
+                  diagnosis and prognosis</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt5">Improved level of
+                  independence/function</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt6">Manage co-existing
+                  conditions</mat-checkbox>
+              </p>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Planned interventions/conditions mgmt over 12 month period from initiation of plan</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt1">Understand life planning
+                  documents ( DPOA, living will, healthcare
+                  proxy)
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt2">Develop personal safety plan
+                  (home safety/fall prevention)
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt3">Improve cognitive function
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt4">Improve mood
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt5">Support/caregiver resources and
+                  involvement
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt6">Control pain
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt7">Medication adherence
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt8">Understand polypharmacy
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt9">Monitor weight
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt10">Improve sleep
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt11">Dash Diet
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt12">Decrease salt intake
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt13">Stop smoking
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt14">Stop tobacco use
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt15">Reduce alcohol use
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt16">Monitor glucose at home
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt17">Monitor blood pressure at home
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt18">Keep record of readings
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt19">Manage anxiety
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt20">Manage stress
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt21">Regularly keep doctors appts
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt22">Community resource availability
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt23">Improve mobility
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt24">Exercise at least 30 min a day
+                </mat-checkbox>
+              </p>
+
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Symptoms management - current month</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="Symptomsmanagementcurrentmonth" class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>Periodic labs and medications review</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Key labs noted this month</strong>
+              </p>
+            </td>
+            <td>
+              <p>
+                <strong>Medication management - key medication changes noted this month</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="Keylabsnotedthismonth" class="form-control" />
+              </p>
+            </td>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="Medicationmanagementkeymedicationchangesnotedthismonth"
+                  class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>Telephone interventions with patient this month</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Discuss of disease process</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt1">Assess weight (on
+                  patient's own scale if avaialable)
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt2">Evaluate knowledge
+                  of disease process
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt3">Instruct on
+                  definition
+                </mat-checkbox>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Medication</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt1">Instruct on medication schedule
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt2">Evaluate effectiveness of
+                  medications/symptom control
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt3">Educate on purpose, action, side
+                  effects, and interations of
+                  medications
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt4">Instruct on medication changes
+                </mat-checkbox>
+              </p>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Nutrition/hydration/elimication</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt1">Assess
+                  appropriate fluid and dietarty intake
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt2">Evaluate
+                  knowledge of diet restrictions/fluid requirement
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt3">Instruct on
+                  diet/fluid requirement as appropriate
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt4">Provide
+                  assistance with meal planning
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt5">Assess bowel and
+                  urinary function
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt6">Instruct to avoid
+                  straining with bowel movements
+                </mat-checkbox>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Activity</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="ActivityOp1">Assess current acitivity and
+                  tolerance levels
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="ActivityOp2">Instruct to avoid overexertion
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="ActivityOp3">Instruct on importance of frequent
+                  rest periods and pacing
+                  activities
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="ActivityOp4">Improve sleep quality and duration
+                  of sleep
+                </mat-checkbox>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Phycho/Social</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt1">Assess social support systems
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt2">Evacuated caregiver coping
+                  status
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt3">Completed PHQ9
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt4">Completed PHQ2
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt5">Completed GADQ2
+                </mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt6">Assess safety and fall risk
+                </mat-checkbox>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <p>
+                <strong>Patient response for interventions outlined above</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
+                <input appTitleCase type="text" formControlName="Patientresponseforinterventionsoutlinedabove"
+                  class="form-control" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>Progress/reduction of barriers noted by patient</span>
+      <table>
+        <thead>
+          <tr style="background-color: lightgrey;">
+            <td>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Excellent</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Good</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Poor</strong>
+              </p>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt1" style="display: contents;">
             <tr>
               <td>
-                <p *ngFor="let item of PlannedInterventionsOrConditionsMgmtover12monthperiodfromInitiationofplan let i = index" formArrayName="PlannedInterventionsOrConditionsMgmtover12monthperiodfromInitiationofplan">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Symptoms management - current month</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>Periodic labs and medications review</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Key labs noted this month</strong>
-                </p>
-              </td>
-              <td>
-                <p>
-                  <strong>Medication management - key medication changes noted this month</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-                </p>
-              </td>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>Telephone interventions with patient this month</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Discuss of disease process</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of DiscussofDiseaseProcess let i = index" formArrayName="DiscussofDiseaseProcess">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
-                </p>
-               
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Medication</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of Medication let i = index" formArrayName="Medication">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-       
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Nutrition/hydration/elimication</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of NutritionOrHydrationOrElimication let i = index" formArrayName="NutritionOrHydrationOrElimication">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-       
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Activity</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of Activity let i = index" formArrayName="Activity">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin" value="n.id">{{item}}</mat-checkbox>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Phycho/Social</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p *ngFor="let item of PhychoOrSocial let i = index" formArrayName="PhychoOrSocial">
-                  <mat-checkbox [formControlName]="i" class="checkbox-margin"  value="n.id">{{item}}</mat-checkbox>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <p>
-                  <strong>Patient response for interventions outlined above</strong>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p>
-                  <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>Progress/reduction of barriers noted by patient</span>
-        <table >
-          <thead>
-            <tr style="background-color: lightgrey;">
-              <td>
+                <p>How would you evaluate your progress toward goals ?</p>
               </td>
               <td>
                 <p style="text-align: center;">
-                  <strong>Excellent</strong>
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
                 </p>
               </td>
               <td>
                 <p style="text-align: center;">
-                  <strong>Good</strong>
+                  <mat-radio-button value="Good"> </mat-radio-button>
                 </p>
               </td>
               <td>
                 <p style="text-align: center;">
-                  <strong>Poor</strong>
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+                </p>
+              </td>
+
+            </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt2" style="display: contents;">
+            <tr>
+              <td>
+                <p>How would rate the education information provided this time ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Good"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+                </p>
+              </td>
+
+            </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt3" style="display: contents;">
+            <tr>
+              <td>
+                <p>How would you rate your mental health, including your mood and ability to think?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Good"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+                </p>
+              </td>
+
+            </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt4" style="display: contents;">
+            <tr>
+              <td>
+                <p>How is your follow-up with all medical appointments ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Good"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Poor"> </mat-radio-button>
                 </p>
               </td>
             </tr>
-            </thead>
-            <tbody>
-              <ng-container  *ngFor="let item of ProgressOrReductionofBarriersNotedbyPatient let i = index" formArrayName="ProgressOrReductionofBarriersNotedbyPatient" >
-            
-            <tr  >
+          </mat-radio-group>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <p><strong>Rate level of pain</strong> </p>
+            </td>
+            <td>
+              <input appTitleCase type="text" formControlName="Ratelevelofpain" class="form-control" />
+            </td>
+          </tr>
+        </thead>
+
+      </table>
+      <span>Medication adherence</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Yes</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>No</strong>
+              </p>
+            </td>
+          </tr>
+          <mat-radio-group formControlName="MedicationAdherenceOpt1" style="display: contents;">
+            <tr>
+
               <td>
-                <p>{{item}}</p>
+                <p>Do you forget to take your medication ?</p>
               </td>
-              
               <td>
                 <p style="text-align: center;">
-                  <mat-radio-button value="Excellent" [name]="item">  </mat-radio-button>
+                  <mat-radio-button value="Yes"> </mat-radio-button>
                 </p>
               </td>
               <td>
                 <p style="text-align: center;">
-                  <mat-radio-button value="Good"  [name]="item">  </mat-radio-button>
+                  <mat-radio-button value="No"> </mat-radio-button>
                 </p>
               </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Poor"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-           
             </tr>
-           </ng-container>
-          </tbody>
-        </table>
-        
-        <table >
-          <thead>
-            <tr >
-              <td>
-                <p><strong>Rate level of pain</strong> </p>
-              </td>
-              <td>
-                <input appTitleCase  type="text" formControlName="firstName" class="form-control"  />
-              </td>
-            </tr>
-            </thead>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt2" style="display: contents;">
+          <tr>
+            <td>
+              <p>Are you confused about how to take your medication?</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt3" style="display: contents;">
+          <tr>
+            <td>
+              <p>Have a hard time opening the bottles or self administering the medication ?</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt4" style="display: contents;">
+          <tr>
+            <td>
+              <p>You don't know what they are for ?</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt5" style="display: contents;">
+          <tr>
+            <td>
+              <p>Are you worried or are you experiencing side effects ?</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt6" style="display: contents;">
+          <tr>
+            <td>
+              <p>Are they too expensive ?</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="MedicationAdherenceOpt7" style="display: contents;">
+          <tr>
+            <td>
+              <p>Pharmacist says they are not available at the time</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Yes"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="No"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <strong>Comments</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input appTitleCase type="text" formControlName="MedicationadherenceComments" class="form-control" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <span>PHQ2 reported By patient</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Not at all (0)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Several days (1)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>More than half days (2)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Nearly every day (3)</strong>
+              </p>
+            </td>
+          </tr>
+          <mat-radio-group formControlName="PHQ2ReportedByPatientOpt1" style="display: contents;">
+          <tr>
+            <td>
+              <p>Feeling down, depressed or hopeless</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+        <mat-radio-group formControlName="PHQ2ReportedByPatientOpt2" style="display: contents;">
+          <tr>
+            <td>
+              <p>Little interest or pleasure in doing things</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td colspan="2">
+              <strong>PHQ2 patient score</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Greater than 3 is that depressive disorder is likely</td>
+            <td><input appTitleCase type="text" formControlName="PHQ2patientscore" class="form-control" /></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <span>Generalized anxiety disorder 2-item (GAD-2)</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Not at All(0)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Several Days (1)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>More than Half Days (2)</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Nearly Every Day (3)</strong>
+              </p>
+            </td>
+          </tr>
+          <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt1" style="display: contents;">
+          <tr>
+            <td>
+              <p>Feeling nervous anxious or on edge</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt2" style="display: contents;">
+          <tr>
+            <td>
+              <p>Not being able to stop or control worrying.</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td colspan="2">
+              <strong>GAD Patient Scrore</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Greater than 3 is that depressive disorder is likely</td>
+            <td><input appTitleCase type="text" formControlName="GADPatientScrore" class="form-control" /></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+              <strong>GAD2Comments</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input appTitleCase type="text" formControlName="GAD2Comments" class="form-control" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span>Patient/caregiver outcomes achieved this month</span>
+      <table>
+        <tbody>
+          <tr style="background-color: lightgrey;">
+            <td>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Met</strong>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <strong>Not Met</strong>
+              </p>
+            </td>
+          </tr>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt1" style="display: contents;">
+          <tr>
+            <td>
+              <p>Demonstrates ability to maintain medical condition with appts kept</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt2" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes understanding of purpose, action and side effects of each medication instructed</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt3" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes general dietary restrictions discussed</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt4" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes fluid restrictions such as alcohol or caffeine</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt5" style="display: contents;">
+          <tr>
+            <td>
+              <p>Achieved optimal GI function</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt6" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes plan to meet basic ADL/IADL needs</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt7" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt8" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes how and when to call for help</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt9" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes members of support system</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+        </mat-radio-group>
+          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt10" style="display: contents;">
+          <tr>
+            <td>
+              <p>Verbalizes knowledge of plan.barriers to care</p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> </mat-radio-button>
+              </p>
+            </td>
+          </tr>
           
-        </table>
-        <span>Medication adherence</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Yes</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>No</strong>
-                </p>
-              </td>
-            </tr>
-            <tr  *ngFor="let item of MeicationAdherence let i = index" formArrayName="MeicationAdherence">
-              <td>
-                <p>{{item}}</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-           
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <strong>Comments</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <span>PHQ2 reported By patient</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Not at all (0)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Several days (1)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>More than half days (2)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Nearly every day (3)</strong>
-                </p>
-              </td>
-            </tr>
-            <tr  *ngFor="let item of PHQ2ReportedByPatient let i = index" formArrayName="PHQ2ReportedByPatient">
-              <td>
-                <p>{{item}}</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td colspan="2">
-                <strong>PHQ2 patient score</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>Greater than 3 is that depressive disorder is likely</td>
-              <td><input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" /></td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <span>Generalized anxiety disorder 2-item (GAD-2)</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Not at All(0)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Several Days (1)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>More than Half Days (2)</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Nearly Every Day (3)</strong>
-                </p>
-              </td>
-            </tr>
-            <tr  *ngFor="let item of GeneralizedAnxietyDisroder2itemGAD2 let i = index" formArrayName="GeneralizedAnxietyDisroder2itemGAD2">
-              <td>
-                <p>{{item}}</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td colspan="2">
-                <strong>GAD Patient Scrore</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>Greater than 3 is that depressive disorder is likely</td>
-              <td><input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" /></td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <strong>Comments</strong>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input appTitleCase  type="text" formControlName="medicalPractice" class="form-control" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <span>Patient/caregiver outcomes achieved this month</span>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Met</strong>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <strong>Not Met</strong>
-                </p>
-              </td>
-            </tr>
-            <tr  *ngFor="let item of PatientOrCaregiverOutcomesAchivedThisMonth let i = index" formArrayName="PatientOrCaregiverOutcomesAchivedThisMonth">
-              <td>
-                <p>{{item}}</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"  [name]="item">  </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table >
-          <tbody>
-            <tr style="background-color: lightgrey;">
-              <td>
-                <strong>Community or social service orders given this month</strong>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met" >  Yes  </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> No </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <span>ADDITIONAL NOTES</span>
-        <p>
-          <textarea rows="5" style="width: 100%;" formControlName="firstName" class="form-control" >
+        </mat-radio-group>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <mat-radio-group formControlName="ServiceOrders" style="display: contents;">
+          <tr style="background-color: lightgrey;">
+            <td>
+              <strong>Community or social service orders given this month</strong>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Met"> Yes </mat-radio-button>
+              </p>
+            </td>
+            <td>
+              <p style="text-align: center;">
+                <mat-radio-button value="Not Met"> No </mat-radio-button>
+              </p>
+            </td>
+          </tr>
+          </mat-radio-group>
+        </tbody>
+      </table>
+      <br />
+      <span>ADDITIONAL NOTES</span>
+      <p>
+        <textarea rows="5" style="width: 100%;" formControlName="AdditionaNotes" class="form-control">
           </textarea>
-        </p>
-        <span>PATIENT'S CONSENT</span>
-        <table >
-          <tbody>
-            <tr>
-              <td>
-                <p>Date of verbal consent:</p>
-              </td>
-              <td>
-                <input appTitleCase   type="text" formControlName="medicalPractice" class="form-control" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table >
-          <tbody>
-            <tr>
-              <td colspan="2">Patient was informed about the availability of CCM services and applicable cost sharing and their right to opt-out anytime. Patient was informed only one practitioner can furnish and be paid for CCM services during a calendar month.</td>
-            </tr>
-          </tbody>
-        </table>
-      </mat-card-content>
-    </mat-card>
-    <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm">
-      <button type="reset" mat-button mat-raised  class="push-right-xs" >Reset</button>
-      <button type="submit" mat-button mat-raised-button color="primary" [disabled]="form.invalid">Save</button>
+      </p>
+      <span>PATIENT'S CONSENT</span>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <p>Date of verbal consent:</p>
+            </td>
+            <td>
+              <input appTitleCase type="text" formControlName="DateIfVerbalConsent" class="form-control" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">Patient was informed about the availability of CCM services and applicable cost sharing and
+              their right to opt-out anytime. Patient was informed only one practitioner can furnish and be paid for CCM
+              services during a calendar month.</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm">
+    <button type="reset" mat-button mat-raised class="push-right-xs">Reset</button>
+    <button type="submit" mat-button mat-raised-button color="primary">Save</button>
   </div>
-  </form>
+</form>

@@ -28,6 +28,7 @@ import { VideoCallComponent } from './Video/Call/videoCall.component';
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
 import {CcmFormComponent  } from './form/ccm/ccm.component';
+import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import {CcmFormComponent  } from './form/ccm/ccm.component';
     AppComponent,
     MainDatatableComponent,
     DetailDataComponent,
-
+    TitleCaseDirective,
     CameraComponent,
     ParticipantsComponent,
     RoomsComponent,

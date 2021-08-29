@@ -9,7 +9,6 @@ export class TitleCaseDirective {
   }
 
   @HostListener('blur') onBlur() {
-      debugger;
     if (this.el.nativeElement.value) {
       const arr: string[] = this.el.nativeElement.value.split('');
       arr[0] = arr[0].toUpperCase();
