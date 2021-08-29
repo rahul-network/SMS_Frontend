@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
 import { DialerAppComponent  } from '../Voice/dialer-app.component';
-import {CcmFormComponent  } from '../../app/form/ccm/ccm.component';
+import {PatientFormsComponent  } from '../../app/form/ccm/patient-forms.component';
 
 @Component({
   selector: 'app-main-datatable',
@@ -38,7 +38,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
 
   openDetail(_data: any) {
     const dialogRef = this.dialog.open(DetailDataComponent, {
-      width: '5000px',
+      width: '100vw',
+      height: '100vh',
       data: { 
         id: _data.id,
         cellPhone: _data.cellPhone,
@@ -63,7 +64,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   openCall(_data: any) {
     const dialogRef = this.dialog.open(DialerAppComponent, {
        disableClose: true ,
-      width: '70%',
+       width: '100vw',
+       height: '100vh',
       data: { 
         id: _data.id,
         cellPhone: _data.cellPhone,
@@ -73,6 +75,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         smsPhoneNo : _data.clinic.smsPhoneNo,
         lastName :_data.lastName,
         gender :_data.gender,
+        
+
 
        }
     });
@@ -86,16 +90,20 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   openCCMForm(_data: any) {
-    const dialogRef = this.dialog.open(CcmFormComponent, {
-      width: '100$',
-      height: '100%',
+    debugger;
+    const dialogRef = this.dialog.open(PatientFormsComponent, {
+      width: '100vw',
+      height: '100vh',
       data: { 
         id: _data.id,
         cellPhone: _data.cellPhone,
         firstName :_data.firstName,
         clinicId: _data.clinicId,
         email : _data.email,
-        smsPhoneNo : _data.clinic.smsPhoneNo
+        smsPhoneNo : _data.clinic.smsPhoneNo,
+        dateOfBirth :_data.dateOfBirth,
+        lastName : _data.lastName
+
        }
     });
   }

@@ -1,0 +1,39 @@
+<button type="button" mat-raised-button color="primary" (click)="openCCMForm(null,true)" style="margin: 10px;">
+    <mat-icon>add</mat-icon>
+    New
+  </button>
+<table mat-table [dataSource]="detailDataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="edit">
+       <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+       <td mat-cell *matCellDef="let element">
+           <div style="cursor: pointer;" (click)="openCCMForm(element,false)">
+               <mat-icon>edit</mat-icon>
+           </div>
+           <div style="cursor: pointer;" (click)="openCCMForm(element,false)">
+               <mat-icon>delete</mat-icon>
+           </div>
+       </td>
+       
+   </ng-container>
+     <!-- Content Column -->
+     <ng-container matColumnDef="formId">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header> formId </th>
+         <td mat-cell *matCellDef="let element"> {{element.formId}} </td>
+     </ng-container>
+   
+     <!-- Sent/Recieved Column -->
+     <ng-container matColumnDef="createdDateTime">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header> createdDateTime</th>
+         <td mat-cell *matCellDef="let element"> {{element.createdDateTime}} </td>
+     </ng-container>
+   
+     <!-- SMS Type Column -->
+     <ng-container matColumnDef="updatedDateTime">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header> updatedDateTime </th>
+         <td mat-cell *matCellDef="let element"> {{element.updatedDateTime}} </td>
+     </ng-container>
+   
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+   

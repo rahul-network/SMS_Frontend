@@ -1,3 +1,6 @@
+
+
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-content>
@@ -59,7 +62,7 @@
             </td>
             <td>
               <p>
-                <input appTitleCase type="text" formControlName="dateOfBirth" class="form-control" />
+                &nbsp;&nbsp;{{data.dateOfBirth | date: 'shortDate'}}
               </p>
             </td>
           </tr>
@@ -1290,8 +1293,14 @@
       </table>
     </mat-card-content>
   </mat-card>
-  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm">
-    <button type="reset" mat-button mat-raised class="push-right-xs">Reset</button>
-    <button type="submit" mat-button mat-raised-button color="primary">Save</button>
+  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm" style="text-align: center;margin: 10px;" >
+    <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
+    <button mat-raised-button color="accent">
+      <mat-icon>refresh</mat-icon>
+      Reset
+    </button>
   </div>
 </form>

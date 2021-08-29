@@ -28,6 +28,7 @@ import { VideoCallComponent } from './Video/Call/videoCall.component';
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
 import {CcmFormComponent  } from './form/ccm/ccm.component';
+import {PatientFormsComponent} from './form/ccm/patient-forms.component';
 import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
 
 
@@ -44,7 +45,8 @@ import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
     DeviceSelectComponent,
     VideoCallComponent,
     DialerAppComponent,
-    CcmFormComponent
+    CcmFormComponent,
+    PatientFormsComponent
     
   ],
   imports: [
