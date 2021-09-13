@@ -211,8 +211,6 @@ export class CcmFormComponent implements OnInit {
             })
             if(this.data.formId !== null){
                 this.ccmFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
-                    debugger;
-                    
                     res.forEach((element :any)=> {
                         (this.form.controls[element.fieldKey] as FormControl).patchValue(element.fieldValue)
                     })
@@ -226,21 +224,16 @@ export class CcmFormComponent implements OnInit {
     get f() { return this.form.controls; }
 
     onSubmit() {
-        debugger;
         this.submitted = true;
         this.ccmFormService.addOrUpdate(this.form.value,Number(this.data.id),this.data.formId).subscribe((res) => {
             alert(res);
           });
-       
         if (this.form.invalid) {
             return;
         }
-
-        
     }
 
     openCCMForm(_data: any) {
-        debugger;
         const dialogRef = this.dialog.open(CcmFormComponent, {
           width: '100$',
           height: '100%',

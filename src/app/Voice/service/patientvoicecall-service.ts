@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from "rxjs/operators";
-import { environment } from "../../../environments/environment" 
+import { environment } from "../../../environments/environment"
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,15 @@ import { environment } from "../../../environments/environment"
 
 export class PatientVoiceCallService {
   constructor(private httpClient: HttpClient) { }
-  addOrUpdate(_data : PatientVoiceCall) {
+  addOrUpdate(_data: PatientVoiceCall) {
     let serverUrl = environment.apiUrl;
-    return this.httpClient.post(`${serverUrl}/api/PatientVoice/`, _data).pipe(
+    http://localhost:12387/api/Clinic/7/Patient/028f6bfe-fc30-4a0d-9050-925cbb3ea11a/VoiceCall/
+
+    return this.httpClient.post(`${serverUrl}/api/Clinic/${Number(_data.cliniccode)}/Patient/${_data.PatientId}/VoiceCall/`, {
+      CallSid: _data.CallSid,
+      OutboundConnectionId: _data.OutboundConnectionId
+
+    }).pipe(
       map((res: any) => {
         return res;
       })
@@ -22,8 +28,9 @@ export class PatientVoiceCallService {
 
 export interface PatientVoiceCall {
   CalledTo: string
-  CallSid: string, 
-  PatientId: number,
+  CallSid: string,
+  cliniccode: string,
+  PatientId: string,
   CallLength: string,
   OutboundConnectionId: string
 }

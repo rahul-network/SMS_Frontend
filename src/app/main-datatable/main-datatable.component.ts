@@ -6,6 +6,7 @@ import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
 import { DialerAppComponent  } from '../Voice/dialer-app.component';
 import {PatientFormsComponent  } from '../../app/form/ccm/patient-forms.component';
+import { PagerModel } from '../shared/pagerModel';
 
 @Component({
   selector: 'app-main-datatable',
@@ -14,7 +15,7 @@ import {PatientFormsComponent  } from '../../app/form/ccm/patient-forms.componen
 })
 export class MainDatatableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['ccmForm','video','call', 'sms',  'email','firstName','clinicId','cellPhone'];
+  displayedColumns: string[] = ['action',  'email','firstName','clinicId','cellPhone'];
   dataSource = new MatTableDataSource([]);
   
   @ViewChild(MatSort) sort: MatSort;
@@ -30,8 +31,16 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   feedDatatableData() {
-    this.datatableFeedService.getAllData().subscribe((_feedData) => {
-      this.dataSource = new MatTableDataSource(_feedData);
+    let clinitId = 7;
+    let pager : PagerModel ={
+      Sort: "1",
+      PageNumber : 1,
+      PageSize :500
+    };
+
+
+    this.datatableFeedService.getAllData(7,pager).subscribe((_feedData) => {
+      this.dataSource = new MatTableDataSource(_feedData.rows);
       this.dataSource.sort = this.sort;
     });
   }
@@ -40,25 +49,17 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(DetailDataComponent, {
       width: '100vw',
       height: '100vh',
-      data: { 
-        id: _data.id,
-        cellPhone: _data.cellPhone,
-        firstName :_data.firstName,
-        clinicId: _data.clinicId,
-        email : _data.email,
-        smsPhoneNo : _data.clinic.smsPhoneNo
-       }
+      data: _data       
+       
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
-
     });
   }
 
   openVideoCall(_data: any) {
-    window.open(`${location.origin}/#/videocall/${_data.id}`, "_blank");
-  
+    debugger;
+    window.open(`${location.origin}/#/videocall/${_data.clinic.id}/${_data.externalPatientId}/`, "_blank");
   }
 
   openCall(_data: any) {
@@ -75,17 +76,10 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         smsPhoneNo : _data.clinic.smsPhoneNo,
         lastName :_data.lastName,
         gender :_data.gender,
-        
-
-
+        externalPatientId : _data.externalPatientId
        }
     });
-
-    
-
     dialogRef.afterClosed().subscribe(result => {
-      
-
     });
   }
 
@@ -102,7 +96,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         email : _data.email,
         smsPhoneNo : _data.clinic.smsPhoneNo,
         dateOfBirth :_data.dateOfBirth,
-        lastName : _data.lastName
+        lastName : _data.lastName,
+        externalPatientId : _data.externalPatientId
 
        }
     });

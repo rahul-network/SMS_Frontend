@@ -8,9 +8,11 @@ import { VideoChatService } from '../../services/videochat.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { environment } from "../../../environments/environment"
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
-import { PatientVideoCallService,PatientVideoCall  } from 'src/app/Video/service/patientvideocall-service';
+import { PatientVideoCallService, PatientVideoCall } from 'src/app/Video/service/patientvideocall-service';
 import { ActivatedRoute } from '@angular/router';
 import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
+import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
+import { debug } from 'console';
 
 @Component({
     selector: 'video-call',
@@ -22,22 +24,26 @@ export class VideoCallComponent implements OnInit {
     @ViewChild('camera', { static: false }) camera: CameraComponent;
     @ViewChild('settings', { static: false }) settings: SettingsComponent;
     @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
-    disable :boolean;
+    disable: boolean;
     activeRoom: Room;
     isRoomExist: boolean = false;
     roomGuid: string;
-    patientId: number;
+    id: number;
+    clinicId: number;
+    patientId: string;
     meetingId: string;
     private notificationHub: HubConnection;
-    data:any;
+    data: any;
     constructor(
         private readonly videoChatService: VideoChatService,
-        private datatableFeedService: DatatableFeedService, 
-        private patientVideoCallService: PatientVideoCallService, 
-        
+        private datatableFeedService: DatatableFeedService,
+        private patientVideoCallService: PatientVideoCallService,
+
         private activatedRoute: ActivatedRoute) {
-        this.patientId = this.activatedRoute.snapshot.params.id as number;
+        this.clinicId = this.activatedRoute.snapshot.params.clinicId as number;
+        this.patientId = this.activatedRoute.snapshot.params.patientId;
         this.meetingId = this.activatedRoute.snapshot.params.meetingId;
+        this.id  = this.activatedRoute.snapshot.params.id;
         if (
             this.meetingId !== null && this.meetingId != "" && typeof this.meetingId !== "undefined"
         ) {
@@ -66,10 +72,10 @@ export class VideoCallComponent implements OnInit {
         this.videoChatService.getAllRooms().then((result) => {
             console.log(result)
         });
-        
-        this.datatableFeedService.getPatient(this.patientId).subscribe((result) => {
+
+        this.datatableFeedService.getPatient(this.clinicId, this.patientId).subscribe((result) => {
             this.data = result;
-          });
+        });
 
     }
 
@@ -78,6 +84,7 @@ export class VideoCallComponent implements OnInit {
     }
 
     async onLeaveRoom(_: boolean) {
+        alert('Yes')
         if (this.activeRoom) {
             this.activeRoom.disconnect();
             this.activeRoom = null;
@@ -88,16 +95,13 @@ export class VideoCallComponent implements OnInit {
         this.camera.initializePreview(videoDevice);
 
         this.participants.clear();
-        let obj : PatientVideoCall = {
-            MeetingId :  this.roomGuid,
-            PatientId : Number(this.patientId),
-            HasPartiparntJoined : true,
-            CallStartDateTime : new Date(),
-            ParticipantJoinDateTime : new Date(),
-            PartipantLeaveDateTime : null,
-            CreatedBy : 1,
+        let obj: PatientVideoCall = {
+            RoomId: this.roomGuid,
+            HasCreated: true,
+            HasJoined: false,
+            Id: this.id,
         }
-        this.patientVideoCallService.Leavemeeting(obj).subscribe();
+        this.patientVideoCallService.CreateOrUpdateMeeting(this.clinicId, this.patientId, obj).subscribe();
     }
 
     async onRoomChanged(roomName: string) {
@@ -164,32 +168,38 @@ export class VideoCallComponent implements OnInit {
 
             this.participants.initialize(this.activeRoom.participants);
             this.registerRoomEvents();
-           
+
             this.notificationHub.send('RoomsUpdated', true);
-            let partipantURL =  `${location.origin}/#/videocall/${this.patientId}/${_roomResponse.name}`
-                
             
-             this.datatableFeedService.sendSms(Number(this.patientId), this.data.cellPhone,partipantURL).subscribe((_feedDataDetails) => {
-                this.disable = false;
-                let obj : PatientVideoCall = {
-                    MeetingId :  _roomResponse.name,
-                    PatientId : Number(this.patientId),
-                    HasPartiparntJoined : false,
-                    CallStartDateTime : new Date(),
-                    ParticipantJoinDateTime : null,
-                    PartipantLeaveDateTime : null,
-                    CreatedBy : 1,
+
+            let obj: PatientVideoCall = {
+                RoomId: this.roomGuid,
+                HasCreated: true,
+                HasJoined: false,
+                Id: this.id,
+            }
+            this.roomGuid = _roomResponse.name;
+            this.patientVideoCallService.CreateOrUpdateMeeting(this.clinicId, this.patientId, obj).subscribe((res) => {
+                this.roomGuid = _roomResponse.name;
+                this.id = res.id; 
+                let partipantURL = `${location.origin}/#/videocall/${this.clinicId  }/${this.patientId}/${res.id}/${this.roomGuid}`
+
+                let obj: PatientMessageRequest = {
+                    CellPhone: this.data.cellPhone,
+                    Content: partipantURL,
+                    SMSPhoneNo: this.data.clinic.smsPhoneNo,
+                    IsRead: false,
                 }
-                this.patientVideoCallService.CreateMeeting(obj).subscribe();
-             },error=>{
+                this.datatableFeedService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();
                 this.disable = false;
-             });
+            });
         });
     }
 
+    
 
     async joinMeeting() {
-        
+
         if (this.activeRoom) {
             this.activeRoom.disconnect();
         }
@@ -205,15 +215,14 @@ export class VideoCallComponent implements OnInit {
         this.registerRoomEvents();
 
         this.notificationHub.send('RoomsUpdated', true);
-        let obj : PatientVideoCall = {
-            MeetingId :  this.roomGuid,
-            PatientId : Number(this.patientId),
-            HasPartiparntJoined : true,
-            CallStartDateTime : new Date(),
-            ParticipantJoinDateTime : new Date(),
-            PartipantLeaveDateTime : null,
-            CreatedBy : 1,
+        let obj: PatientVideoCall = {
+            RoomId: this.roomGuid,
+            HasCreated: false,
+            HasJoined: true,
+            Id: Number( this.id),
         }
-        this.patientVideoCallService.Joinmeeting(obj).subscribe();
+
+
+        this.patientVideoCallService.CreateOrUpdateMeeting(this.clinicId, this.patientId, obj).subscribe();
     }
 }

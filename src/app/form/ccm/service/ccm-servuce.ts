@@ -10,7 +10,6 @@ import { environment } from "../../../../environments/environment"
 export class CCMFormService {
   constructor(private httpClient: HttpClient) { }
   addOrUpdate(_data : FormData,patientId: number,formId: string) {
-    debugger;
     let obj : SaveCCMFormModel = {
       FormData : _data,
       PatientId : patientId,

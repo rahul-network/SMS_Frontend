@@ -52,9 +52,7 @@ export class PatientFormsComponent implements OnInit {
     }
 
     openCCMForm(_data: any,isNew :boolean) {
-        debugger;
         const dialogRef = this.dialog.open(CcmFormComponent, {
-            
           width: '100%',
           height: '100%',
           data: { 

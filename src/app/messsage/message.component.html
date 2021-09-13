@@ -1,0 +1,28 @@
+<form [formGroup]="registerForm" (submit)="submitForm()">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{data.firstName}} - : {{data.cellPhone}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+            <mat-form-field appearance="fill" class="fill-container">
+                <mat-label>Message</mat-label>
+                <textarea matInput [matTextareaAutosize]="false" formControlName="message" id="message"
+                    name="message" ngModel></textarea>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+
+            <button [disabled]="!registerForm.valid" mat-raised-button color="primary" type="submit">
+                <mat-icon>send</mat-icon>
+                send
+            </button>
+            <button  mat-raised-button primary (click)="close()">
+                <mat-icon>close</mat-icon>
+                Exit
+              </button>
+        </mat-card-actions>
+    </mat-card>
+</form>

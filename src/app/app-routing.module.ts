@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: MainDatatableComponent },
   { path: 'videocall', component: VideoCallComponent },
-  { path: 'videocall/:id', component: VideoCallComponent },
-  { path: 'videocall/:id/:meetingId', component: VideoCallComponent }
+  { path: 'videocall/:clinicId/:patientId', component: VideoCallComponent },
+  { path: 'videocall/:clinicId/:patientId/:id/:meetingId', component: VideoCallComponent }
 
 ];
 

@@ -9,9 +9,9 @@ import { environment } from "../../../environments/environment"
 
 export class PatientVideoCallService {
   constructor(private httpClient: HttpClient) { }
-  CreateMeeting(_data : PatientVideoCall) {
+  CreateOrUpdateMeeting(cliniccode: number,patientid:string, _data : PatientVideoCall) {
     let serverUrl = environment.apiUrl;
-    return this.httpClient.post(`${serverUrl}/api/PatientVideoCall/createmeeting/`, _data).pipe(
+    return this.httpClient.post(`${serverUrl}/api/Clinic/${cliniccode}/Patient/${patientid}/VideoCall`, _data).pipe(
       map((res: any) => {
         return res;
       })
@@ -39,11 +39,8 @@ export class PatientVideoCallService {
 
 
 export interface PatientVideoCall {
-    MeetingId: string,
-    PatientId: number,
-    HasPartiparntJoined: boolean,
-    CallStartDateTime : Date,
-    ParticipantJoinDateTime: Date,
-    PartipantLeaveDateTime: Date,
-    CreatedBy: number
+  Id: number,
+  RoomId: string,
+  HasCreated: boolean,
+  HasJoined : boolean
 }

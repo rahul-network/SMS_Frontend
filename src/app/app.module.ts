@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSortModule } from '@angular/material/sort';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,11 +30,14 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
 import {CcmFormComponent  } from './form/ccm/ccm.component';
 import {PatientFormsComponent} from './form/ccm/patient-forms.component';
+import {MessageComponent} from './messsage/message.component';
 import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
-
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
+    
     AppComponent,
     MainDatatableComponent,
     DetailDataComponent,
@@ -46,7 +50,8 @@ import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
     VideoCallComponent,
     DialerAppComponent,
     CcmFormComponent,
-    PatientFormsComponent
+    PatientFormsComponent,
+    MessageComponent
     
   ],
   imports: [
@@ -58,6 +63,10 @@ import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
     FormsModule,
     ReactiveFormsModule,
     SpinnersAngularModule,
+    NgxSkeletonLoaderModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule
     
     
 

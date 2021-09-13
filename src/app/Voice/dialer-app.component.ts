@@ -39,10 +39,10 @@ export class DialerAppComponent implements OnInit {
     this.muted = false;
     this.isValidNumber = false;
     let serverUrl = environment.apiUrl;
-    this.datatableFeedService.getDataById(curretRowId).subscribe((_feedDataDetails) => {
-      this.detailDataSource = new MatTableDataSource(_feedDataDetails);
-      this.detailDataSource.sort = this.sort;
-    });
+    // this.datatableFeedService.getDataById(curretRowId).subscribe((_feedDataDetails) => {
+    //   this.detailDataSource = new MatTableDataSource(_feedDataDetails);
+    //   this.detailDataSource.sort = this.sort;
+    // });
 
     this.httpClient
       .get(`${serverUrl}/Token`, { responseType: "text" })
@@ -76,8 +76,9 @@ export class DialerAppComponent implements OnInit {
       console.log("This is a listener that fires when your device is connected to a phone call")
       console.log(connection);
       let obj: PatientVoiceCall = {
-        PatientId: Number( this.data.id),
-        CallLength: "00",
+        PatientId: this.data.externalPatientId,
+        cliniccode: this.data.clinicId,     
+        CallLength:""   ,
         CallSid: connection.parameters.CallSid,
         CalledTo: connection.message.To,
         OutboundConnectionId: connection.outboundConnectionId
@@ -99,10 +100,10 @@ export class DialerAppComponent implements OnInit {
   }
 
   refreshData(): void {
-    this.datatableFeedService.getDataById(this.data.id).subscribe((_feedDataDetails) => {
-      this.detailDataSource = new MatTableDataSource(_feedDataDetails);
-      this.detailDataSource.sort = this.sort;
-    });
+    // this.datatableFeedService.getDataById(this.data.id).subscribe((_feedDataDetails) => {
+    //   this.detailDataSource = new MatTableDataSource(_feedDataDetails);
+    //   this.detailDataSource.sort = this.sort;
+    // });
   }
 
   Phonecall(phoneNumber: string) {
