@@ -15,7 +15,8 @@ export class PatientVoiceCallService {
 
     return this.httpClient.post(`${serverUrl}/api/Clinic/${Number(_data.cliniccode)}/Patient/${_data.PatientId}/VoiceCall/`, {
       CallSid: _data.CallSid,
-      OutboundConnectionId: _data.OutboundConnectionId
+      OutboundConnectionId: _data.OutboundConnectionId,
+      CalledTo: _data.CalledTo
 
     }).pipe(
       map((res: any) => {

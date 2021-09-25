@@ -224,9 +224,11 @@ export class CcmFormComponent implements OnInit {
     get f() { return this.form.controls; }
 
     onSubmit() {
+        debugger;
         this.submitted = true;
         this.ccmFormService.addOrUpdate(this.form.value,Number(this.data.id),this.data.formId).subscribe((res) => {
-            alert(res);
+            alert("Save Successfully");
+            this.dialogRef.close();
           });
         if (this.form.invalid) {
             return;

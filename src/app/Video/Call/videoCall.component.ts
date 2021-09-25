@@ -84,7 +84,6 @@ export class VideoCallComponent implements OnInit {
     }
 
     async onLeaveRoom(_: boolean) {
-        alert('Yes')
         if (this.activeRoom) {
             this.activeRoom.disconnect();
             this.activeRoom = null;

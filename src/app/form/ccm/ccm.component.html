@@ -1295,9 +1295,11 @@
   </mat-card>
   <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm" style="text-align: center;margin: 10px;" >
     <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
-      <mat-icon>save</mat-icon>
+      <mat-icon *ngIf="!submitted" >save</mat-icon>
+      <mat-icon *ngIf="submitted" ><mat-spinner color="accent" diameter="20"></mat-spinner></mat-icon>
       Save
     </button>
+    
     <button mat-raised-button color="accent">
       <mat-icon>refresh</mat-icon>
       Reset

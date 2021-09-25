@@ -75,6 +75,6 @@ export class CameraComponent implements AfterViewInit {
             }
         }
 
-        return createLocalTracks({ audio: true, video: true });
+        return createLocalTracks({ audio: true, video: { width: 1280, height: 720, frameRate: 24 }});
     }
 }

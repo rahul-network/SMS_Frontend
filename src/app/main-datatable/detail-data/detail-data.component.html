@@ -51,7 +51,7 @@
     }"
   ></ngx-skeleton-loader> -->
   
-            <table style="width: 100%;" mat-table [dataSource]="detailDataSource"  matSort class="mat-elevation-z8" >
+            <table style="width: 100%;" mat-table [dataSource]="detailDataSource"  matSort #TableCommsSort="matSort" class="mat-elevation-z8" >
 
                 <!-- Sent/Recieved Column -->
                 <ng-container matColumnDef="createdDateTime">
@@ -99,11 +99,16 @@
 
             </table>
            
-        
+            <mat-paginator
+            [length]="detailDataSourceLength"
+            #TableCommsPaginator="matPaginator"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 20, 30]"
+          ></mat-paginator>
         </mat-tab>
         <mat-tab label="Message">
 
-            <table style="width: 100%;" mat-table [dataSource]="messageDataSource" matSort class="mat-elevation-z8">
+            <table style="width: 100%;" mat-table [dataSource]="messageDataSource" matSort #TableMessageSort="matSort" class="mat-elevation-z8">
 
                 <!-- Sent/Recieved Column -->
                 <ng-container matColumnDef="createdDateTime">
@@ -149,11 +154,16 @@
                 <tr mat-row *matRowDef="let row; columns: messageDisplayedColumns;"></tr>
 
             </table>
-          
+            <mat-paginator
+            [length]="messageDataSourceLength"
+            #TableMessagePaginator="matPaginator"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 20, 30]"
+          ></mat-paginator>
         </mat-tab>
        
         <mat-tab label="Voice Call">
-            <table style="width: 100%;" mat-table [dataSource]="callsDataSource" matSort class="mat-elevation-z8">
+            <table style="width: 100%;" mat-table [dataSource]="callsDataSource" matSort #TableCallsSort="matSort" class="mat-elevation-z8">
 
                 <!-- Sent/Recieved Column -->
                 <ng-container matColumnDef="createdDateTime">
@@ -170,7 +180,7 @@
                 </ng-container>
                 <ng-container matColumnDef="callStartDateTime">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Start At </th>
-                    <td mat-cell *matCellDef="let element">{{element.callStartDateTime  | date: 'HH:mm'}} </td>
+                    <td mat-cell *matCellDef="let element">{{element.callStartDateTime}} {{element.callStartDateTime  | date: 'HH:mm'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="createdByName">
@@ -181,11 +191,16 @@
                 <tr mat-row *matRowDef="let row; columns: callsDisplayedColumns;"></tr>
 
             </table>
-           
+            <mat-paginator
+            [length]="callsDataSourceLength"
+            #TableCallsPaginator="matPaginator"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 20, 30]"
+          ></mat-paginator>
         </mat-tab>
        
         <mat-tab label="Video Calls">
-            <table style="width: 100%;" mat-table [dataSource]="videoDataSource" matSort class="mat-elevation-z8">
+            <table style="width: 100%;" mat-table [dataSource]="videoDataSource" matSort #TableVideoCallsSort="matSort" class="mat-elevation-z8">
 
                 <!-- Sent/Recieved Column -->
                 <ng-container matColumnDef="createdDateTime">
@@ -222,7 +237,12 @@
                 <tr mat-row *matRowDef="let row; columns: videoDisplayedColumns;"></tr>
 
             </table>
-          
+            <mat-paginator
+            [length]="videoDataSourceLength"
+            #TableVideoCallsPaginator="matPaginator"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 20, 30]"
+          ></mat-paginator>
         </mat-tab>
         <mat-tab label="CCM Forms">
                 <patient-forms></patient-forms>
