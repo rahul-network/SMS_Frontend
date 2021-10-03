@@ -52,6 +52,7 @@ export class PatientFormsComponent implements OnInit {
     }
 
     openCCMForm(_data: any,isNew :boolean) {
+        debugger;
         const dialogRef = this.dialog.open(CcmFormComponent, {
           width: '100%',
           height: '100%',
@@ -60,7 +61,8 @@ export class PatientFormsComponent implements OnInit {
             firstName :this.data.firstName,
             dateOfBirth :this.data.dateOfBirth,
             lastName : this.data.lastName,
-            formId : _data == null ? null : _data.formId
+            formId : _data == null ? null : _data.formId,
+            medicalPractice :  this.data.clinic.name
            }
         });
       }

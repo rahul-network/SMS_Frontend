@@ -1,48 +1,86 @@
+<div style="margin-bottom: 20px;">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{data.firstName}} {{data.lastName}}</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="margin: 5px;">
+        <p><span><strong>Cell Phone : </strong>{{data.cellPhone}}</span></p>
+      </div>
+      <div *ngIf="dialpadshow">
+        <div>
+          <button mat-fab mat-raised-button (click)="sendDigit('1')">
+            1
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('2')">
+            2
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('3')">
+            3
+          </button>
+        </div>
+        <div>
+          <button mat-fab mat-raised-button (click)="sendDigit('4')">
+            4
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('5')">
+            5
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('6')">
+            6
+          </button>
+        </div>
+        <div>
+          <button mat-fab mat-raised-button (click)="sendDigit('7')">
+            7
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('8')">
+            8
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('9')">
+            9
+          </button>
+        </div>
+        <div>
+          <button mat-fab mat-raised-button (click)="sendDigit('*')">
+            *
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('0')">
+            0
+          </button>
+          <button mat-fab mat-raised-button (click)="sendDigit('#')">
+            #
+          </button>
+        </div>
+      </div>
+      <div [hidden]="dialpadshow">
+        <mat-label>Call Note:</mat-label>
+        <textarea matInput [(ngModel)]="Notes" rows="10"></textarea>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-fab *ngIf="data.cellPhone && onPhone" mat-raised-button color="primary" (click)="toggleMute()">
+        <mat-icon *ngIf="!muted">mic</mat-icon>
+        <mat-icon *ngIf="muted">mic_off</mat-icon>
+      </button>
+      <button mat-fab *ngIf="onPhone" mat-raised-button 
+      (click)="toggleDialPad()">
+      <mat-icon>dialpad</mat-icon>
+      </button>
 
-  <div class="card-container" style="display: grid;">
-    <div style="margin-bottom: 20px;">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            
-            <mat-card-title>{{data.firstName}}  {{data.lastName}}</mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <div style="margin: 5px;">
-              <p><span><strong>Gender : </strong>{{data.gender}}</span></p>
-              <p><span><strong>Cell Phone : </strong>{{data.cellPhone}}</span></p>
-              <p><span><strong>Home Phone : </strong>{{data.homePhone}}</span></p>
-              <p><span><strong>email : </strong>{{data.email}}</span></p>
-              </div>
-          </mat-card-content>
-          <mat-card-actions>
-             
-            <button *ngIf="data.cellPhone"  mat-raised-button [ngClass]="{'danger': onPhone, 'primary': !onPhone}" (click)="Phonecall(data.cellPhone)">
-              <mat-icon *ngIf="!onPhone"  >call</mat-icon>
-              <mat-icon *ngIf="onPhone"  >phone_in_talk</mat-icon>
-              Cell : {{data.cellPhone}}
-            </button>
-            <button *ngIf="data.cellPhone && onPhone" mat-raised-button color="primary" (click)="toggleMute()">
-              <mat-icon *ngIf="!muted"  >volume_mute</mat-icon>
-              <mat-icon *ngIf="muted"  >volume_off</mat-icon>
-            </button>
-            <button *ngIf="data.homePhone" mat-raised-button [ngClass]="{'danger': onPhone, 'primary': !onPhone}"   (click)="Phonecall(data.homePhone)">
-              <mat-icon *ngIf="!onPhone"  >call</mat-icon>
-              <mat-icon *ngIf="onPhone"  >phone_in_talk</mat-icon>
-              Home : {{data.homePhone}}
-            </button>
-            <button *ngIf="data.homePhone && onPhone"  mat-raised-button color="primary" (click)="toggleMute()">
-              <mat-icon *ngIf="!muted"  >volume_mute</mat-icon>
-              <mat-icon *ngIf="muted"  >volume_off</mat-icon>
-            </button>
-            <button  mat-raised-button primary (click)="close()">
-              <mat-icon>close</mat-icon>
-              Exit
-            </button>
-          </mat-card-actions>
-        </mat-card>
-  </div>
-
-
+      <button mat-fab *ngIf="data.cellPhone" mat-raised-button [ngClass]="{'danger': onPhone, 'primary': !onPhone}"
+        (click)="Phonecall(data.cellPhone)">
+        <mat-icon *ngIf="!onPhone">phone</mat-icon>
+        <mat-icon *ngIf="onPhone">call_end</mat-icon>
+      </button>
+      
+     
+      <button [disabled]="onPhone" mat-raised-button primary (click)="close()">
+        <mat-icon>close</mat-icon>
+        Save & Exit
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

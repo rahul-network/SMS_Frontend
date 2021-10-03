@@ -37,7 +37,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
-    
     AppComponent,
     MainDatatableComponent,
     DetailDataComponent,
@@ -52,7 +51,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CcmFormComponent,
     PatientFormsComponent,
     MessageComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -67,9 +65,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatTableModule,
     MatPaginatorModule
-    
-    
-
   ],
    providers: [VideoChatService,DeviceService,StorageService],
   bootstrap: [AppComponent]

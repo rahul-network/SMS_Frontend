@@ -67,6 +67,7 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
        disableClose: true ,
        width: '100vw',
        height: '100vh',
+       panelClass: 'my-dialog',
       data: { 
         id: _data.id,
         cellPhone: _data.cellPhone,

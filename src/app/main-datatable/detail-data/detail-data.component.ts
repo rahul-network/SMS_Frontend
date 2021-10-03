@@ -183,8 +183,7 @@ export class DetailDataComponent implements OnInit {
   openPhoneCall(phoneNumber: any) {
     const dialogRef = this.dialog.open(DialerAppComponent, {
       disableClose: true,
-      width: '50vw',
-      height: '50vh',
+      panelClass: 'my-dialog',
       data: {
         id: this.data.id,
         cellPhone: phoneNumber, //,

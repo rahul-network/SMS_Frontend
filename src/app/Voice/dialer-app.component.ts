@@ -22,7 +22,8 @@ export class DialerAppComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  @Input() muted: boolean; onPhone: boolean; disabled: boolean;
+  @Input() muted: boolean; onPhone: boolean; disabled: boolean;dialpadshow:boolean;Notes:string;
+  
   @Output() onClickCall = new EventEmitter();
   @Output() onClickMute = new EventEmitter();
 
@@ -32,13 +33,17 @@ export class DialerAppComponent implements OnInit {
   isValidNumber: boolean;
   fullNumber: string;
   http: any;
+  patientVoiceCallResponse : any;
 
   ngOnInit(): void {
     let curretRowId = this.data.id;
     this.onPhone = false;
+    this.dialpadshow = false;
     this.muted = false;
+    this.dialpadshow = false;
     this.isValidNumber = false;
     let serverUrl = environment.apiUrl;
+    this.Notes = '';
     // this.datatableFeedService.getDataById(curretRowId).subscribe((_feedDataDetails) => {
     //   this.detailDataSource = new MatTableDataSource(_feedDataDetails);
     //   this.detailDataSource.sort = this.sort;
@@ -67,23 +72,37 @@ export class DialerAppComponent implements OnInit {
     this.onClickMute = new EventEmitter();;
 
     Twilio.Device.on("ready", (device: any) => {
+      debugger;
       console.log("This is a listenner that fires when your device is ready")
       console.log(device);
+      device.volume = 1.0
+      
+      
       // 
+    });
+
+    Twilio.Device.on("volume", (connection: any) =>{
+
+      alert('c')
     });
 
     Twilio.Device.on("connect", (connection: any) => {
       console.log("This is a listener that fires when your device is connected to a phone call")
       console.log(connection);
+
+      debugger;
       let obj: PatientVoiceCall = {
+        Id: 0,
         PatientId: this.data.externalPatientId,
         cliniccode: this.data.clinicId,     
         CallLength:""   ,
         CallSid: connection.parameters.CallSid,
         CalledTo: connection.message.To,
-        OutboundConnectionId: connection.outboundConnectionId
+        OutboundConnectionId: connection.outboundConnectionId,
+        Remarks : ""
       };
       this.patientVoiceCallService.addOrUpdate(obj).subscribe((res) => {
+        this.patientVoiceCallResponse = res;
         console.log(res);
       });
       console.log(connection);
@@ -95,26 +114,22 @@ export class DialerAppComponent implements OnInit {
       console.log(connection);
       Twilio.Device.disconnectAll();
       this.onPhone = false;
+      this.dialpadshow = false;
       this.muted = true;
     });
-  }
-
-  refreshData(): void {
-    // this.datatableFeedService.getDataById(this.data.id).subscribe((_feedDataDetails) => {
-    //   this.detailDataSource = new MatTableDataSource(_feedDataDetails);
-    //   this.detailDataSource.sort = this.sort;
-    // });
   }
 
   Phonecall(phoneNumber: string) {
     if (!this.onPhone) {
       this.onPhone = true;
+      
       this.muted = false;
        Twilio.Device.connect({ To: phoneNumber, From :this.data.smsPhoneNo });
       this.logtext = `Calling ${this.fullNumber}`;
     } else {
       // hang up call in progress
       this.onPhone = false;
+      this.dialpadshow = false;
       this.muted = true;
       var connection = Twilio.Device.activeConnection();
       console.log(connection)
@@ -125,6 +140,11 @@ export class DialerAppComponent implements OnInit {
     }
   }
 
+  sendDigit(input: any){
+    Twilio.Device.activeConnection()?.sendDigits(input);
+    
+
+  }
   endCall() {
     var connection = Twilio.Device.activeConnection();
     console.log(connection)
@@ -152,10 +172,36 @@ export class DialerAppComponent implements OnInit {
     this.muted = !this.muted;
     Twilio.Device.activeConnection()?.mute(this.muted);
   }
+  toggleDialPad() {
+    this.dialpadshow = !this.dialpadshow;
+  }
+
 
   close() {
     Twilio.Device.disconnectAll();
+    debugger;
+    if(this.patientVoiceCallResponse !== undefined){
+    let obj: PatientVoiceCall = {
+      Id: this.patientVoiceCallResponse.id,
+      PatientId: this.data.externalPatientId,
+      cliniccode: this.data.clinicId,     
+      CallLength:""   ,
+      CallSid: "",
+      CalledTo: "",
+      OutboundConnectionId: "",
+      Remarks :  this.Notes
+    };
+    this.patientVoiceCallService.addOrUpdate(obj).subscribe((res) => {
+      this.patientVoiceCallResponse = res;
+      this.dialogRef.close()
+      console.log(res);
+    });
+  }else{
     this.dialogRef.close()
+  }
+   
+   
+
 
   }
 }

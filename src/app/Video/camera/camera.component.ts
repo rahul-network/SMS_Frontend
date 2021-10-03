@@ -47,6 +47,7 @@ export class CameraComponent implements AfterViewInit {
 
     private async initializeDevice(kind?: MediaDeviceKind, deviceId?: string) {
         try {
+            debugger;
             this.isInitializing = true;
 
             this.finalizePreview();
@@ -55,12 +56,18 @@ export class CameraComponent implements AfterViewInit {
                 ? await this.initializeTracks(kind, deviceId)
                 : await this.initializeTracks();
 
+             
+
             this.videoTrack = this.localTracks.find(t => t.kind === 'video') as LocalVideoTrack;
             const videoElement = this.videoTrack.attach();
             this.renderer.setStyle(videoElement, 'height', '100%');
             this.renderer.setStyle(videoElement, 'width', '100%');
             this.renderer.appendChild(this.previewElement.nativeElement, videoElement);
-        } finally {
+        } 
+        catch {
+            alert('Permission Denied !')
+
+        }finally {
             this.isInitializing = false;
         }
     }

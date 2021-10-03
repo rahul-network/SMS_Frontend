@@ -7,6 +7,8 @@ import { formatDate } from '@angular/common';
 import { CCMFormService } from './service/ccm-servuce';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
+import * as moment from 'moment';
+import { debug } from 'console';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class CcmFormComponent implements OnInit {
     isAddMode!: boolean;
     loading = false;
     submitted = false;
-
+    todayDate = moment(new Date()).format('MMMM DD yyyy');
     
 
     constructor(public dialog: MatDialog,
@@ -71,7 +73,7 @@ export class CcmFormComponent implements OnInit {
 
 
         });
-        
+        debugger;
        
             this.form = new FormGroup({
 
@@ -211,6 +213,7 @@ export class CcmFormComponent implements OnInit {
             })
             if(this.data.formId !== null){
                 this.ccmFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
+                    this.todayDate = res.documentCreated;
                     res.forEach((element :any)=> {
                         (this.form.controls[element.fieldKey] as FormControl).patchValue(element.fieldValue)
                     })

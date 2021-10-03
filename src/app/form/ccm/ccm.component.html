@@ -1,6 +1,3 @@
-
-
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-content>
@@ -23,16 +20,19 @@
         </span>
       </p>
       <p style="margin-left:40%;margin-right: 40%;">
-        <input appTitleCase type="text" formControlName="medicalPractice" class="form-control" />
+        <span>
+          <h3> {{data.medicalPractice}}</h3>
+        </span>
       </p>
-
       <p>
         <span>
           <h2>DOCUMENT CREATED</h2>
         </span>
       </p>
       <p style="margin-left:40%;margin-right: 40%;">
-        <input appTitleCase appTitleCase type="text" formControlName="documentCreated" class="form-control" />
+        <span>
+      <h3>{{todayDate}}</h3>
+      </span>
       </p>
       <span>PATIENT DETAILS</span>
       <table>
@@ -51,18 +51,18 @@
           <tr>
             <td>
               <p>
+                &nbsp;&nbsp; {{this.data.firstName}}
+              </p>
+            </td>
+            <td>
+              <p>
+                &nbsp;&nbsp;{{this.data.lastName}}
 
-                <input appTitleCase type="text" formControlName="firstName" class="form-control" />
               </p>
             </td>
             <td>
               <p>
-                <input appTitleCase type="text" formControlName="lastName" class="form-control" />
-              </p>
-            </td>
-            <td>
-              <p>
-                &nbsp;&nbsp;{{data.dateOfBirth | date: 'shortDate'}}
+                &nbsp;&nbsp;{{data.dateOfBirth | date: 'MMMM dd yyyy'}}
               </p>
             </td>
           </tr>
@@ -723,106 +723,106 @@
             </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt2" style="display: contents;">
-          <tr>
-            <td>
-              <p>Are you confused about how to take your medication?</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Are you confused about how to take your medication?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt3" style="display: contents;">
-          <tr>
-            <td>
-              <p>Have a hard time opening the bottles or self administering the medication ?</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Have a hard time opening the bottles or self administering the medication ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt4" style="display: contents;">
-          <tr>
-            <td>
-              <p>You don't know what they are for ?</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>You don't know what they are for ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt5" style="display: contents;">
-          <tr>
-            <td>
-              <p>Are you worried or are you experiencing side effects ?</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Are you worried or are you experiencing side effects ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt6" style="display: contents;">
-          <tr>
-            <td>
-              <p>Are they too expensive ?</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Are they too expensive ?</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="MedicationAdherenceOpt7" style="display: contents;">
-          <tr>
-            <td>
-              <p>Pharmacist says they are not available at the time</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Yes"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="No"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Pharmacist says they are not available at the time</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="No"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
         </tbody>
       </table>
@@ -870,59 +870,59 @@
             </td>
           </tr>
           <mat-radio-group formControlName="PHQ2ReportedByPatientOpt1" style="display: contents;">
-          <tr>
-            <td>
-              <p>Feeling down, depressed or hopeless</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
-        <mat-radio-group formControlName="PHQ2ReportedByPatientOpt2" style="display: contents;">
-          <tr>
-            <td>
-              <p>Little interest or pleasure in doing things</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Feeling down, depressed or hopeless</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
+          <mat-radio-group formControlName="PHQ2ReportedByPatientOpt2" style="display: contents;">
+            <tr>
+              <td>
+                <p>Little interest or pleasure in doing things</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
         </tbody>
       </table>
 
@@ -968,58 +968,58 @@
             </td>
           </tr>
           <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt1" style="display: contents;">
-          <tr>
-            <td>
-              <p>Feeling nervous anxious or on edge</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Feeling nervous anxious or on edge</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt2" style="display: contents;">
-          <tr>
-            <td>
-              <p>Not being able to stop or control worrying.</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Not being able to stop or control worrying.</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
         </tbody>
       </table>
@@ -1070,196 +1070,196 @@
             </td>
           </tr>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt1" style="display: contents;">
-          <tr>
-            <td>
-              <p>Demonstrates ability to maintain medical condition with appts kept</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Demonstrates ability to maintain medical condition with appts kept</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt2" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes understanding of purpose, action and side effects of each medication instructed</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes understanding of purpose, action and side effects of each medication instructed</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt3" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes general dietary restrictions discussed</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes general dietary restrictions discussed</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt4" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes fluid restrictions such as alcohol or caffeine</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes fluid restrictions such as alcohol or caffeine</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt5" style="display: contents;">
-          <tr>
-            <td>
-              <p>Achieved optimal GI function</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Achieved optimal GI function</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt6" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes plan to meet basic ADL/IADL needs</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes plan to meet basic ADL/IADL needs</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt7" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt8" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes how and when to call for help</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <p>Verbalizes how and when to call for help</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt9" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes members of support system</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes members of support system</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+          </mat-radio-group>
           <mat-radio-group formControlName="PatientCaregiveroutcomesOpt10" style="display: contents;">
-          <tr>
-            <td>
-              <p>Verbalizes knowledge of plan.barriers to care</p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> </mat-radio-button>
-              </p>
-            </td>
-          </tr>
-          
-        </mat-radio-group>
+            <tr>
+              <td>
+                <p>Verbalizes knowledge of plan.barriers to care</p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+                </p>
+              </td>
+            </tr>
+
+          </mat-radio-group>
         </tbody>
       </table>
       <table>
         <tbody>
           <mat-radio-group formControlName="ServiceOrders" style="display: contents;">
-          <tr style="background-color: lightgrey;">
-            <td>
-              <strong>Community or social service orders given this month</strong>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Met"> Yes </mat-radio-button>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <mat-radio-button value="Not Met"> No </mat-radio-button>
-              </p>
-            </td>
-          </tr>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>Community or social service orders given this month</strong>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Met"> Yes </mat-radio-button>
+                </p>
+              </td>
+              <td>
+                <p style="text-align: center;">
+                  <mat-radio-button value="Not Met"> No </mat-radio-button>
+                </p>
+              </td>
+            </tr>
           </mat-radio-group>
         </tbody>
       </table>
@@ -1293,16 +1293,14 @@
       </table>
     </mat-card-content>
   </mat-card>
-  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm" style="text-align: center;margin: 10px;" >
+  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm"
+    style="text-align: center;margin: 10px;">
     <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
-      <mat-icon *ngIf="!submitted" >save</mat-icon>
-      <mat-icon *ngIf="submitted" ><mat-spinner color="accent" diameter="20"></mat-spinner></mat-icon>
+      <mat-icon *ngIf="!submitted">save</mat-icon>
+      <mat-icon *ngIf="submitted">
+        <mat-spinner color="accent" diameter="20"></mat-spinner>
+      </mat-icon>
       Save
-    </button>
-    
-    <button mat-raised-button color="accent">
-      <mat-icon>refresh</mat-icon>
-      Reset
     </button>
   </div>
 </form>
