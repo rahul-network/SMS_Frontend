@@ -4,8 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
-import { DialerAppComponent  } from '../Voice/dialer-app.component';
-import {PatientFormsComponent  } from '../../app/form/ccm/patient-forms.component';
+import { DialerAppComponent } from '../Voice/dialer-app.component';
+import { PatientFormsComponent } from '../../app/form/ccm/patient-forms.component';
 import { PagerModel } from '../shared/pagerModel';
 
 @Component({
@@ -15,9 +15,9 @@ import { PagerModel } from '../shared/pagerModel';
 })
 export class MainDatatableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['action',  'email','firstName','clinicId','cellPhone'];
+  displayedColumns: string[] = ['action', 'email', 'firstName', 'clinicId', 'cellPhone'];
   dataSource = new MatTableDataSource([]);
-  
+
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private datatableFeedService: DatatableFeedService,
@@ -32,14 +32,14 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
 
   feedDatatableData() {
     let clinitId = 7;
-    let pager : PagerModel ={
+    let pager: PagerModel = {
       Sort: "1",
-      PageNumber : 1,
-      PageSize :500
+      PageNumber: 1,
+      PageSize: 500
     };
 
 
-    this.datatableFeedService.getAllData(7,pager).subscribe((_feedData) => {
+    this.datatableFeedService.getAllData(7, pager).subscribe((_feedData) => {
       this.dataSource = new MatTableDataSource(_feedData.rows);
       this.dataSource.sort = this.sort;
     });
@@ -49,8 +49,9 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(DetailDataComponent, {
       width: '100vw',
       height: '100vh',
-      data: _data       
-       
+      data: _data,
+      autoFocus: false
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -64,21 +65,22 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
 
   openCall(_data: any) {
     const dialogRef = this.dialog.open(DialerAppComponent, {
-       disableClose: true ,
-       width: '100vw',
-       height: '100vh',
-       panelClass: 'my-dialog',
-      data: { 
+      disableClose: true,
+      width: '100vw',
+      height: '100vh',
+      panelClass: 'my-dialog',
+      autoFocus:false,
+      data: {
         id: _data.id,
         cellPhone: _data.cellPhone,
-        firstName :_data.firstName,
+        firstName: _data.firstName,
         clinicId: _data.clinicId,
-        email : _data.email,
-        smsPhoneNo : _data.clinic.smsPhoneNo,
-        lastName :_data.lastName,
-        gender :_data.gender,
-        externalPatientId : _data.externalPatientId
-       }
+        email: _data.email,
+        smsPhoneNo: _data.clinic.smsPhoneNo,
+        lastName: _data.lastName,
+        gender: _data.gender,
+        externalPatientId: _data.externalPatientId
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
     });
@@ -89,18 +91,19 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(PatientFormsComponent, {
       width: '100vw',
       height: '100vh',
-      data: { 
+      autoFocus:false,
+      data: {
         id: _data.id,
         cellPhone: _data.cellPhone,
-        firstName :_data.firstName,
+        firstName: _data.firstName,
         clinicId: _data.clinicId,
-        email : _data.email,
-        smsPhoneNo : _data.clinic.smsPhoneNo,
-        dateOfBirth :_data.dateOfBirth,
-        lastName : _data.lastName,
-        externalPatientId : _data.externalPatientId
+        email: _data.email,
+        smsPhoneNo: _data.clinic.smsPhoneNo,
+        dateOfBirth: _data.dateOfBirth,
+        lastName: _data.lastName,
+        externalPatientId: _data.externalPatientId
 
-       }
+      }
     });
   }
 

@@ -306,3 +306,7 @@
     line-height: 14px;
     min-width: auto;
   }
+
+  .mat-raised-button {
+    background-color: #4ba6db !important;
+  }

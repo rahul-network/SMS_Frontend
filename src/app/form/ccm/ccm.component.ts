@@ -242,17 +242,12 @@ export class CcmFormComponent implements OnInit {
         const dialogRef = this.dialog.open(CcmFormComponent, {
           width: '100$',
           height: '100%',
+          autoFocus:false,
           data: { 
-           //id: _data.id,
-            // cellPhone: _data.cellPhone,
-            // firstName :_data.firstName,
-            // clinicId: _data.clinicId,
-            // email : _data.email,
-            // smsPhoneNo : _data.clinic.smsPhoneNo,
-            // dateOfBirth :_data.dateOfBirth,
-            // lastName : _data.lastName
-    
-           }
+            
+     
+            }
+         
         });
       }
 

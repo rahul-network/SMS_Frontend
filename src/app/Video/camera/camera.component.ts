@@ -73,12 +73,13 @@ export class CameraComponent implements AfterViewInit {
     }
 
     private initializeTracks(kind?: MediaDeviceKind, deviceId?: string) {
+       
         if (kind) {
             switch (kind) {
                 case 'audioinput':
                     return createLocalTracks({ audio: { deviceId }, video: true });
                 case 'videoinput':
-                    return createLocalTracks({ audio: true, video: { deviceId } });
+                    return createLocalTracks({ audio: true, video: { deviceId,width: 1920, height: 1080, frameRate: 24 } });
             }
         }
 

@@ -14,6 +14,8 @@
   width: 100%;
 }
 
+
+
 .mat-form-field.fill-container textarea {
   height:100px;
 }
@@ -50,6 +52,12 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color:white;
 }
 
 .mat-column-content {
@@ -100,14 +108,12 @@
   hyphens: auto;
 }
 
-.cdk-overlay-pane.my-dialog {
-  position: relative!important;
+.mat-raised-button {
+  background-color: #4ba6db !important;
 }
-.close.mat-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 5px;
-  line-height: 14px;
-  min-width: auto;
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color:white;
 }

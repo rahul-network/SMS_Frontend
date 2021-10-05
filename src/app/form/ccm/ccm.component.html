@@ -1,3 +1,6 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-content>
@@ -1295,12 +1298,16 @@
   </mat-card>
   <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm"
     style="text-align: center;margin: 10px;">
+    <button mat-stroked-button  style="margin: 10px;" [mat-dialog-close]="true">
+      Cancel
+    </button>
+
     <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
-      <mat-icon *ngIf="!submitted">save</mat-icon>
       <mat-icon *ngIf="submitted">
         <mat-spinner color="accent" diameter="20"></mat-spinner>
       </mat-icon>
       Save
     </button>
+    
   </div>
 </form>

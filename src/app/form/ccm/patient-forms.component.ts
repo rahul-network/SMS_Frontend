@@ -56,6 +56,7 @@ export class PatientFormsComponent implements OnInit {
         const dialogRef = this.dialog.open(CcmFormComponent, {
           width: '100%',
           height: '100%',
+          autoFocus:false,
           data: { 
            id: this.data.id,
             firstName :this.data.firstName,

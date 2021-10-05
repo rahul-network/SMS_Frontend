@@ -28,3 +28,13 @@ color: white;
 background-color: lightseagreen;
 color: white;
 }
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color:white;
+}
+
+.mat-raised-button {
+  background-color: #4ba6db !important;
+}

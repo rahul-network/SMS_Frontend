@@ -614,3 +614,15 @@ button{
 video{
   width: 44vh;
 }
+
+.mat-raised-button {
+  background-color: #4ba6db !important;
+}
+
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color:white;
+}

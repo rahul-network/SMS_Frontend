@@ -164,6 +164,7 @@ export class DetailDataComponent implements OnInit {
   openMessage(phoneNumber: any) {
     const dialogRef = this.dialog.open(MessageComponent, {
       disableClose: true,
+      autoFocus:false,
       width: '50vw',
       height: '50vh',
       data: {
@@ -184,6 +185,7 @@ export class DetailDataComponent implements OnInit {
     const dialogRef = this.dialog.open(DialerAppComponent, {
       disableClose: true,
       panelClass: 'my-dialog',
+      autoFocus:false,
       data: {
         id: this.data.id,
         cellPhone: phoneNumber, //,

@@ -1,3 +1,6 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" >close</mat-icon>
+</button>
 <div style="margin-bottom: 20px;">
   <mat-card class="example-card">
     <mat-card-header>
@@ -77,7 +80,7 @@
       </button>
       
      
-      <button [disabled]="onPhone" mat-raised-button primary (click)="close()">
+      <button [disabled]="onPhone" color="primary" mat-raised-button primary (click)="close()">
         <mat-icon>close</mat-icon>
         Save & Exit
       </button>
