@@ -26,7 +26,7 @@ export class DetailDataComponent implements OnInit {
 
   displayedColumns: string[] = ['createdDateTime', 'smsType', 'content', 'createdByName', 'markread'];
   messageDisplayedColumns: string[] = ['createdDateTime', 'smsType', 'content', 'createdByName', 'markread'];
-  callsDisplayedColumns: string[] = ['createdDateTime', 'calledTo', 'callLength', 'callStartDateTime', 'createdByName'];
+  callsDisplayedColumns: string[] = ['createdDateTime', 'calledTo', 'callLength', 'callStartDateTime', 'remarks','createdByName'];
   videoDisplayedColumns: string[] = ['createdDateTime', 'videoCallStartDateTime', 'videoCallEndDateTime', 'participantJoinDateTime', 'partipantLeaveDateTime', 'createdByName'];
   detailDataSourceLength = 0;
   detailDataSource = new MatTableDataSource<IComms>([]);

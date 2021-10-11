@@ -77,7 +77,9 @@
                         <div *ngIf="element.smsType == 3"> <strong> Called :</strong> {{element.calledTo}} |
                            <strong>{{element.callStartDateTime | date: 'HH:MM:ss' }}</strong> To
                             <strong>{{element.callEndDateTime | date: 'HH:MM:ss' }} </strong>
-                            ({{element.callLength}}) </div>
+                            ({{element.callLength}}) 
+                            <strong>Remarks :</strong>{{element.remarks}}
+                        </div>
                         <div *ngIf="element.smsType == 4">
                             <!-- <strong> Call Initiated :</strong> {{element.videoCallStartDateTime | date: 'HH:MM:ss'}} | <strong>End Call At: </strong>{{element.partipantLeaveDateTime | date: 'HH:MM:ss' }} |<strong> Patient Joined : </strong>{{element.participantJoinDateTime | date:'HH:MM:ss' }}   --></div> 
                     </td>
@@ -185,6 +187,11 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Start At </th>
                     <td mat-cell *matCellDef="let element">{{element.callStartDateTime}} {{element.callStartDateTime  | date: 'HH:mm'}} </td>
                 </ng-container>
+                <ng-container matColumnDef="remarks">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
+                    <td mat-cell *matCellDef="let element">{{element.remarks}} </td>
+                </ng-container>
+                
 
                 <ng-container matColumnDef="createdByName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
