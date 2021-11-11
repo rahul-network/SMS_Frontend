@@ -7,6 +7,7 @@ import { PatientVoiceCallService, PatientVoiceCall } from "./service/patientvoic
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { debug } from "console";
+import { Subscription } from "rxjs/internal/Subscription";
 
 declare const Twilio: any;
 
@@ -16,7 +17,7 @@ declare const Twilio: any;
   styleUrls: ["./dialer-app.component.css"],
 })
 export class DialerAppComponent implements OnInit {
-
+  subscription: Subscription;
   displayedColumns: string[] = ['content', 'createdDateTime', 'smsType'];
   detailDataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatSort) sort: MatSort;
@@ -89,26 +90,8 @@ export class DialerAppComponent implements OnInit {
     Twilio.Device.on("connect", (connection: any) => {
       console.log("This is a listener that fires when your device is connected to a phone call")
       console.log(connection);
-
-      debugger;
-      let obj: PatientVoiceCall = {
-        Id: 0,
-        PatientId: this.data.externalPatientId,
-        cliniccode: this.data.clinicId,     
-        CallLength:""   ,
-        CallSid: connection.parameters.CallSid,
-        CalledTo: connection.message.To,
-        OutboundConnectionId: connection.outboundConnectionId,
-        Remarks : ""
-      };
-      this.patientVoiceCallService.addOrUpdate(obj).subscribe((res) => {
-        this.patientVoiceCallResponse = res;
-        console.log(res);
-      });
-      console.log(connection);
+      this.PatientAddOrUpdate(connection.parameters.CallSid,connection.message.To,connection.outboundConnectionId)
     });
-   
-
     Twilio.Device.on("disconnect", (connection: any) => {
       console.log("disconnect")
       console.log(connection);
@@ -117,6 +100,26 @@ export class DialerAppComponent implements OnInit {
       this.dialpadshow = false;
       this.muted = true;
     });
+  }
+
+  PatientAddOrUpdate(CallSid : any,To:any,outboundConnectionId : any){
+    let obj: PatientVoiceCall = {
+      Id: 0,
+      PatientId: this.data.externalPatientId,
+      cliniccode: this.data.clinicId,     
+      CallLength:""   ,
+      CallSid: CallSid,
+      CalledTo: To,
+      OutboundConnectionId: outboundConnectionId,
+      Remarks : ""
+    };
+    this.patientVoiceCallService.addOrUpdate(obj).subscribe((res) => {
+      this.patientVoiceCallResponse = res;
+      console.log(res);
+    });
+    this.subscription.unsubscribe();
+    
+
   }
 
   Phonecall(phoneNumber: string) {
