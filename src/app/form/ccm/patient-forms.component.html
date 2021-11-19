@@ -1,6 +1,10 @@
 <button type="button" mat-raised-button color="primary" (click)="openCCMForm(null,true)" style="margin: 10px;">
     <mat-icon>add</mat-icon>
-    New
+    CCM
+  </button>
+  <button type="button" mat-raised-button color="primary" (click)="openMAWVForm(null,true)" style="margin: 10px;">
+    <mat-icon>add</mat-icon>
+    MAWV
   </button>
 <table mat-table [dataSource]="detailDataSource" *ngIf="detailDataSource.data.length > 0" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="edit">

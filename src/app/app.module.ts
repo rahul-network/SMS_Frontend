@@ -29,6 +29,7 @@ import { VideoCallComponent } from './Video/Call/videoCall.component';
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
 import {CcmFormComponent  } from './form/ccm/ccm.component';
+import {MawvFormComponent  } from './form/ccm/mawv.component';
 import {PatientFormsComponent} from './form/ccm/patient-forms.component';
 import {MessageComponent} from './messsage/message.component';
 import {TitleCaseDirective   } from './form/ccm/TitleCaseDirective';
@@ -49,6 +50,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     VideoCallComponent,
     DialerAppComponent,
     CcmFormComponent,
+    MawvFormComponent,
     PatientFormsComponent,
     MessageComponent
   ],

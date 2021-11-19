@@ -180,8 +180,10 @@ export class VideoCallComponent implements OnInit {
             this.roomGuid = _roomResponse.name;
             this.patientVideoCallService.CreateOrUpdateMeeting(this.clinicId, this.patientId, obj).subscribe((res) => {
                 this.roomGuid = _roomResponse.name;
+                debugger;
                 this.id = res.id; 
-                let partipantURL = `${location.origin}/#/videocall/${this.clinicId  }/${this.patientId}/${res.id}/${this.roomGuid}`
+                let sms = `Hello ${this.data.firstName} ${this.data.lastName}, System Admin from ${this.data.clinic.name } is requesting a video call. Click this link to join the video session now: `
+                let partipantURL = `${sms} ${location.origin}/#/videocall/${this.clinicId  }/${this.patientId}/${res.id}/${this.roomGuid}`
 
                 let obj: PatientMessageRequest = {
                     CellPhone: this.data.cellPhone,

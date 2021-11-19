@@ -1,0 +1,3260 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-content>
+            <header>
+                <p>
+                    <img aria-label="podiatrist" src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px"
+                        width="250px" />
+                </p>
+            </header>
+            <p>
+                <span>
+                    <h2>Health Risk Assessment</h2>
+                </span>
+            </p>
+            <p>
+                <span>
+                    <h2>MEDICAL PRACTICE</h2>
+                </span>
+            </p>
+            <p style="margin-left:40%;margin-right: 40%;">
+                <span>
+                    <h3> {{data.medicalPractice}}</h3>
+                </span>
+            </p>
+            <p>
+                <span>
+                    <h2>DOCUMENT CREATED</h2>
+                </span>
+            </p>
+            <p style="margin-left:40%;margin-right: 40%;">
+                <span>
+                    <h3>{{todayDate}}</h3>
+                </span>
+            </p>
+            <span>PATIENT DETAILS</span>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>First name</p>
+                        </td>
+                        <td>
+                            <p>Last name</p>
+                        </td>
+                        <td>
+                            <p>Date of birth</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                &nbsp;&nbsp; {{this.data.firstName}}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                &nbsp;&nbsp;{{this.data.lastName}}
+
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                &nbsp;&nbsp;{{data.dateOfBirth | date: 'MMMM dd yyyy'}}
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td colspan="2">
+                            <p>
+                                <strong>TYPE OF VISIT
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">
+                            <p>
+                                <mat-radio-button value="Excellent">Telehealth visit </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">
+                            <p>
+                                <mat-radio-button value="Excellent">In-person doctor’s visit </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">
+                            <p>
+                                <mat-radio-button value="Excellent">Nursing home visit </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">
+                            <p>
+                                <mat-radio-button value="Excellent">Assisted living facility visit </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Other </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <P>
+                                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                    class="form-control" />
+                            </P>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <strong>Demographics (required)</strong>
+
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Gender
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Current Marital Status
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <select title="gender" >
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <select title="gender" >
+                                    <option>Single</option>
+                                    <option>Married</option>
+                                    <option>Divorced</option>
+                                    <option>Separated</option>
+                                    <option>Widowed</option>
+                                    <option>In Relationship</option>
+                                </select>
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Person answering questionnaire
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Comment
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <select title="gender" >
+                                    <option>Patient</option>
+                                    <option>Caregiver</option>
+                                    <option>Other</option>
+                                </select>
+
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                    class="form-control" />
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <strong> General Health Self Assessment</strong>
+            <br />
+            <strong>HEDIS Quality Metirc</strong>
+
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Age of Patient Calculation
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Body Mass Screening
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                    class="form-control" />
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+74) </mat-radio-button>
+                            </p>
+                            <p>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Colorectal Screening
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Date of last Colorectal Screening
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+74) </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Patient had flexible sigmoidoscopy in last 4 years
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Patient had colonoscopy in last 10 years
+                                </mat-radio-button>
+
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Breast Cancer Screening
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Date of Last Breast Cancer
+                                    Screening
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+74)
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Mammogram in last 24 months</mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Blood Pressure Screening
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Diabetic Eye Exam
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+85)
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+75)
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Nephropathy Screening
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Bone Density Test
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+75)
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Patient has Age Exclusion (+85)
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Excellent</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Good</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Poor</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Considering your age, how would you rate your overall
+                                health?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>In general, what is your satisfaction with life?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How would you describe the condition of your mouth
+                                and teeth, including false teeth or dentures?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How would you rate your mental health, including your
+                                mood and ability to think?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Comment
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Frequent</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Often</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Rare</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>How often do you snore?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>In the past 7 days, how often have you felt sleepy
+                                during the daytime?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>In the past 7 days, how often have you felt sleepy
+                                during the daytime?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>In the past 7 days, how often have you felt sleepy
+                                during the daytime?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Rate level of pain on scale 1-10 (1 being the lowest)
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                class="form-control" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Have you suffered a personal loss or misfortune in the last year?
+                                </strong>
+                                <br />
+                                (For example: a job loss, disability, divorce, separation, jail term, or the death of
+                                someone close to you.)
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p >
+                                <mat-radio-button value="Yes, one serious loss">Yes, one serious loss </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p >
+                                <mat-radio-button value="Yes, two or more serious losses">Yes, two or more serious losses </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p >
+                                <mat-radio-button value="No"> No</mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Comment
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>How much sleep do you usually get each night?
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <strong> Medication Adherence</strong>
+
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgray;">
+                        <td>
+                            <p>
+                                <strong>Do you take your medications as you have
+                                    been told to take them?
+                                </strong>
+                            </p>
+                            
+
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                                <p>
+                                    <mat-radio-button value="I always take my medication as prescribed">I always take my medication as prescribed </mat-radio-button>
+                                </p>
+                                <p>
+                                    <mat-radio-button value="Sometimes I take my medication as prescribed">
+                                        Sometimes I take my medication as prescribed
+                                    </mat-radio-button>
+                                </p>
+                                <p>
+                                    
+                                    <mat-radio-button value="I have hard time taking my medication as prescribed">
+                                        I have hard time taking my medication as prescribed
+                                    </mat-radio-button>
+                                </p>
+                            
+                        </td>
+                        <td>
+                            <p>
+                                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                    class="form-control" />
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Do you forget to take your medication?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Are confused about how to take your medication?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Have a hard time opening the bottles or self administering the
+                                medication?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>You don't know what they are for?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Are you worried or are you experiencing side effects?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Are they too expensive?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Pharmacist says they are not available at the time
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+            <strong>ADL Functional Assessment
+            </strong>
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p> Can you stand from a sitting position?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Are you able to walk outside of the house?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Can you eat meals unassisted?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Can you bathe unassisted?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Are you able to organize your day?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Are you able to walk in the house?
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p> Can you get dressed unassisted?
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p> Can you use the toilet unassisted?
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p> Since you answered "no" to one of the questions, do you have
+                                someone who can assist you?
+
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p> In the past 6 months, have you experience leaking of urine?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+            <strong>ADL Instrumental Assesment
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Can you or someone shop for groceries?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Are you able to drive or use of public transportation?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Can you make phone calls unassisted?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Are you able to cook?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Can you do housework?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Can you take your medications?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Can you handle your finances?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+            <strong>Fall Prevention
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>In the past 6 months, have you fallen?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Did you sustain any injuries?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Do you feel unsteady when you walk?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td colspan="4">Which assisted Device do you use?
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">wheelchair
+                                </mat-checkbox>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">cane
+                                </mat-checkbox>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">prosthetic
+                                </mat-checkbox>
+                            </p>
+
+                        </td>
+                        <td>
+                            <p>
+                              
+                                <mat-checkbox class="checkbox-margin">orthotic
+                                </mat-checkbox>
+                            </p>
+                           
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+
+
+            <strong>Fall Risk Assessment
+            </strong>
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Gait & Balance</strong>
+                                <br>
+                                Have patient stand on both feet w/o any type of assist then have walk: forward, thru a
+                                doorway, then make a turn.
+                                <br />
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Normal/safe gait and balance </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Can or Walker</mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Shuffling</mat-radio-button>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Level of Consciousness
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Alert X 3 </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Disoriented X 3</mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Confusion</mat-radio-button>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Mobility
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Independent </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Limited</mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Immobile or amputation</mat-radio-button>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Complications</strong>
+                                <br />
+                                Based upon the following types of medications: anesthetics, antihistamines, cathartics,
+                                diuretics, antihypertensives,
+                                antiseizure, benzodiazepines, hypoglycemics, psychotropics, sedative/hypnotics.
+                                <br />
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">None of these medications taken currently or w/in
+                                    past 7 days </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Takes 1-2 of these medications currently or w/in
+                                    past 7 days.</mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Takes 3-4 of these medications currently or w/in
+                                    past 7 days or less</mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Ambulation/Elimination Status</strong>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Ambulatory and continent </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Chair bound and requires assist w/ toileting
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Ambulatory and incontinent</mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Visual Impairment</strong>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Adequate (w/ or w/o glasses) </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Adequate (w/ or w/o glasses)
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Legally blind
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Environmental Hazards
+                                </strong>
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">None </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Rugs, Oxygen tubing
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">Cluttered Room
+
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Predisposing Diseases
+
+                                </strong>
+                            </p>
+                            <p>
+                                Based upon the following conditions: hypertension, vertigo, CVA, Parkinson’s Disease,
+                                loss of limb(s), seizures,
+                                arthritis, osteoporosis, fractures.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">None present </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">1-2 present
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">3 or more present
+
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>History of Falls in Last 90 Days
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">No falls </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">1-2 falls
+                                </mat-radio-button>
+                                <br />
+                                <mat-radio-button value="Excellent">3 or more falls
+                                </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+
+                </thead>
+            </table>
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Rugs in the hallways?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Grab bars in the bathroom?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Hand rails on the stairs?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Proper lighting?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>
+                Hearing Impairment
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Do you currently wear a hearing aid?
+                            </p>
+                            (If yes, the following questions should be answered wearing the hearing aid)
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Do you currently have a hearing problem or do you feel you hearing
+                                aid is not addressing the issue?</p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Does a hearing problem cause you to feel embarassed when you meet
+                                new people?</p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Frequent</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Often</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Rare</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Do you feel frustrated when talking to members of your
+                                family?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Do you have a hard time hearing when someone
+                                speaks in a whisper?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Does a hearing problem cause you difficulty when
+                                visting friends, relatives, or neighbors?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Does a hearing problem cause you to have arguments
+                                with family members?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Does a hearing problem cause you difficulty when
+                                listening to TV or radio?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>Depression</strong>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Every
+                                    Day</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Often</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Never</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Little interest or pleasure in doing things
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Feeling down, depressed or hopeless
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Trouble falling or staying asleep or sleeping too much?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Feeling tired or having little energy?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Poor appetitie or eating too much?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Trouble concentrating on things such as reading the newspaper
+                                or watching TV?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Moving or speaking so slowly that other people have noticed? Or
+                                the opposite - being so fidgety and restless that you have been
+                                moving around a lot more than usual.
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Thoughts that you would be better off dead, or hurting yourself or
+                                others?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Do you drink alcohol?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Do you take recreational drugs?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>When did you have these thoughts and do you have plans to take your life?
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>
+                Anxiety
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Frequent</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Often</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Rare</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>In the past 2 weeks, how often have you felt nervous,
+                                anxious, or on edge?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>In the past 2 weeks how often were you not able to
+                                stop worrying or control your worrying?
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How often does stress prevent you from handling tasks
+                                such as your health, finances, family, relationships,
+                                work?
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <p>How often do you get the social and emotional support
+                                you need?
+
+
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>
+                Nutrition
+            </strong>
+            Over the past 7 days:
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Frequent</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Often</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Rare</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>How often do you eat fast food or snacks or pizza?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How often do you drink sodas or eat sweets?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How often do you eat fruits and vegetables?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>How often do you eat less than 2 meals a day?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Excellent"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Good"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Poor"> </mat-radio-button>
+                            </p>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Do you always have enough money to buy the food you need?
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Excellent">Yes </mat-radio-button>
+                                &nbsp;&nbsp;
+                                <mat-radio-button value="Excellent">No </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+
+
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+
+            <strong>Physical Activity
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Do you exercise?
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <strong>How many days a week do you exercise?</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+<p>
+                                <mat-radio-button value="Yes">Yes </mat-radio-button>
+                                &nbsp;&nbsp;
+                                <mat-radio-button value="No">No </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                class="form-control" />
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>On days when you exercise, for how long doyou exercise (in minutes)?
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <strong>How intense is your typical exercise?</strong>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>
+                            <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                class="form-control" />
+                        </td>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Light (stretching or slow walking etc.)">Light (stretching or slow walking etc.) </mat-radio-button>
+                            &nbsp;&nbsp;
+                            
+                                <mat-radio-button value="Moderate (Brisk walking etc)"> Moderate (Brisk walking etc)</mat-radio-button>
+                                &nbsp;&nbsp;
+                                <mat-radio-button value="Intense (jogging, swimming etc)"> Intense (jogging, swimming etc)</mat-radio-button>
+                            </p>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>
+                Home Safety and Living Conditions
+            </strong>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Does your home have smoke and carbon monoxide detectors?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Do you always fasten your seat belt when you are in a car?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Do you live alone?
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Who do you live with?
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <strong>Do you live in:</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-radio-button value="Alone">Alone </mat-radio-button>
+                            </p>
+                            <p>
+                                <mat-radio-button value="With my family"> With my family</mat-radio-button>
+                            </p>
+                            <p>
+                                <mat-radio-button value="With a friend"> With a friend</mat-radio-button>
+                            </p>
+                            <p>
+                                <mat-radio-button value="With a caregiver">With a caregiver </mat-radio-button>
+                            </p>
+
+                        </td>
+                        <td>
+                            <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                class="form-control" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <strong>
+                Advance Care Planning
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Yes</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>No</strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <strong>Don't Know</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <p>Does your home have smoke and carbon monoxide detectors?
+                            </p>
+                            <p>
+                                (Someone to make medical decisions for you in the event that you areunable to?)
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Dontknow"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Do you have a living will/advance directive?
+                            </p>
+                            <p style="color: red;">
+                                (Documents that make your healthcare wishes known? Such as a DNR?)
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Dontknow"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Is a copy of your advance care directive on file at your doctor'soffice?
+                            </p>
+                            <p>
+                                (Documents that makeyour healthcare wishes known? Such as a DNR?)
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Yes"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="No"> </mat-radio-button>
+                            </p>
+                        </td>
+                        <td>
+                            <p style="text-align: center;">
+                                <mat-radio-button value="Dontknow"> </mat-radio-button>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Comments:
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <strong>
+                Annual Review of Chronic Conditions
+            </strong>
+
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <p>
+                                <strong>Also comment in plan if applicable
+                                </strong>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <strong>Also comment in plan if applicable
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td>
+                        <p>
+                            <mat-checkbox class="checkbox-margin">G82.2 - Paraplegia
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">G82.5 - Quadriplegia.
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">M05.9 - Rheumatoid arthritis
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">R25.1 - Tremor, unspecified
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">G20 - Parkinson's disease
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">R56.9 - Unspecified convulsions
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">G40.9 - Epilepsy, unspecified
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">I20 - Angina pectoris
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z21 - Asymptomatic human immunodeficiency virus[HIV]
+                                infection
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">B18 - Chronic viral hepatitis
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">D69.2 - Other nonthrombocytopenic purpura
+                            </mat-checkbox><br />
+                        </p>
+
+                    </td>
+                    <td>
+                        <p>
+                            <mat-checkbox class="checkbox-margin">I25.119 - Atherosclerotic heart disease of native
+                                coronary artery with unspecified angina pectoris
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">I48.91 - Unspecified atrial fibrillation
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">I49.9 - Cardiac arrhythmia, unspecified
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z94.1 - Heart transplant
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z94.2 - Lung transplant
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z94.4 - Liver transplant
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z93.0 - Tracheostomy
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z93.1 - Gastrostomy
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z93.3 - Colostomy
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z89.4 - Acquired absence of toe(s), foot, and ankle
+                            </mat-checkbox><br />
+                            <mat-checkbox class="checkbox-margin">Z89.5 - Acquired absence of leg below knee
+                            </mat-checkbox><br />
+                        </p>
+                    </td>
+                </tbody>
+            </table>
+            <strong>PLAN OF CARE</strong>
+            <table>
+                <thead>
+                    <tr style="background-color: lightgrey;">
+                        <td style="width: 50%;">
+                            <p>
+                                <strong>Assessment
+                                </strong>
+                            </p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+                                <strong>Plan
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <strong>
+                Referrals
+            </strong>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 50%;">
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Referral for Bone Density Exam
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Referral for Dilated Eye Exam
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+
+
+                                <mat-checkbox class="checkbox-margin">Referral for Colorectal Cancer Screening
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Referral for Rheumatologist
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+
+
+                                <mat-checkbox class="checkbox-margin">Referral for Podiatry
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Referral for Nephrology
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgrey;">
+                        <td style="width: 50%;"><p>
+                            <strong>Blood Tests</strong></p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+                            <strong>Other Blood Test</strong>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">BNP
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">CBC
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">CBC w/Diff
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">CMP
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">ESR
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Fasting Lipid Panel
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Free T-4
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Hemoglobin A1C
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Homocysteine
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Iron
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Ucid Acid
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Magnesium
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Vit D
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">PHOS
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">TSH
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Thyroxine
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">PTINR
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td style="width: 50%;">
+
+                            <p>
+                            <strong>Urine Tests</strong>
+                        </p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+
+                            
+                            <strong>Other Urine Test</strong>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Urine Drug Test/conf.
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Urinalysis with reflex/culture
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Stool, Occult Blood
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Urine microalbumin
+                                </mat-checkbox><br />
+                            </p>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td style="width: 50%;">
+                            <p>
+                            <strong>Radiology/Imaging</strong>
+                        </p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+                            <strong>Other Radiology/Imaging</strong>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">CXR PA/Lateral views
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Ultrasound
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Venous Doppler
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Arterial Doppler
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">X-ray
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">MRI w/Contrast
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">MRI w/o Contrast
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">CT w/Contrast
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">CT w/o Contrast
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr style="background-color: lightgrey;">
+                        <td style="width: 50%;">
+                            <p>
+                            <strong>Other Tests</strong>
+                        </p>
+                        </td>
+                        <td style="width: 50%;">
+                            <p>
+                            <strong>Other Tests</strong>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <mat-checkbox class="checkbox-margin">Overnight Oximetry (Virtuox)
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Home Sleep Oxygen Test (Virtuox)
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Mobile Cardiac Telemetry (Virtuox)
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">Overnight EEG (Virtuox)
+                                </mat-checkbox><br />
+                                <mat-checkbox class="checkbox-margin">12 Lead EKG (VIrtoux)
+                                </mat-checkbox><br />
+                            </p>
+                        </td>
+                        <td>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <table>
+                <tbody>
+                    <tr style="background-color: lightgrey;">
+                        <td>
+                            <strong>Provider’s name</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                                class="form-control" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span>ADDITIONAL NOTES</span>
+            <p>
+                <textarea aria-label="AdditionaNotes" rows="5" style="width: 100%;" formControlName="AdditionaNotes"
+                    class="form-control">
+          </textarea>
+            </p>
+
+        </mat-card-content>
+    </mat-card>
+</form>

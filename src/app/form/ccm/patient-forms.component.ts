@@ -8,6 +8,7 @@ import { CCMFormService } from './service/ccm-servuce';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
 import { CcmFormComponent } from './ccm.component';
+import {MawvFormComponent } from './mawv.component';
 
 
 @Component({
@@ -67,6 +68,20 @@ export class PatientFormsComponent implements OnInit {
            }
         });
       }
-
-
+      openMAWVForm(_data: any,isNew :boolean) {
+        debugger;
+        const dialogRef = this.dialog.open(MawvFormComponent, {
+          width: '100%',
+          height: '100%',
+          autoFocus:false,
+          data: { 
+           id: this.data.id,
+            firstName :this.data.firstName,
+            dateOfBirth :this.data.dateOfBirth,
+            lastName : this.data.lastName,
+            formId : _data == null ? null : _data.formId,
+            medicalPractice :  this.data.clinic.name
+           }
+        });
+      }
 }
