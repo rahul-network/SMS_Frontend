@@ -12,6 +12,15 @@ p {
   margin-top: 2%;
 }
 
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 3px !important;
+}
+
 mat-card-title {
   color: green;
   font-size: 40px;

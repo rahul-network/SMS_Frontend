@@ -71,6 +71,8 @@ export class MawvFormComponent implements OnInit {
             DateIfVerbalConsent: ['']
         });
 
+      
+
         this.form = new FormGroup({
 
 
@@ -82,7 +84,7 @@ export class MawvFormComponent implements OnInit {
             lastName: new FormControl(this.data.lastName),
             typeOfVisit: new FormControl(),	//	TYPE OF VISIT
             typeOfVisitOther: new FormControl(),	//	TYPE OF VISIT OTHER
-            //gender: new FormControl(),	//	Gender
+            gender: new FormControl(),	//	Gender
             //currentMaritalStatus: new FormControl(),	//	Current Marital Status
            // personAnsQuestionalrie: new FormControl(),	//	Person answering questionnaire
             comment: new FormControl(),	//	Comment
@@ -145,6 +147,7 @@ export class MawvFormComponent implements OnInit {
             cane: new FormControl(),	//	cane
             prosthetic: new FormControl(),	//	prosthetic
             orthotic: new FormControl(),	//	orthotic
+            walkers: new FormControl(),	//	orthotic //New
             fallPreventionComment: new FormControl(),	//	Comments
             gaitAndBalance: new FormControl(),	//	Gait & Balance
             levelOfConsciousness: new FormControl(),	//	Level of Consciousness
@@ -297,16 +300,21 @@ export class MawvFormComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
+    public calculateAge(birthdate: any): number {
+        return moment().diff(birthdate, 'years');
+      }
+
+      
     onSubmit() {
         debugger;
         this.submitted = true;
-        this.ccmFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId).subscribe((res) => {
-            alert("Save Successfully");
-            this.dialogRef.close();
-        });
-        if (this.form.invalid) {
-            return;
-        }
+        // this.ccmFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId).subscribe((res) => {
+        //     alert("Save Successfully");
+        //     this.dialogRef.close();
+        // });
+        // if (this.form.invalid) {
+        //     return;
+        // }
     }
 
     openCCMForm(_data: any) {
