@@ -1,41 +1,38 @@
-<link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet"> -->
 <div *ngIf="data" class="app-container">
   <div class="app-main">
     <div class="video-call-wrapper">
       <div class="video-participant">
-        <div class="participant-actions">
-          {{data.firstName}} {{data.lastName}}
-        </div>
-
-        <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
+        <header class="site-header">
+          <span class="video-title">{{data.firstName}} {{data.lastName}}</span>
+          <!-- <h5 class="participant-actions video-title">{{data.firstName}} {{data.lastName}}</h5> -->
+          <button mat-icon-button [mat-dialog-close]="true" style="float: right;">
+            <mat-icon class="close-icon">close</mat-icon>
+          </button>
+        </header>
+        <app-camera #camera class="appclass" [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
+        <footer id="colophon" class="site-footer">
+          <button *ngIf="isRoomExist" style="background-color:#ffc500;"
+            class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="joinMeeting()">
+            Join
+          </button>
+          <button *ngIf="!isRoomExist" [disabled]="disable" class="btn btn-lg btn-outline-secondary twitter-red"
+            type="button" (click)="sendInvite()">
+            Send Invite
+          </button>
+          <button *ngIf="activeRoom" type="button" class="btn btn-lg btn-outline-secondary twitter-red"
+            style="background-color: red;" title="Click to leave this room." (click)="onLeaveRoom(true)">
+            Leave Meeting ?
+          </button>
+          <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
+        </footer>
         <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
           (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
           [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants>
       </div>
-      <div class="video-participant">
-        <div class="participant-actions">
-          <div style="width: 100%;">
-            
-            <button *ngIf="isRoomExist" style="background-color:#ffc500;"
-              class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="joinMeeting()">
-              Join
-            </button>
-            <button *ngIf="!isRoomExist" [disabled]="disable"
-              class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="sendInvite()">
-              Send Invite
-            </button>
-            <button *ngIf="activeRoom" type="button" class="btn btn-lg btn-outline-secondary twitter-red" style="background-color: red;" title="Click to leave this room."
-              (click)="onLeaveRoom(true)">
-              Leave Meeting ?
-            </button>
-            <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
-          </div>
-            <div style="width: 40%;">
-
-              
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="footer-button">
+      <!-- <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings> -->
     </div>
   </div>
 </div>

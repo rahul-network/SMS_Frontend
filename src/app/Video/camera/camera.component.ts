@@ -60,8 +60,8 @@ export class CameraComponent implements AfterViewInit {
 
             this.videoTrack = this.localTracks.find(t => t.kind === 'video') as LocalVideoTrack;
             const videoElement = this.videoTrack.attach();
-            this.renderer.setStyle(videoElement, 'height', '100%');
-            this.renderer.setStyle(videoElement, 'width', '100%');
+            this.renderer.setStyle(videoElement, 'height', '100vh');
+            this.renderer.setStyle(videoElement, 'width', '100vh');
             this.renderer.appendChild(this.previewElement.nativeElement, videoElement);
         } 
         catch {

@@ -10,7 +10,7 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailDataComponent } from './main-datatable/detail-data/detail-data.component';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 
 
 import { CameraComponent } from './Video/camera/camera.component';
@@ -26,6 +26,7 @@ import { VideoChatService } from './services/videochat.service';
 import { DeviceService } from './services/device.service';
 import { StorageService } from './services/storage.service';
 import { VideoCallComponent } from './Video/Call/videoCall.component';
+import { participendVideoCallComponent } from './Video/Call/videoCall.component - Copy';
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './Voice/dialer-app.component';
 import {CcmFormComponent  } from './form/ccm/ccm.component';
@@ -48,6 +49,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SettingsComponent,
     DeviceSelectComponent,
     VideoCallComponent,
+    participendVideoCallComponent,
     DialerAppComponent,
     CcmFormComponent,
     MawvFormComponent,
@@ -66,7 +68,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NgxSkeletonLoaderModule,
     MatSortModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
    providers: [VideoChatService,DeviceService,StorageService],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { VideoCallComponent } from '../..//Video/Call/videoCall.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -158,7 +159,25 @@ export class DetailDataComponent implements OnInit {
   }
 
   openVideoCall() {
-    window.open(`${location.origin}/#/videocall/${this.data.clinic.id}/${this.data.externalPatientId}/`, "_blank");
+    const dialogRef = this.dialog.open(VideoCallComponent, {
+      disableClose: true,
+      autoFocus:false,
+      panelClass: 'my-video',
+      width: '100%',
+      height: '100%',
+      data: {
+        id: this.data.id,
+        firstName: this.data.firstName,
+        clinic: this.data.clinic,
+        email: this.data.email,
+        smsPhoneNo: this.data.clinic.smsPhoneNo,
+        lastName: this.data.lastName,
+        gender: this.data.gender,
+        externalPatientId: this.data.externalPatientId
+      }
+
+    });
+    //window.open(`${location.origin}/#/videocall/${this.data.clinic.id}/${this.data.externalPatientId}/`, "_blank");
 
   }
   openMessage(phoneNumber: any) {

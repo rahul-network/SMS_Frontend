@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Inject } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant } from 'twilio-video';
 import { RoomsComponent } from '../rooms/rooms.component';
 import { CameraComponent } from '../camera/camera.component';
@@ -13,14 +13,13 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
 import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
 import { debug } from 'console';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'video-call',
     styleUrls: ['./videoCall.component.css'],
     templateUrl: './videoCall.component.html',
 })
-export class VideoCallComponent implements OnInit {
+export class participendVideoCallComponent implements OnInit {
     @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
     @ViewChild('camera', { static: false }) camera: CameraComponent;
     @ViewChild('settings', { static: false }) settings: SettingsComponent;
@@ -34,28 +33,17 @@ export class VideoCallComponent implements OnInit {
     patientId: string;
     meetingId: string;
     private notificationHub: HubConnection;
-    
-    constructor(public dialogRef: MatDialogRef<VideoCallComponent>,
-        
+    data: any;
+    constructor(
         private readonly videoChatService: VideoChatService,
         private datatableFeedService: DatatableFeedService,
         private patientVideoCallService: PatientVideoCallService,
-        @Inject(MAT_DIALOG_DATA) 
-        public data: any,     
-        private activatedRoute: ActivatedRoute) {
 
-            if(this.activatedRoute.snapshot.params.meetingId !== undefined){
+        private activatedRoute: ActivatedRoute) {
         this.clinicId = this.activatedRoute.snapshot.params.clinicId as number;
         this.patientId = this.activatedRoute.snapshot.params.patientId;
         this.meetingId = this.activatedRoute.snapshot.params.meetingId;
         this.id  = this.activatedRoute.snapshot.params.id;
-            }
-            else
-            {
-                this.clinicId = this.data.clinic.id as number;
-                this.patientId = this.data.externalPatientId;
-            }
-        debugger;
         if (
             this.meetingId !== null && this.meetingId != "" && typeof this.meetingId !== "undefined"
         ) {
@@ -192,6 +180,7 @@ export class VideoCallComponent implements OnInit {
             this.roomGuid = _roomResponse.name;
             this.patientVideoCallService.CreateOrUpdateMeeting(this.clinicId, this.patientId, obj).subscribe((res) => {
                 this.roomGuid = _roomResponse.name;
+                debugger;
                 this.id = res.id; 
                 let sms = `Hello ${this.data.firstName} ${this.data.lastName}, System Admin from ${this.data.clinic.name } is requesting a video call. Click this link to join the video session now: `
                 let partipantURL = `${sms} ${location.origin}/#/videocall/${this.clinicId  }/${this.patientId}/${res.id}/${this.roomGuid}`

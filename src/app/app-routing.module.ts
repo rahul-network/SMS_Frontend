@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainDatatableComponent  } from './main-datatable/main-datatable.component';
 import { VideoCallComponent } from './Video/Call/videoCall.component';
+import { participendVideoCallComponent } from './Video/Call/videoCall.component - Copy';
 
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
   { path: 'dashboard', component: MainDatatableComponent },
   { path: 'videocall', component: VideoCallComponent },
   { path: 'videocall/:clinicId/:patientId', component: VideoCallComponent },
-  { path: 'videocall/:clinicId/:patientId/:id/:meetingId', component: VideoCallComponent }
+  { path: 'videocall/:clinicId/:patientId/:id/:meetingId', component: participendVideoCallComponent }
 
 ];
 
