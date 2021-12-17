@@ -22,14 +22,16 @@ export class CameraComponent implements AfterViewInit {
         private readonly renderer: Renderer2) { }
 
     async ngAfterViewInit() {
+        debugger;
         if (this.previewElement && this.previewElement.nativeElement) {
             await this.initializeDevice();
         }
     }
 
     initializePreview(deviceInfo?: MediaDeviceInfo) {
+        debugger;
         if (deviceInfo) {
-            this.initializeDevice(deviceInfo.kind, deviceInfo.deviceId);
+            this.initializeDevice(deviceInfo.kind, deviceInfo.deviceId,deviceInfo.label);
         } else {
             this.initializeDevice();
         }
@@ -45,7 +47,7 @@ export class CameraComponent implements AfterViewInit {
         }
     }
 
-    private async initializeDevice(kind?: MediaDeviceKind, deviceId?: string) {
+    private async initializeDevice(kind?: MediaDeviceKind, deviceId?: string,name?:string) {
         try {
             debugger;
             this.isInitializing = true;
@@ -53,7 +55,7 @@ export class CameraComponent implements AfterViewInit {
             this.finalizePreview();
 
             this.localTracks = kind && deviceId
-                ? await this.initializeTracks(kind, deviceId)
+                ? await this.initializeTracks(kind, deviceId,name)
                 : await this.initializeTracks();
 
              
@@ -64,25 +66,27 @@ export class CameraComponent implements AfterViewInit {
             this.renderer.setStyle(videoElement, 'width', '100vh');
             this.renderer.appendChild(this.previewElement.nativeElement, videoElement);
         } 
-        catch {
-            alert('Permission Denied !')
-
-        }finally {
+        catch (e) {
+            alert(e);
+            console.log(e)
+        }
+        finally {
             this.isInitializing = false;
         }
     }
 
-    private initializeTracks(kind?: MediaDeviceKind, deviceId?: string) {
+    private initializeTracks(kind?: MediaDeviceKind, deviceId?: string,name? :string) {
        
         if (kind) {
             switch (kind) {
                 case 'audioinput':
                     return createLocalTracks({ audio: { deviceId }, video: true });
                 case 'videoinput':
-                    return createLocalTracks({ audio: true, video: { deviceId,width: 1920, height: 1080, frameRate: 24 } });
+                    return createLocalTracks({ audio: true, video: { deviceId,"name":name, width: 1920, height: 1080, frameRate: 24 } });
             }
         }
 
         return createLocalTracks({ audio: true, video: { width: 1280, height: 720, frameRate: 24 }});
+ 
     }
 }

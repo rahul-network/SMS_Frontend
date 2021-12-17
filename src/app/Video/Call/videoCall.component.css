@@ -649,7 +649,7 @@ video {
   /* width: 145vh !important;
   height: 100vh !important; */
   width: 70vw !important;
-  height: 95vh !important;
+  height: 96vh !important;
   display: block;
   margin: auto;
 }
@@ -739,6 +739,15 @@ video {
   border-color: #444;
 }
 
-::ng-deep .settings-video{
-  display: none !important;
+::ng-deep .settings-video {
+  /* display: none !important; */
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+::ng-deep .settings-video video {
+  width: 20vw !important;
+  height: 47vh !important;
 }

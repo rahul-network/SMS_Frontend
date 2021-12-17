@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
-import { CCMFormService } from '../ccm/service/ccm-servuce';
+import { MAWVFormService } from '../ccm/service/mawv-service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
@@ -40,7 +40,7 @@ export class MawvFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private ccmFormService: CCMFormService
+        private MAWVFormService: MAWVFormService
 
         // private alertService: AlertService
     ) { }
@@ -276,7 +276,7 @@ export class MawvFormComponent implements OnInit {
             overnightOximetry: new FormControl(),	//	Overnight Oximetry (Virtuox)
             homeSleepOxygenTest: new FormControl(),	//	Home Sleep Oxygen Test (Virtuox)
             mobileCardiacTelementry: new FormControl(),	//	Mobile Cardiac Telemetry (Virtuox)
-            overnightEFG: new FormControl(),	//	Overnight EEG (Virtuox)
+            overnightEEG: new FormControl(),	//	Overnight EEG (Virtuox)
             leadEkG: new FormControl(),	//	12 Lead EKG (VIrtoux)
             otherTest: new FormControl(),	//	Other Test
             providersName: new FormControl(),	//	Provider’s name
@@ -286,7 +286,7 @@ export class MawvFormComponent implements OnInit {
 
         })
         if (this.data.formId !== null) {
-            this.ccmFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
+            this.MAWVFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
                 this.todayDate = res.documentCreated;
                 res.forEach((element: any) => {
                     (this.form.controls[element.fieldKey] as FormControl).patchValue(element.fieldValue)
@@ -308,13 +308,13 @@ export class MawvFormComponent implements OnInit {
     onSubmit() {
         debugger;
         this.submitted = true;
-        // this.ccmFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId).subscribe((res) => {
-        //     alert("Save Successfully");
-        //     this.dialogRef.close();
-        // });
-        // if (this.form.invalid) {
-        //     return;
-        // }
+        this.MAWVFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId,7).subscribe((res) => {
+            alert("Save Successfully");
+            this.dialogRef.close();
+        });
+        if (this.form.invalid) {
+            return;
+        }
     }
 
     openCCMForm(_data: any) {

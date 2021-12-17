@@ -165,7 +165,7 @@
                     <tr>
                         <td>
                             <p>
-                                <select title="gender">
+                                <select formControlName="gender" title="gender">
                                     <option>Male</option>
                                     <option>Female</option>
                                 </select>
@@ -229,7 +229,7 @@
 
             <strong> GENERAL HEALTH ASSESSMENT</strong>
             <br />
-            <strong>HEDIS quality metircs</strong>
+            <strong>HEDIS quality metrics</strong>
 
             <table>
                 <tbody>
@@ -2270,7 +2270,7 @@
                     <mat-radio-group formControlName="depressionOp4" style="display: contents;">
                         <tr>
                             <td>
-                                <p>Feeling tired or having little energy?
+                                <p>Feeling tired or having little energy
                                 </p>
                             </td>
                             <td>
@@ -2294,7 +2294,7 @@
                     <mat-radio-group formControlName="depressionOp5" style="display: contents;">
                         <tr>
                             <td>
-                                <p>Poor appetite or eating too much?
+                                <p>Poor appetite or eating too much
                                 </p>
                             </td>
                             <td>
@@ -2319,7 +2319,7 @@
                         <tr>
                             <td>
                                 <p>Trouble concentrating on things such as reading the newspaper
-                                    or watching TV?
+                                    or watching TV
                                 </p>
                             </td>
                             <td>
@@ -2370,7 +2370,7 @@
                         <tr>
                             <td>
                                 <p>Thoughts that you would be better off dead, or hurting yourself or
-                                    others?
+                                    others
 
                                 </p>
                             </td>
@@ -3055,11 +3055,6 @@
                                 <p>
                                     <mat-radio-button value="Nursing home"> Nursing home</mat-radio-button>
                                 </p>
-                                <p>
-                                    <mat-radio-button value="With a caregiver">With a caregiver </mat-radio-button>
-                                </p>
-
-
                                 <input aria-label="liveIn" appTitleCase type="text" class="form-control" />
                             </td>
                         </mat-radio-group>
@@ -3099,6 +3094,9 @@
                             <td>
                                 <p>Do you have a medical power of attorney?
                                 </p>
+                                <p>
+                                    (Someone to make medical decisions for you in the event that you are unable to?)
+                                </p>
                             </td>
                             <td>
                                 <p style="text-align: center;">
@@ -3122,7 +3120,7 @@
                             <td>
                                 <p>Do you have a living will/advanced directive?
                                 </p>
-                                <p style="color: red;">
+                                <p>
                                     (Documents that make your healthcare wishes known? Such as a DNR?)
                                 </p>
                             </td>
@@ -3149,7 +3147,7 @@
                                 <p>Is a copy of your advanced care directive on file at your doctor's office?
                                 </p>
                                 <p>
-                                    (Documents that makeyour healthcare wishes known? Such as a DNR?)
+                                    (Documents that make your healthcare wishes known? Such as a DNR?)
                                 </p>
                             </td>
                             <td>
@@ -3239,11 +3237,11 @@
                                 pectoris
                             </mat-checkbox><br />
                             <mat-checkbox formControlName="annualReviewChronicOp9" class="checkbox-margin">Z21 -
-                                Asymptomatic human immunodeficiency virus[HIV]
+                                Asymptomatic human immunodeficiency virus [HIV]
                                 infection
                             </mat-checkbox><br />
                             <mat-checkbox formControlName="annualReviewChronicOp10" class="checkbox-margin">B18 -
-                                Vhronic viral hepatitis
+                                Chronic viral hepatitis
                             </mat-checkbox><br />
                             <mat-checkbox formControlName="annualReviewChronicOp11" class="checkbox-margin">D69.2 -
                                 Other nonthrombocytopenic purpura
@@ -3440,7 +3438,7 @@
                             </p>
                         </td>
                         <td>
-                            <textarea aria-label="AdditionaNotes" rows="27" style="width: 100%;"
+                            <textarea aria-label="AdditionaNotes" rows="24" style="width: 100%;"
                                 formControlName="otherBloodTest" class="form-control"></textarea>
                         </td>
                     </tr>
@@ -3546,7 +3544,7 @@
                                 <mat-checkbox formControlName="mobileCardiacTelementry" class="checkbox-margin">Mobile
                                     cardiac telemetry (virtuox)
                                 </mat-checkbox><br />
-                                <mat-checkbox formControlName="overnightEFG" class="checkbox-margin">Overnight EFG
+                                <mat-checkbox formControlName="overnightEEG" class="checkbox-margin">Overnight EEG
                                     (virtuox)
                                 </mat-checkbox><br />
                                 <mat-checkbox formControlName="leadEkG" class="checkbox-margin">12 Lead EKG (virtoux)
@@ -3554,7 +3552,7 @@
                             </p>
                         </td>
                         <td>
-                            <textarea aria-label="AdditionaNotes" rows="8" style="width: 100%;"
+                            <textarea aria-label="AdditionaNotes" rows="7" style="width: 100%;"
                                 formControlName="otherTest" class="form-control"></textarea>
                         </td>
 
