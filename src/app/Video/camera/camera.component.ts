@@ -22,14 +22,12 @@ export class CameraComponent implements AfterViewInit {
         private readonly renderer: Renderer2) { }
 
     async ngAfterViewInit() {
-        debugger;
         if (this.previewElement && this.previewElement.nativeElement) {
             await this.initializeDevice();
         }
     }
 
     initializePreview(deviceInfo?: MediaDeviceInfo) {
-        debugger;
         if (deviceInfo) {
             this.initializeDevice(deviceInfo.kind, deviceInfo.deviceId,deviceInfo.label);
         } else {
@@ -49,9 +47,7 @@ export class CameraComponent implements AfterViewInit {
 
     private async initializeDevice(kind?: MediaDeviceKind, deviceId?: string,name?:string) {
         try {
-            debugger;
             this.isInitializing = true;
-
             this.finalizePreview();
 
             this.localTracks = kind && deviceId

@@ -73,7 +73,6 @@ export class DialerAppComponent implements OnInit {
     this.onClickMute = new EventEmitter();;
 
     Twilio.Device.on("ready", (device: any) => {
-      debugger;
       console.log("This is a listenner that fires when your device is ready")
       console.log(device);
       device.volume = 1.0
@@ -182,7 +181,6 @@ export class DialerAppComponent implements OnInit {
 
   close() {
     Twilio.Device.disconnectAll();
-    debugger;
     if(this.patientVoiceCallResponse !== undefined){
     let obj: PatientVoiceCall = {
       Id: this.patientVoiceCallResponse.id,

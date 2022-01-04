@@ -306,7 +306,6 @@ export class MawvFormComponent implements OnInit {
 
       
     onSubmit() {
-        debugger;
         this.submitted = true;
         this.MAWVFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId,7).subscribe((res) => {
             alert("Save Successfully");

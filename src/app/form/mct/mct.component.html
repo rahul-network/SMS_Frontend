@@ -1,0 +1,186 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-card>
+    <mat-card-content>
+      <p>
+        <img aria-label="podiatrist" src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px"
+          width="250px" />
+      </p>
+      <table>
+        <tr>
+          <td colspan="2">
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="ClinicId" placeholder="Clinic Name" [(value)]="selectedClinicId">
+                <mat-option *ngFor="let c of clinicModel" [value]="c.id">
+                  {{c.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-icon *ngIf="loading">
+              <mat-spinner color="accent" diameter="20"></mat-spinner>
+            </mat-icon>
+          </td>
+
+        </tr>
+        <mat-radio-group formControlName="patientType" style="display: contents;">
+          <tr>
+            <td>
+              <mat-radio-button value="Existing"> Existing</mat-radio-button>
+            </td>
+            <td>
+              <mat-radio-button value="New">New </mat-radio-button>
+            </td>
+          </tr>
+        </mat-radio-group>
+
+        <tr *ngIf="displayAutocomplete">
+          <td colspan="2">
+            <ng-autocomplete [data]="patients" [searchKeyword]="keyword" placeholder="Enter the Patient Name"
+              (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+              (inputFocused)='onFocused($event)' historyIdentifier="patients" [itemTemplate]="itemTemplate"
+              formControlName="PatientId" [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.fullName"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+            <mat-icon *ngIf="isLoaded">
+              <mat-spinner color="accent" diameter="20"></mat-spinner>
+            </mat-icon>
+          </td>
+        </tr>
+        <tr *ngIf="!displayAutocomplete">
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input [disabled]="displayAutocomplete" formControlName="FirstName" matInput
+                placeholder="Patient's First Name">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input [disabled]="displayAutocomplete" formControlName="LastName" matInput
+                placeholder="Patient's Last Name">
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <mat-form-field>
+              <input placeholder="DOB" formControlName="DOB" matInput [matDatepicker]="DOB">
+              <mat-datepicker-toggle matSuffix [for]="DOB"></mat-datepicker-toggle>
+              <mat-datepicker #DOB></mat-datepicker>
+            </mat-form-field>
+
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="ICD 10" formControlName="ICD10">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <h3>Reimbursement</h3>
+      <mat-divider></mat-divider>
+      <table>
+        <tr>
+          <td>
+            <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93224">CPT 93224
+            </mat-checkbox>
+          </td>
+          <td>
+            <mat-form-field>
+              <input placeholder="Service Date" formControlName="Rem_CPT93224_ServiceDt" matInput
+                [matDatepicker]="cpt93224">
+              <mat-datepicker-toggle matSuffix [for]="cpt93224"></mat-datepicker-toggle>
+              <mat-datepicker #cpt93224></mat-datepicker>
+            </mat-form-field>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93228">CPT 93228
+            </mat-checkbox>
+          </td>
+          <td>
+            <mat-form-field>
+              <input placeholder="Service Date" formControlName="Rem_CPT93228_ServiceDt" matInput
+                [matDatepicker]="cpt93228">
+              <mat-datepicker-toggle matSuffix [for]="cpt93228"></mat-datepicker-toggle>
+              <mat-datepicker #cpt93228></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93229">CPT 93229
+            </mat-checkbox>
+          </td>
+          <td>
+            <mat-form-field>
+              <input placeholder="Service Date" formControlName="Rem_CPT93229_ServiceDt" matInput
+                [matDatepicker]="cpt93229">
+              <mat-datepicker-toggle matSuffix [for]="cpt93229"></mat-datepicker-toggle>
+              <mat-datepicker #cpt93229></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td colspan="2" class="content-center">
+            <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm"
+              style="text-align: center;margin: 10px;">
+              <button mat-stroked-button style="margin: 10px;" [mat-dialog-close]="true">
+                Cancel
+              </button>
+
+              <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
+                <mat-icon *ngIf="submitted">
+                  <mat-spinner color="accent" diameter="20"></mat-spinner>
+                </mat-icon>
+                Save
+              </button>
+
+            </div>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</form>
+<!-- 
+<form class="example-form">
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Number</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  
+<mat-form-field appearance="fill">
+  <mat-label>Choose a date</mat-label>
+  <input placeholder="date" matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+</form> -->

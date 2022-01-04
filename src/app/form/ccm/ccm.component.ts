@@ -73,8 +73,6 @@ export class CcmFormComponent implements OnInit {
 
 
         });
-        debugger;
-       
             this.form = new FormGroup({
 
                 patientId : new FormControl(),
@@ -227,7 +225,6 @@ export class CcmFormComponent implements OnInit {
     get f() { return this.form.controls; }
 
     onSubmit() {
-        debugger;
         this.submitted = true;
         this.ccmFormService.addOrUpdate(this.form.value,Number(this.data.id),this.data.formId).subscribe((res) => {
             alert("Save Successfully");

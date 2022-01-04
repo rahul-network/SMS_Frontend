@@ -6,6 +6,7 @@ import { DatatableFeedService } from '../datatable-feed.service';
 import { DetailDataComponent } from './detail-data/detail-data.component';
 import { DialerAppComponent } from '../Voice/dialer-app.component';
 import { PatientFormsComponent } from '../../app/form/ccm/patient-forms.component';
+import { MctFormComponent } from '../form/mct/mct.component';
 import { PagerModel } from '../shared/pagerModel';
 
 @Component({
@@ -58,8 +59,16 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     });
   }
 
+  openMCTForm() {
+    const dialogRef = this.dialog.open(MctFormComponent, {
+      width: '50%',
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
   openVideoCall(_data: any) {
-    debugger;
     window.open(`${location.origin}/#/videocall/${_data.clinic.id}/${_data.externalPatientId}/`, "_blank");
   }
 
@@ -87,7 +96,6 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   openCCMForm(_data: any) {
-    debugger;
     const dialogRef = this.dialog.open(PatientFormsComponent, {
       width: '100vw',
       height: '100vh',

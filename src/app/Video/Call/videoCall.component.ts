@@ -55,7 +55,6 @@ export class VideoCallComponent implements OnInit {
                 this.clinicId = this.data.clinic.id as number;
                 this.patientId = this.data.externalPatientId;
             }
-        debugger;
         if (
             this.meetingId !== null && this.meetingId != "" && typeof this.meetingId !== "undefined"
         ) {
