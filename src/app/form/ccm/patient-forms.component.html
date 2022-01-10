@@ -1,8 +1,8 @@
-<button type="button" mat-raised-button color="primary" (click)="openCCMForm(null,true)" style="margin: 10px;">
+<button type="button" mat-raised-button color="primary" (click)="openForm(null,true)" style="margin: 10px;">
     <mat-icon>add</mat-icon>
     CCM
   </button>
-  <button type="button" mat-raised-button color="primary" (click)="openMAWVForm(null,true)" style="margin: 10px;">
+  <button type="button" mat-raised-button color="primary" (click)="openForm({'formName':'MAWV'},true)" style="margin: 10px;">
     <mat-icon>add</mat-icon>
     MAWV
   </button>
@@ -10,7 +10,7 @@
     <ng-container matColumnDef="edit">
        <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit</th>
        <td mat-cell *matCellDef="let element">
-           <div style="cursor: pointer;" (click)="openCCMForm(element,false)">
+           <div style="cursor: pointer;" (click)="openForm(element,false)">
                <mat-icon>edit</mat-icon>
            </div>
        </td>
@@ -21,6 +21,11 @@
          <th mat-header-cell *matHeaderCellDef mat-sort-header> Form Id </th>
          <td mat-cell *matCellDef="let element"> {{element.formId}} </td>
      </ng-container>
+     <ng-container matColumnDef="formName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Form Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.formName}} </td>
+    </ng-container>
+     
    
      <!-- Sent/Recieved Column -->
      <ng-container matColumnDef="createdDateTime">

@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
-import { CCMFormService } from './service/ccm-servuce';
+import { FormService } from './service/ccm-servuce';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
@@ -40,7 +40,7 @@ export class CcmFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private ccmFormService: CCMFormService
+        private ccmFormService: FormService
        
         // private alertService: AlertService
     ) { }

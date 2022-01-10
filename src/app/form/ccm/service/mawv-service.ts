@@ -9,13 +9,13 @@ import { environment } from "../../../../environments/environment"
 
 export class MAWVFormService {
   constructor(private httpClient: HttpClient) { }
-  addOrUpdate(_data : FormData,patientId: number,formId: string,clinicCode : number) {
+  addOrUpdate(_data : FormData,externalPatientId: string,formId: string,clinicCode : number) {
     let obj : SaveMAWVFormModel = {
       FormData : _data,
       FormId :  formId 
     }
     let serverUrl = environment.apiUrl;
-    return this.httpClient.post(`${serverUrl}/api/Clinic/${clinicCode}/Patient/${patientId}/MAWVForm`,obj).pipe(
+    return this.httpClient.post(`${serverUrl}/api/Clinic/${clinicCode}/Patient/${externalPatientId}/MAWVForm`,obj).pipe(
       map((res: any) => {
         return res;
       })

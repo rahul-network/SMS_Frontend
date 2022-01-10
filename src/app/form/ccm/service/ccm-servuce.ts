@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from "rxjs/operators";
+import { PagerModel } from 'src/app/shared/pagerModel';
 import { environment } from "../../../../environments/environment" 
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CCMFormService {
+export class FormService {
   constructor(private httpClient: HttpClient) { }
   addOrUpdate(_data : FormData,patientId: number,formId: string) {
     let obj : SaveCCMFormModel = {
@@ -24,11 +25,13 @@ export class CCMFormService {
     
   }
 
-  getFormsbyPatientId(_id: any) {
+  getFormsbyPatientId(cliniccode:number,patientid :string,_pagerModel: PagerModel) {
     let serverUrl = environment.apiUrl;
-    return this.httpClient.get(`${serverUrl}/api/CCM/getFormsByPatientId/${_id}`).pipe(
+    return this.httpClient.get(`${serverUrl}/api/Clinic/${cliniccode}/Patient/${patientid}/MAWVForm/?PageNumber=${_pagerModel.PageNumber}&&PageSize=${_pagerModel.PageSize}&&Sort=${_pagerModel.Sort}`).pipe(
+    //return this.httpClient.get(`${serverUrl}/api/CCM/getFormsByPatientId/${_id}`).pipe(
       map((res: any) => {
-        return res;
+        debugger;
+        return res.items;
       })
     );
   }

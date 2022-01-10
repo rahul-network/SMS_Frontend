@@ -47,16 +47,13 @@ export class MawvFormComponent implements OnInit {
 
     ngOnInit() {
         this.loading = false;
-
-
-
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
         this.form = this.formBuilder.group({
-            medicalPractice: [''],
-            documentCreated: [''],
-            firstName: [''],
-            lastName: [''],
+            mawv_medicalPractice: [''],
+            mawv_documentCreated: [''],
+            mawv_firstName: [''],
+            mawv_lastName: [''],
             //dateOfBirth: [''],
             dateOfBirth: [formatDate(this.data.dateOfBirth, 'MM/dd/yyyy', 'en'), [Validators.required]],
             diagnose1: [''],
@@ -77,11 +74,11 @@ export class MawvFormComponent implements OnInit {
 
 
 
-            patientId: new FormControl(),
-            medicalPractice: new FormControl(),
-            documentCreated: new FormControl(),
-            firstName: new FormControl(this.data.firstName),
-            lastName: new FormControl(this.data.lastName),
+            mawv_patientId: new FormControl(),
+            mawv_medicalPractice: new FormControl(),
+            mawv_documentCreated: new FormControl(),
+            mawv_firstName: new FormControl(this.data.firstName),
+            mawv_lastName: new FormControl(this.data.lastName),
             typeOfVisit: new FormControl(),	//	TYPE OF VISIT
             typeOfVisitOther: new FormControl(),	//	TYPE OF VISIT OTHER
             gender: new FormControl(),	//	Gender
@@ -107,7 +104,7 @@ export class MawvFormComponent implements OnInit {
             hedisQualityOpt6: new FormControl(),	//	In the past 7 days, how often have you felt sleepy during the daytime?
             hedisQualityOpt7: new FormControl(),	//	In the past 7 days, how often have you felt sleepy during the daytime?
             hedisQualityOpt8: new FormControl(),	//	In the past 7 days, how often have you felt sleepy during the daytime?
-            rateLevelOfPain: new FormControl(),	//	Rate level of pain on scale 1-10 (1 being the lowest)
+            rateLevelOfPainScale: new FormControl(),	//	Rate level of pain on scale 1-10 (1 being the lowest)
             hedisQualityOpt9: new FormControl(),	//	Have you suffered a personal loss or misfortune in the last year? (For example: a job loss, disability, divorce, separation, jail term, or the death of someone close to you.)
             hedisQualityComment2: new FormControl(),	//	Comment
             eachNightSleep: new FormControl(),	//	How much sleep do you usually get each night?
@@ -307,7 +304,7 @@ export class MawvFormComponent implements OnInit {
       
     onSubmit() {
         this.submitted = true;
-        this.MAWVFormService.addOrUpdate(this.form.value, Number(this.data.id), this.data.formId,7).subscribe((res) => {
+        this.MAWVFormService.addOrUpdate(this.form.value, this.data.externalPatientId, this.data.formId,7).subscribe((res) => {
             alert("Save Successfully");
             this.dialogRef.close();
         });
@@ -316,13 +313,13 @@ export class MawvFormComponent implements OnInit {
         }
     }
 
-    openCCMForm(_data: any) {
-        const dialogRef = this.dialog.open(MawvFormComponent, {
-            width: '100$',
-            height: '100%',
-            autoFocus: false,
-            data: {
-            }
-        });
-    }
+    // openCCMForm(_data: any) {
+    //     const dialogRef = this.dialog.open(MawvFormComponent, {
+    //         width: '100$',
+    //         height: '100%',
+    //         autoFocus: false,
+    //         data: {
+    //         }
+    //     });
+    // }
 }

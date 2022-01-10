@@ -12,12 +12,12 @@ import { PagerModel } from 'src/app/shared/pagerModel';
 
 interface ClinicModel {
     name: string;
-    id:number;
+    id: number;
 }
-interface PatientModel{
-    firstName:string;
-    lastName:string;
-    id:string
+interface PatientModel {
+    firstName: string;
+    lastName: string;
+    id: number
 }
 
 @Component({
@@ -46,35 +46,38 @@ export class MctFormComponent implements OnInit {
     data: any;
     isLoaded: boolean;
     dataSource: any;
-    patients:PatientModel[];
+    patients: PatientModel[];
     constructor(
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<MctFormComponent>,
         public mctFormService: MctFormService,
         private datatableFeedService: DatatableFeedService,
         private formBuilder: FormBuilder
-        
+
     ) {
     }
 
     keyword = 'fullName';
-  
+
     selectEvent(item: any) {
-    // do something with selected item
-  }
+        this.form.controls['PatientId'].setValue(item.value);
+        this.form.controls['FirstName'].setValue(item.firstName);
+        this.form.controls['LastName'].setValue(item.lastName);
+        return item;
+    }
 
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
+    onChangeSearch(search: string) {
+        // fetch remote data from here
+        // And reassign the 'data' which is binded to 'data' property.
+    }
 
-  onFocused(e:any) {
-    // do something
-  }
-  
+    onFocused(e: any) {
+        // do something
+    }
+
 
     getClinics(): void {
-        
+
         this.mctFormService.getClinics().subscribe(data => {
             if (data) {
                 this.clinicModel = data;
@@ -83,18 +86,17 @@ export class MctFormComponent implements OnInit {
         });
     }
 
-    
+
 
     ngOnInit() {
-      
+
         this.form = this.formBuilder.group({
-            ClinicId:[''],
-            PatientId:[''],
+            ClinicId: [''],
+            PatientId: [''],
             FirstName: [''],
             LastName: [''],
-            
-            DOB : [''],
-            icd10:[''],
+            DOB: [''],
+            icd10: [''],
             cpt93224: [''],
             cpt93224Date: [''],
             cpt93228: [''],
@@ -104,10 +106,9 @@ export class MctFormComponent implements OnInit {
 
         });
         this.form = new FormGroup({
-
             patientType: new FormControl(),
             ClinicId: new FormControl(),
-            PatientId:new FormControl(),
+            PatientId: new FormControl(),
             FirstName: new FormControl({ value: '', disabled: false }),
             LastName: new FormControl(),
             DOB: new FormControl(),
@@ -130,23 +131,25 @@ export class MctFormComponent implements OnInit {
                     Sort: "1",
                     PageNumber: 1,
                     PageSize: 500
-                  };
-                
+                };
+
                 this.datatableFeedService.getAllData(Number(this.form.get('ClinicId').value), pager)
-                .subscribe(data => {
-                    if (data) {
-                        this.patients = data.rows.map(
-                            (obj : PatientModel) => {
-                              return   {
-                                fullName: obj.firstName+' '+obj.lastName,
-                                value: obj.id,
-                              };
-                            }
-                          );;
-                          this.isLoaded = false;
-                        
-                    }
-                });
+                    .subscribe(data => {
+                        if (data) {
+                            this.patients = data.rows.map(
+                                (obj: PatientModel) => {
+                                    return {
+                                        fullName: obj.firstName + ' ' + obj.lastName,
+                                        value: obj.id,
+                                        firstName: obj.firstName,
+                                        lastName : obj.lastName
+                                    };
+                                }
+                            );;
+                            this.isLoaded = false;
+
+                        }
+                    });
             }
             else {
                 this.displayAutocomplete = false;
@@ -170,7 +173,7 @@ export class MctFormComponent implements OnInit {
         this.mctFormService.saveMctForm(this.form.value).subscribe((res) => {
             alert("Save Successfully");
             this.dialogRef.close();
-          });
+        });
         this.submitted = true;
     }
 }

@@ -37,11 +37,11 @@
         </mat-radio-group>
 
         <tr *ngIf="displayAutocomplete">
-          <td colspan="2">
-            <ng-autocomplete [data]="patients" [searchKeyword]="keyword" placeholder="Enter the Patient Name"
+          <td colspan="2" style="padding-top: 10px;padding-bottom: 10px;">
+            <ng-autocomplete [data]="patients" [searchKeyword]="keyword" placeholder="Search for Patient Name"
               (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
               (inputFocused)='onFocused($event)' historyIdentifier="patients" [itemTemplate]="itemTemplate"
-              formControlName="PatientId" [notFoundTemplate]="notFoundTemplate">
+               [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
             <ng-template #itemTemplate let-item>
               <a [innerHTML]="item.fullName"></a>
@@ -55,7 +55,7 @@
             </mat-icon>
           </td>
         </tr>
-        <tr *ngIf="!displayAutocomplete">
+        <tr>
           <td>
             <mat-form-field class="demo-full-width">
               <input [disabled]="displayAutocomplete" formControlName="FirstName" matInput
