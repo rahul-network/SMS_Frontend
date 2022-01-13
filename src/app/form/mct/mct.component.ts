@@ -8,7 +8,8 @@ import { MctFormService } from './service/mct-service';
 import { coerceStringArray } from '@angular/cdk/coercion';
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { PagerModel } from 'src/app/shared/pagerModel';
-
+import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import { NotificationService } from '../../services/notification.service'
 
 interface ClinicModel {
     name: string;
@@ -17,7 +18,8 @@ interface ClinicModel {
 interface PatientModel {
     firstName: string;
     lastName: string;
-    id: number
+    id: number,
+    dateOfBirth: Date
 }
 
 @Component({
@@ -44,13 +46,14 @@ export class MctFormComponent implements OnInit {
     displayAutocomplete = false;
     clinicModel: ClinicModel[];
     data: any;
-    isLoaded: boolean;
+    loadPatients: boolean;
     dataSource: any;
     patients: PatientModel[];
     constructor(
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<MctFormComponent>,
         public mctFormService: MctFormService,
+        private notifyService: NotificationService,
         private datatableFeedService: DatatableFeedService,
         private formBuilder: FormBuilder
 
@@ -60,10 +63,19 @@ export class MctFormComponent implements OnInit {
     keyword = 'fullName';
 
     selectEvent(item: any) {
+        debugger;
         this.form.controls['PatientId'].setValue(item.value);
         this.form.controls['FirstName'].setValue(item.firstName);
         this.form.controls['LastName'].setValue(item.lastName);
+        this.form.controls['DOB'].setValue(item.dateOfBirth);
         return item;
+    }
+    clearEventStatic() {
+        this.form.controls['PatientId'].setValue(null);
+        this.form.controls['FirstName'].setValue(null);
+        this.form.controls['LastName'].setValue(null);
+        this.form.controls['DOB'].setValue(null);
+        console.log('clear');
     }
 
     onChangeSearch(search: string) {
@@ -87,6 +99,35 @@ export class MctFormComponent implements OnInit {
     }
 
 
+    clinicChange(value: string) {
+        this.loadPatients = true;
+        let pager: PagerModel = {
+            Sort: "1",
+            PageNumber: 1,
+            PageSize: 500
+        };
+
+        this.datatableFeedService.getAllData(Number(value), pager)
+            .subscribe(data => {
+                if (data) {
+                    debugger;
+                    this.patients = data.rows.map(
+
+                        (obj: PatientModel) => {
+                            return {
+                                fullName: obj.firstName + ' ' + obj.lastName,
+                                value: obj.id,
+                                firstName: obj.firstName,
+                                lastName: obj.lastName,
+                                dateOfBirth: obj.dateOfBirth
+                            };
+                        }
+                    );;
+                    this.loadPatients = false;
+
+                }
+            });
+    }
 
     ngOnInit() {
 
@@ -120,43 +161,7 @@ export class MctFormComponent implements OnInit {
             Rem_CPT93229: new FormControl(false),
             Rem_CPT93229_ServiceDt: new FormControl(),
         })
-        this.form.get("patientType").valueChanges.subscribe(selectedValue => {
-            this.isLoaded = true;
 
-            this.form.controls['FirstName'].reset();
-            this.form.controls['LastName'].reset();
-            if (selectedValue === "Existing") {
-                this.displayAutocomplete = true;
-                let pager: PagerModel = {
-                    Sort: "1",
-                    PageNumber: 1,
-                    PageSize: 500
-                };
-
-                this.datatableFeedService.getAllData(Number(this.form.get('ClinicId').value), pager)
-                    .subscribe(data => {
-                        if (data) {
-                            this.patients = data.rows.map(
-                                (obj: PatientModel) => {
-                                    return {
-                                        fullName: obj.firstName + ' ' + obj.lastName,
-                                        value: obj.id,
-                                        firstName: obj.firstName,
-                                        lastName : obj.lastName
-                                    };
-                                }
-                            );;
-                            this.isLoaded = false;
-
-                        }
-                    });
-            }
-            else {
-                this.displayAutocomplete = false;
-            }
-
-            //console.log(this.form.get("patientType").value)
-        })
         this.getClinics();
     }
 
@@ -169,11 +174,16 @@ export class MctFormComponent implements OnInit {
     }
 
     onSubmit() {
-
-        this.mctFormService.saveMctForm(this.form.value).subscribe((res) => {
-            alert("Save Successfully");
-            this.dialogRef.close();
-        });
-        this.submitted = true;
+        if (this.form.valid) {
+            this.submitted = true;
+            this.mctFormService.saveMctForm(this.form.value).subscribe((res) => {
+                this.notifyService.showSuccess("Data Saved successfully !!", "")
+                this.dialogRef.close();
+            });
+        }
+        else {
+            this.notifyService.showError("Please fill required fields", "")
+        }
     }
+
 }

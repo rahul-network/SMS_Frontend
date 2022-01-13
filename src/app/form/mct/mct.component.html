@@ -12,8 +12,8 @@
       <table>
         <tr>
           <td colspan="2">
-            <mat-form-field appearance="fill">
-              <mat-select formControlName="ClinicId" placeholder="Clinic Name" [(value)]="selectedClinicId">
+            <mat-form-field appearance="fill" >
+              <mat-select required formControlName="ClinicId" (selectionChange)="clinicChange($event.value)" placeholder="Clinic Name" [(value)]="selectedClinicId" >
                 <mat-option *ngFor="let c of clinicModel" [value]="c.id">
                   {{c.name}}
                 </mat-option>
@@ -25,22 +25,16 @@
           </td>
 
         </tr>
-        <mat-radio-group formControlName="patientType" style="display: contents;">
-          <tr>
-            <td>
-              <mat-radio-button value="Existing"> Existing</mat-radio-button>
-            </td>
-            <td>
-              <mat-radio-button value="New">New </mat-radio-button>
-            </td>
-          </tr>
-        </mat-radio-group>
-
-        <tr *ngIf="displayAutocomplete">
+        <tr>
           <td colspan="2" style="padding-top: 10px;padding-bottom: 10px;">
             <ng-autocomplete [data]="patients" [searchKeyword]="keyword" placeholder="Search for Patient Name"
-              (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
-              (inputFocused)='onFocused($event)' historyIdentifier="patients" [itemTemplate]="itemTemplate"
+              (selected)='selectEvent($event)' 
+              (inputCleared)='clearEventStatic()'
+
+              (inputChanged)='onChangeSearch($event)'
+              (inputFocused)='onFocused($event)' 
+              historyIdentifier="patients" 
+              [itemTemplate]="itemTemplate"
                [notFoundTemplate]="notFoundTemplate">
             </ng-autocomplete>
             <ng-template #itemTemplate let-item>
@@ -50,7 +44,10 @@
             <ng-template #notFoundTemplate let-notFound>
               <div [innerHTML]="notFound"></div>
             </ng-template>
-            <mat-icon *ngIf="isLoaded">
+            
+          </td>
+          <td>
+            <mat-icon *ngIf="loadPatients">
               <mat-spinner color="accent" diameter="20"></mat-spinner>
             </mat-icon>
           </td>
@@ -58,14 +55,14 @@
         <tr>
           <td>
             <mat-form-field class="demo-full-width">
-              <input [disabled]="displayAutocomplete" formControlName="FirstName" matInput
-                placeholder="Patient's First Name">
+              <input formControlName="FirstName" matInput
+                placeholder="Patient's First Name" required>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="demo-full-width">
-              <input [disabled]="displayAutocomplete" formControlName="LastName" matInput
-                placeholder="Patient's Last Name">
+              <input formControlName="LastName" matInput
+                placeholder="Patient's Last Name" required>
             </mat-form-field>
           </td>
         </tr>
@@ -73,7 +70,7 @@
         <tr>
           <td colspan="2">
             <mat-form-field>
-              <input placeholder="DOB" formControlName="DOB" matInput [matDatepicker]="DOB">
+              <input placeholder="DOB" formControlName="DOB" matInput [matDatepicker]="DOB" required>
               <mat-datepicker-toggle matSuffix [for]="DOB"></mat-datepicker-toggle>
               <mat-datepicker #DOB></mat-datepicker>
             </mat-form-field>
@@ -144,7 +141,7 @@
                 Cancel
               </button>
 
-              <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
+              <button type="submit"  mat-raised-button color="primary" style="margin: 10px;">
                 <mat-icon *ngIf="submitted">
                   <mat-spinner color="accent" diameter="20"></mat-spinner>
                 </mat-icon>
