@@ -58,7 +58,11 @@ export class MctFormComponent implements OnInit {
         private formBuilder: FormBuilder
 
     ) {
+
     }
+
+
+
 
     keyword = 'fullName';
 
@@ -75,7 +79,6 @@ export class MctFormComponent implements OnInit {
         this.form.controls['FirstName'].setValue(null);
         this.form.controls['LastName'].setValue(null);
         this.form.controls['DOB'].setValue(null);
-        console.log('clear');
     }
 
     onChangeSearch(search: string) {
@@ -161,6 +164,40 @@ export class MctFormComponent implements OnInit {
             Rem_CPT93229: new FormControl(false),
             Rem_CPT93229_ServiceDt: new FormControl(),
         })
+
+        this.form.get('Rem_CPT93224').valueChanges
+            .subscribe(value => {
+                debugger;
+                if (value) {
+                    this.form.get('Rem_CPT93224_ServiceDt').setValidators(Validators.required)
+                    this.form.get('Rem_CPT93224_ServiceDt').updateValueAndValidity();
+                } else {
+                    this.form.get('Rem_CPT93224_ServiceDt').clearValidators();
+                    this.form.get('Rem_CPT93224_ServiceDt').updateValueAndValidity();
+                }
+            });
+            this.form.get('Rem_CPT93228').valueChanges
+            .subscribe(value => {
+                debugger;
+                if (value) {
+                    this.form.get('Rem_CPT93228_ServiceDt').setValidators(Validators.required)
+                    this.form.get('Rem_CPT93228_ServiceDt').updateValueAndValidity();
+                } else {
+                    this.form.get('Rem_CPT93228_ServiceDt').clearValidators();
+                    this.form.get('Rem_CPT93228_ServiceDt').updateValueAndValidity();
+                }
+            });
+            this.form.get('Rem_CPT93229').valueChanges
+            .subscribe(value => {
+                debugger;
+                if (value) {
+                    this.form.get('Rem_CPT93229_ServiceDt').setValidators(Validators.required)
+                    this.form.get('Rem_CPT93229_ServiceDt').updateValueAndValidity();
+                } else {
+                    this.form.get('Rem_CPT93229_ServiceDt').clearValidators();
+                    this.form.get('Rem_CPT93229_ServiceDt').updateValueAndValidity();
+                }
+            });
 
         this.getClinics();
     }
