@@ -6,13 +6,10 @@ import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { PatientMessageRequest } from '../../shared/patientMessagePagerModel'
-import { PagerModel } from '../../shared/pagerModel'
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MessageComponent } from '../../messsage/message.component';
 import { DialerAppComponent } from 'src/app/Voice/dialer-app.component';
-import { debug } from 'console';
 import { merge, Observable } from 'rxjs';
 import { startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -25,8 +22,8 @@ import { environment } from '../../../environments/environment';
 
 export class DetailDataComponent implements OnInit {
 
-  displayedColumns: string[] = ['createdDateTime', 'smsType', 'content', 'createdByName', 'markread'];
-  messageDisplayedColumns: string[] = ['createdDateTime', 'smsType', 'content', 'createdByName', 'markread'];
+  displayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
+  messageDisplayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
   callsDisplayedColumns: string[] = ['createdDateTime', 'calledTo', 'callLength', 'callStartDateTime', 'remarks','createdByName'];
   videoDisplayedColumns: string[] = ['createdDateTime', 'videoCallStartDateTime', 'videoCallEndDateTime', 'participantJoinDateTime', 'partipantLeaveDateTime', 'createdByName'];
   detailDataSourceLength = 0;

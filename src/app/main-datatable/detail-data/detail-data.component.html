@@ -68,6 +68,13 @@
                         "3" ? "Voice Call" : "Video Call" }}
                     </td>
                 </ng-container>
+                 <!-- SMS Status Column -->
+                 <ng-container matColumnDef="smsStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.smsStatus}}
+                    </td>
+                </ng-container>
                 <!-- Content Column -->
                 <ng-container matColumnDef="content">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Content </th>
@@ -125,6 +132,13 @@
                     <td mat-cell *matCellDef="let element">
                         {{element.smsType == "1" ? "SMS In" : element.smsType == "2" ? "SMS Out" : element.smsType ==
                         "3" ? "Voice Call" : "Video Call" }}
+                    </td>
+                </ng-container>
+                <!-- SMS Status Column -->
+                <ng-container matColumnDef="smsStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.smsStatus}}
                     </td>
                 </ng-container>
                 <!-- Content Column -->

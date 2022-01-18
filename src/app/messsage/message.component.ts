@@ -48,7 +48,12 @@ export class MessageComponent implements OnInit {
     let clinicId = this.data.clinicId;
     this.datatableFeedService.sendSms(Number(clinicId),externalPatientId,obj).subscribe((_feedDataDetails) => {
         this.dialogRef.close();
-    });
+    },
+    (error) => {
+      alert(error.error);
+      return false;
+    }
+    );
     
   }
   close(): void {
