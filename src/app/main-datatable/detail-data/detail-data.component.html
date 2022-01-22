@@ -93,7 +93,7 @@
                 </ng-container>
                 <ng-container matColumnDef="createdByName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Createdby </th>
-                    <td mat-cell *matCellDef="let element"> {{element.createdByName ?? "Admin Admin"}}</td>
+                    <td mat-cell *matCellDef="let element"> {{element.createdByName}}</td>
                 </ng-container>
 
                 <!-- SMS Type Column -->
@@ -110,13 +110,15 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
             </table>
-           
             <mat-paginator
             [length]="detailDataSourceLength"
             #TableCommsPaginator="matPaginator"
             [pageSize]="10"
             [pageSizeOptions]="[10, 20, 30]"
           ></mat-paginator>
+           
+            
+          
         </mat-tab>
         <mat-tab label="Message">
 
@@ -157,7 +159,7 @@
                 </ng-container>
                 <ng-container matColumnDef="createdByName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Createdby </th>
-                    <td mat-cell *matCellDef="let element"> {{element.createdByName ?? "Admin Admin"}}</td>
+                    <td mat-cell *matCellDef="let element"> {{element.createdByName}}</td>
                 </ng-container>
 
                 <!-- SMS Type Column -->
@@ -179,6 +181,7 @@
             [pageSize]="10"
             [pageSizeOptions]="[10, 20, 30]"
           ></mat-paginator>
+            
         </mat-tab>
        
         <mat-tab label="Voice Call">
@@ -209,7 +212,7 @@
 
                 <ng-container matColumnDef="createdByName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
-                    <td mat-cell *matCellDef="let element">{{element.createdByName ?? "Admin Admin"}}</td>
+                    <td mat-cell *matCellDef="let element">{{element.createdByName}}</td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="callsDisplayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: callsDisplayedColumns;"></tr>
@@ -221,6 +224,7 @@
             [pageSize]="10"
             [pageSizeOptions]="[10, 20, 30]"
           ></mat-paginator>
+            
         </mat-tab>
        
         <mat-tab label="Video Calls">
@@ -253,7 +257,7 @@
 
                 <ng-container matColumnDef="createdByName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Created By </th>
-                    <td mat-cell *matCellDef="let element">{{element.createdByName ?? "Admin Admin"}} </td>
+                    <td mat-cell *matCellDef="let element">{{element.createdByName}} </td>
                 </ng-container>
 
 
@@ -267,6 +271,7 @@
             [pageSize]="10"
             [pageSizeOptions]="[10, 20, 30]"
           ></mat-paginator>
+            
         </mat-tab>
         <mat-tab label="Forms">
                 <patient-forms></patient-forms>

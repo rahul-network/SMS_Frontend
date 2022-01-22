@@ -12,7 +12,6 @@ import { PatientVideoCallService, PatientVideoCall } from 'src/app/Video/service
 import { ActivatedRoute } from '@angular/router';
 import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
 import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
-import { debug } from 'console';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

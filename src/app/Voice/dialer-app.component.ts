@@ -6,7 +6,6 @@ import { DatatableFeedService } from "../datatable-feed.service";
 import { PatientVoiceCallService, PatientVoiceCall } from "./service/patientvoicecall-service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
-import { debug } from "console";
 import { Subscription } from "rxjs/internal/Subscription";
 
 declare const Twilio: any;
