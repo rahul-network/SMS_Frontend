@@ -101,7 +101,7 @@ export class ParticipantsComponent {
     private attachRemoteTrack(track: RemoteTrack) 
     {
         if (this.isAttachable(track)) {
-            alert('attach')
+            //alert('attach')
             const element = track.attach();
             this.renderer.data.id = track.sid;
             //this.renderer.setStyle(element, 'width', '95%');

@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
-import { NgControl } from '@angular/forms';
 import { createLocalVideoTrack, LocalVideoTrack } from 'twilio-video';
 import { StorageService } from '../service/storageService';
 
@@ -27,7 +26,7 @@ export class CameraComponent implements AfterViewInit {
         }
     }
 
-    async initializePreview(deviceId: string) {
+    async initializePreview(deviceId?: string) {
         await this.initializeDevice(deviceId);
     }
 
@@ -43,7 +42,6 @@ export class CameraComponent implements AfterViewInit {
     }
 
     private async initializeDevice(deviceId?: string) {
-        console.log("initializeDevice");
         try {
             this.isInitializing = true;
 
@@ -57,10 +55,12 @@ export class CameraComponent implements AfterViewInit {
             this.renderer.setStyle(videoElement, 'height', '100%');
             this.renderer.setStyle(videoElement, 'width', '100%');            
             this.renderer.appendChild(this.previewElement.nativeElement, videoElement);
-        }catch (e) {
+        }
+        catch (e) {
             alert(e);
             console.log(e)
-        } finally {
+        }
+         finally {
             this.isInitializing = false;
         }
     }

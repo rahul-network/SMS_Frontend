@@ -67,6 +67,7 @@ export class VideoCallComponent implements OnInit {
     }
 
     async ngOnInit() {
+        debugger;
         this.disable = false;
         let serverUrl = environment.apiUrl;
         const builder =
@@ -92,16 +93,8 @@ export class VideoCallComponent implements OnInit {
     }
 
     async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
+        debugger;
         await this.camera.initializePreview(deviceInfo.deviceId);
-        console.log("this.settings.isPreviewing --",this.settings.isPreviewing);
-        if (this.settings.isPreviewing) {
-            const track = await this.settings.showPreviewCamera();
-            if (this.activeRoom) {
-                const localParticipant = this.activeRoom.localParticipant;
-                localParticipant.videoTracks.forEach(publication => publication.unpublish());
-                await localParticipant.publishTrack(track);
-            }
-        }
     }
 
     async onLeaveRoom(_: boolean) {
@@ -109,7 +102,7 @@ export class VideoCallComponent implements OnInit {
             this.activeRoom.disconnect();
             this.activeRoom = null;
         }
-
+debugger;
         this.camera.finalizePreview();
         const videoDevice = this.settings.hidePreviewCamera();
         await this.camera.initializePreview(videoDevice && videoDevice.deviceId);

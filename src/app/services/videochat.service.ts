@@ -1,8 +1,9 @@
-import { connect, ConnectOptions, LocalTrack, Room } from 'twilio-video';
+import { connect, ConnectOptions, LocalTrack, LocalVideoTrack, Room } from 'twilio-video';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject , Observable } from 'rxjs';
 import { environment } from "../../environments/environment" 
+
 interface AuthToken {
     token: string;
 }
@@ -16,9 +17,7 @@ export interface NamedRoom {
 
 export type Rooms = NamedRoom[];
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class VideoChatService {
     $roomsUpdated: Observable<boolean>;
 
@@ -32,11 +31,12 @@ export class VideoChatService {
         let serverUrl = environment.apiUrl;
         const auth =
             await this.http
-                .get<AuthToken>(`${serverUrl}/api/video/token`)
-                .toPromise();
+            .get<AuthToken>(`${serverUrl}/api/video/token`)
+                      .toPromise();
 
         return auth.token;
     }
+
     getAllRooms() {
         let serverUrl = environment.apiUrl;
         return this.http
@@ -49,7 +49,7 @@ export class VideoChatService {
         return this.http
             .get<NamedRoom>(`${serverUrl}/api/video/room`);
     }
-
+    
     async joinOrCreateRoom(name: string, tracks: LocalTrack[]) {
         let room: Room = null;
         try {
@@ -63,7 +63,7 @@ export class VideoChatService {
                     } as ConnectOptions);
         } catch (error) {
             alert(error)
-            console.error(`Unable to connect to Room: ${error.message}`);
+            console.error(`Unable to connect to Room: ${error}`);
         } finally {
             
             if (room) {
