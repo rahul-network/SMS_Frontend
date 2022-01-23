@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, Inject } from '@angular/core';
-import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant } from 'twilio-video';
+import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant, createLocalAudioTrack } from 'twilio-video';
 import { RoomsComponent } from '../rooms/rooms.component';
 import { CameraComponent } from '../camera/camera.component';
 import { SettingsComponent } from '../settings/settings.component';
@@ -10,14 +10,16 @@ import { environment } from "../../../environments/environment"
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { PatientVideoCallService, PatientVideoCall } from 'src/app/Video/service/patientvideocall-service';
 import { ActivatedRoute } from '@angular/router';
-import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
+import { PatientVoiceCall, PatientVoiceCallService } from 'src/app/Voice/service/patientvoicecall-service';
 import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StorageService } from '../service/storageService';
 
 @Component({
     selector: 'video-call',
     styleUrls: ['./videoCall.component.css'],
     templateUrl: './videoCall.component.html',
+    providers: [StorageService]
 })
 export class VideoCallComponent implements OnInit {
     @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
@@ -90,7 +92,16 @@ export class VideoCallComponent implements OnInit {
     }
 
     async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
-        await this.camera.initializePreview(deviceInfo);
+        await this.camera.initializePreview(deviceInfo.deviceId);
+        console.log("this.settings.isPreviewing --",this.settings.isPreviewing);
+        if (this.settings.isPreviewing) {
+            const track = await this.settings.showPreviewCamera();
+            if (this.activeRoom) {
+                const localParticipant = this.activeRoom.localParticipant;
+                localParticipant.videoTracks.forEach(publication => publication.unpublish());
+                await localParticipant.publishTrack(track);
+            }
+        }
     }
 
     async onLeaveRoom(_: boolean) {
@@ -101,7 +112,7 @@ export class VideoCallComponent implements OnInit {
 
         this.camera.finalizePreview();
         const videoDevice = this.settings.hidePreviewCamera();
-        this.camera.initializePreview(videoDevice);
+        await this.camera.initializePreview(videoDevice && videoDevice.deviceId);
 
         this.participants.clear();
         let obj: PatientVideoCall = {
@@ -120,8 +131,11 @@ export class VideoCallComponent implements OnInit {
             }
 
             this.camera.finalizePreview();
-            const tracks = await this.settings.showPreviewCamera();
-
+            //const tracks = await this.settings.showPreviewCamera();
+            const tracks = await Promise.all([
+                createLocalAudioTrack(),
+                this.settings.showPreviewCamera()
+            ]);
             this.activeRoom =
                 await this.videoChatService
                     .joinOrCreateRoom(roomName, tracks);
@@ -169,8 +183,11 @@ export class VideoCallComponent implements OnInit {
             }
 
             this.camera.finalizePreview();
-            const tracks = await this.settings.showPreviewCamera();
-
+            //const tracks = await this.settings.showPreviewCamera();
+            const tracks = await Promise.all([
+                createLocalAudioTrack(),
+                this.settings.showPreviewCamera()
+            ]);
             this.activeRoom =
                 await this.videoChatService
                     .joinOrCreateRoom(_roomResponse.name, tracks);
@@ -193,7 +210,7 @@ export class VideoCallComponent implements OnInit {
                 this.id = res.id; 
                 let sms = `Hello ${this.data.firstName} ${this.data.lastName}, System Admin from ${this.data.clinic.name } is requesting a video call. Click this link to join the video session now: `
                 let partipantURL = `${sms} ${location.origin}/#/videocall/${this.clinicId  }/${this.patientId}/${res.id}/${this.roomGuid}`
-
+                console.log(partipantURL);
                 let obj: PatientMessageRequest = {
                     CellPhone: this.data.cellPhone,
                     Content: partipantURL,
@@ -215,8 +232,11 @@ export class VideoCallComponent implements OnInit {
         }
 
         this.camera.finalizePreview();
-        const tracks = await this.settings.showPreviewCamera();
-
+        //const tracks = await this.settings.showPreviewCamera();
+        const tracks = await Promise.all([
+            createLocalAudioTrack(),
+            this.settings.showPreviewCamera()
+        ]);
         this.activeRoom =
             await this.videoChatService
                 .joinOrCreateRoom(this.roomGuid, tracks);

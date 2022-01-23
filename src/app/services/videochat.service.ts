@@ -62,8 +62,10 @@ export class VideoChatService {
                         dominantSpeaker: true
                     } as ConnectOptions);
         } catch (error) {
+            alert(error)
             console.error(`Unable to connect to Room: ${error.message}`);
         } finally {
+            
             if (room) {
                 this.roomBroadcast.next(true);
             }

@@ -58,6 +58,8 @@
  * Zone JS is required by default for Angular itself.
  */
  import 'zone.js';  // Included with Angular CLI.
+ import 'zone.js/dist/zone-patch-user-media';
+ import 'zone.js/dist/webapis-rtc-peer-connection';
 
 
  /***************************************************************************************************
