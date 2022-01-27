@@ -4,8 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from './service/patient-service';
 import { PatientDetailComponent  } from './patient-detail/patient-detail.component';
-import { DialerAppComponent } from '../Voice/dialer-app.component';
-import { PatientFormsComponent } from '../form/ccm/patient-forms.component';
+import { DialerAppComponent } from './patient-detail/Call/dialer-app.component';
+import { PatientFormsComponent } from './patient-detail/Forms/patient-forms.component';
 import {PatientListPagerModel } from './models/patient'
 import { MctFormComponent } from '../form/mct/mct.component';
 import { Router } from '@angular/router'
@@ -45,6 +45,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   }
 
   openDetail(_data: any) {
+    debugger;
     const dialogRef = this.dialog.open(PatientDetailComponent, {
       width: '100vw',
       height: '100vh',

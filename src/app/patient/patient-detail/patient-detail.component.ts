@@ -1,14 +1,14 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { VideoCallComponent } from '../../Video/Call/videoCall.component';
+import { VideoCallComponent } from '../patient-detail/Video/Call/videoCall.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { MessageComponent } from '../../messsage/message.component';
-import { DialerAppComponent } from '../../Voice/dialer-app.component';
+import { PatientSmsComponent } from '../patient-detail/Sms/patient-sms.component';
+import { DialerAppComponent } from './Call/dialer-app.component';
 import { merge, Observable } from 'rxjs';
 import { startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -81,7 +81,7 @@ export class PatientDetailComponent implements OnInit {
         switchMap(() => {
           //this.isLoadingResults = true;
           return this.laraHealthHttpDatabase!.getComms(
-            this.commSort.active, this.commSort.direction, this.paginator.pageIndex, 10, Number(this.data.clinicId), this.data.externalPatientId)
+            this.commSort.active, this.commSort.direction, this.paginator.pageIndex, 10, 'QAC', this.data.externalPatientId)
             .pipe();
         }),
         map(data => {
@@ -100,7 +100,7 @@ export class PatientDetailComponent implements OnInit {
         switchMap(() => {
           //this.isLoadingResults = true;
           return this.laraHealthHttpDatabase!.getMessages(
-            this.messagesort.active, this.messagesort.direction, this.messagepaginator.pageIndex, 10, Number(this.data.clinicId), this.data.externalPatientId)
+            this.messagesort.active, this.messagesort.direction, this.messagepaginator.pageIndex, 10, 'QAC', this.data.externalPatientId)
             .pipe();
         }),
         map(data => {
@@ -117,7 +117,7 @@ export class PatientDetailComponent implements OnInit {
       .pipe(
         startWith({}), switchMap(() => {
           return this.laraHealthHttpDatabase!.getVoiceCalls(
-            this.voicecallsort.active, this.voicecallsort.direction, this.voicepaginator.pageIndex, 10, Number(this.data.clinicId), this.data.externalPatientId)
+            this.voicecallsort.active, this.voicecallsort.direction, this.voicepaginator.pageIndex, 10, 'QAC', this.data.externalPatientId)
             .pipe();
         }),
         map(data => {
@@ -154,7 +154,6 @@ export class PatientDetailComponent implements OnInit {
   }
 
   openVideoCall() {
-    debugger;
     const dialogRef = this.dialog.open(VideoCallComponent, {
       disableClose: true,
       autoFocus:false,
@@ -177,7 +176,7 @@ export class PatientDetailComponent implements OnInit {
 
   }
   openMessage(phoneNumber: any) {
-    const dialogRef = this.dialog.open(MessageComponent, {
+    const dialogRef = this.dialog.open(PatientSmsComponent, {
       disableClose: true,
       autoFocus:false,
       width: '50vw',
@@ -223,7 +222,7 @@ export class LaraHealthHttpDatabase {
   constructor(private _httpClient: HttpClient) { }
 
   getComms(sort: string, order: SortDirection, page: number, pageSize: number,
-    cliniccode: number, patientid: string): Observable<any> {
+    cliniccode: string, patientid: string): Observable<any> {
     if (sort === undefined)
       sort = 'createdDateTime';
     if (order !== 'asc' && sort !== undefined)
@@ -236,7 +235,7 @@ export class LaraHealthHttpDatabase {
   }
 
   getMessages(sort: string, order: SortDirection, page: number, pageSize: number,
-    cliniccode: number, patientid: string): Observable<any> {
+    cliniccode: string, patientid: string): Observable<any> {
     if (sort === undefined)
       sort = 'createdDateTime';
     if (order !== 'asc' && sort !== undefined)
@@ -248,7 +247,7 @@ export class LaraHealthHttpDatabase {
     return this._httpClient.get<any>(requestUrl);
   }
   getVoiceCalls(sort: string, order: SortDirection, page: number, pageSize: number,
-    cliniccode: number, patientid: string): Observable<any> {
+    cliniccode: string, patientid: string): Observable<any> {
     if (sort === undefined)
       sort = 'createdDateTime';
     if (order !== 'asc' && sort !== undefined)

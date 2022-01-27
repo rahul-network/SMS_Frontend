@@ -1,10 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { VideoCallComponent } from '../..//Video/Call/videoCall.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatientService } from '../../patient/service/patient-service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MessageComponent } from '../../messsage/message.component';
-import { DialerAppComponent } from 'src/app/Voice/dialer-app.component';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
@@ -56,7 +53,6 @@ export class MctDataComponent implements OnInit, AfterViewInit {
 
     }
     ngAfterViewInit() {
-        debugger;
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
         merge(this.sort.sortChange, this.paginator.page)
             .pipe(

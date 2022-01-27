@@ -17,7 +17,7 @@ export class PatientService {
       })
     );
   }
-  getPatient(clinicId: number, _id:any): Observable<any> {
+  getPatient(clinicId: string, _id:any): Observable<any> {
     let serverUrl = environment.apiUrl;
     return this.httpClient.get(`${serverUrl}/api/Clinic/${clinicId}/Patient/${_id}`).pipe(
       map((res: any) => {
@@ -57,7 +57,7 @@ export class PatientService {
       })
     );
   }
-  sendSms(cliniccode:number,patientid :string,model:PatientMessageRequest) {
+  sendSms(cliniccode:string,patientid :string,model:PatientMessageRequest) {
     let serverUrl = environment.apiUrl;
     return this.httpClient.post(`${serverUrl}/api/Clinic/${cliniccode}/Patient/${patientid}/Message`,model).pipe(
       map((res: any) => {
