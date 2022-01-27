@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ViewChild } from '@angular/core';
 import { CcmFormComponent } from './ccm.component';
 import {MawvFormComponent } from './mawv.component';
-import { PagerModel } from 'src/app/shared/pagerModel';
+import { PatientListPagerModel } from '../../patient/models/patient';
 
 
 @Component({
@@ -22,9 +22,8 @@ import { PagerModel } from 'src/app/shared/pagerModel';
 export class PatientFormsComponent implements OnInit {
     displayedColumns: string[] = ['edit','formId','formName', 'createdDateTime', 'updatedDateTime'];
     detailDataSource = new MatTableDataSource<any>([]);
-    @ViewChild(MatSort) sort: MatSort;
-
-    form: FormGroup;
+    @ViewChild(MatSort) sort!: MatSort;
+    form!: FormGroup;
     id!: string;
     isAddMode!: boolean;
     loading = false;
@@ -46,7 +45,7 @@ export class PatientFormsComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
-        let pager: PagerModel = {
+        let pager: PatientListPagerModel = {
           Sort: "1",
           PageNumber: 1,
           PageSize: 500

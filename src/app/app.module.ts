@@ -7,10 +7,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MainDatatableComponent } from './main-datatable/main-datatable.component';
+import { PatientListComponent } from './patient/patients-list.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { DetailDataComponent } from './main-datatable/detail-data/detail-data.component';
+import { PatientDetailComponent } from './patient/patient-detail/patient-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -45,9 +45,9 @@ import { MatChipsModule } from '@angular/material/chips';
   declarations: [
    
     AppComponent,
-    MainDatatableComponent,
+    PatientListComponent,
     MctDataComponent,
-    DetailDataComponent,
+    PatientDetailComponent,
     TitleCaseDirective,
     CameraComponent,
     ParticipantsComponent,

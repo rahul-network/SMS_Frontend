@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild, Input, Output, EventEmitter, } fr
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { DatatableFeedService } from "../datatable-feed.service";
+import { PatientService } from "../patient/service/patient-service";
 import { PatientVoiceCallService, PatientVoiceCall } from "./service/patientvoicecall-service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
@@ -64,7 +64,7 @@ export class DialerAppComponent implements OnInit {
     private httpClient: HttpClient,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    private datatableFeedService: DatatableFeedService,
+    private patientService: PatientService,
     private patientVoiceCallService: PatientVoiceCallService
   ) {
     dialogRef.disableClose = true;

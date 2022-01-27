@@ -7,11 +7,11 @@ import { ParticipantsComponent } from '../participants/participants.component';
 import { VideoChatService } from '../../services/videochat.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { environment } from "../../../environments/environment"
-import { DatatableFeedService } from 'src/app/datatable-feed.service';
+import { PatientService } from '../../patient/service/patient-service';
 import { PatientVideoCallService, PatientVideoCall } from 'src/app/Video/service/patientvideocall-service';
 import { ActivatedRoute } from '@angular/router';
 import { PatientVoiceCall, PatientVoiceCallService } from 'src/app/Voice/service/patientvoicecall-service';
-import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
+import { PatientMessageRequest } from '../../patient/models/patient';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StorageService } from '../service/storageService';
 
@@ -22,24 +22,24 @@ import { StorageService } from '../service/storageService';
     providers: [StorageService]
 })
 export class VideoCallComponent implements OnInit {
-    @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
-    @ViewChild('camera', { static: false }) camera: CameraComponent;
-    @ViewChild('settings', { static: false }) settings: SettingsComponent;
-    @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
-    disable: boolean;
-    activeRoom: Room;
+    @ViewChild('rooms', { static: false }) rooms!: RoomsComponent;
+    @ViewChild('camera', { static: false }) camera!: CameraComponent;
+    @ViewChild('settings', { static: false }) settings!: SettingsComponent;
+    @ViewChild('participants', { static: false }) participants!: ParticipantsComponent;
+    disable!: boolean;
+    activeRoom!: Room;
     isRoomExist: boolean = false;
-    roomGuid: string;
-    id: number;
+    roomGuid!: string;
+    id!: number;
     clinicId: number;
     patientId: string;
-    meetingId: string;
-    private notificationHub: HubConnection;
+    meetingId!: string;
+    private notificationHub!: HubConnection;
     
     constructor(public dialogRef: MatDialogRef<VideoCallComponent>,
         
         private readonly videoChatService: VideoChatService,
-        private datatableFeedService: DatatableFeedService,
+        private patientService: PatientService,
         private patientVideoCallService: PatientVideoCallService,
         @Inject(MAT_DIALOG_DATA) 
         public data: any,     
@@ -85,7 +85,7 @@ export class VideoCallComponent implements OnInit {
             console.log(result)
         });
 
-        this.datatableFeedService.getPatient(this.clinicId, this.patientId).subscribe((result) => {
+        this.patientService.getPatient(this.clinicId, this.patientId).subscribe((result) => {
             this.data = result;
         });
 
@@ -98,7 +98,7 @@ export class VideoCallComponent implements OnInit {
     async onLeaveRoom(_: boolean) {
         if (this.activeRoom) {
             this.activeRoom.disconnect();
-            this.activeRoom = null;
+            //this.activeRoom = null;
         }
         this.camera.finalizePreview();
         const videoDevice = this.settings.hidePreviewCamera();
@@ -207,7 +207,7 @@ export class VideoCallComponent implements OnInit {
                     SMSPhoneNo: this.data.cellPhone,
                     IsRead: false,
                 }
-                this.datatableFeedService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();
+                this.patientService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();
                 this.disable = false;
             });
         });

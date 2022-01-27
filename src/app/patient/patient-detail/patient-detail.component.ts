@@ -1,26 +1,25 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { VideoCallComponent } from '../..//Video/Call/videoCall.component';
+import { VideoCallComponent } from '../../Video/Call/videoCall.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MessageComponent } from '../../messsage/message.component';
-import { DialerAppComponent } from 'src/app/Voice/dialer-app.component';
+import { DialerAppComponent } from '../../Voice/dialer-app.component';
 import { merge, Observable } from 'rxjs';
 import { startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 @Component({
-  selector: 'app-detail-data',
-  templateUrl: './detail-data.component.html',
-  styleUrls: ['./detail-data.component.css']
+  selector: 'patient-detail',
+  templateUrl: './patient-detail.component.html',
+  styleUrls: ['./patient-detail.component.css']
 })
 
 
-export class DetailDataComponent implements OnInit {
+export class PatientDetailComponent implements OnInit {
 
   displayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
   messageDisplayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
@@ -35,16 +34,16 @@ export class DetailDataComponent implements OnInit {
   videoDataSourceLength = 0;
   videoDataSource = new MatTableDataSource<IVideoCalls>([]);
 
-  @ViewChild("TableCommsSort", { static: true }) commSort: MatSort;
+  @ViewChild("TableCommsSort", { static: true }) commSort!: MatSort;
 
-  @ViewChild("TableMessageSort", { static: true }) messagesort: MatSort;
-  @ViewChild("TableCallsSort", { static: true }) voicecallsort: MatSort;
-  @ViewChild("TableVideoCallsSort", { static: true }) videocallsort: MatSort;
+  @ViewChild("TableMessageSort", { static: true }) messagesort!: MatSort;
+  @ViewChild("TableCallsSort", { static: true }) voicecallsort!: MatSort;
+  @ViewChild("TableVideoCallsSort", { static: true }) videocallsort!: MatSort;
 
-  @ViewChild("TableCommsPaginator", { static: true }) paginator: MatPaginator;
-  @ViewChild("TableMessagePaginator", { static: true }) messagepaginator: MatPaginator;
-  @ViewChild("TableCallsPaginator", { static: true }) voicepaginator: MatPaginator;
-  @ViewChild("TableVideoCallsPaginator", { static: true }) videpaginator: MatPaginator;
+  @ViewChild("TableCommsPaginator", { static: true }) paginator!: MatPaginator;
+  @ViewChild("TableMessagePaginator", { static: true }) messagepaginator!: MatPaginator;
+  @ViewChild("TableCallsPaginator", { static: true }) voicepaginator!: MatPaginator;
+  @ViewChild("TableVideoCallsPaginator", { static: true }) videpaginator!: MatPaginator;
 
   detailDataloading: boolean = false;
   messageDataloading: boolean = false;
@@ -55,18 +54,17 @@ export class DetailDataComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef,
-    public dialogRef: MatDialogRef<DetailDataComponent>, private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
 
     @Inject(MAT_DIALOG_DATA)
-    public data: any,
-    private datatableFeedService: DatatableFeedService) {
+    public data: any) {
 
   }
-  laraHealthHttpDatabase: LaraHealthHttpDatabase | null;
-  result: any[];
-  messageResult: any[];
-  voiceResult: any[];
-  videoResult: any[];
+  laraHealthHttpDatabase!: LaraHealthHttpDatabase | null;
+  result!: any[];
+  messageResult!: any[];
+  voiceResult!: any[];
+  videoResult!: any[];
 
   registerForm: FormGroup = this.formBuilder.group({
     id: [, { updateOn: "change" }],

@@ -7,11 +7,11 @@ import { ParticipantsComponent } from '../participants/participants.component';
 import { VideoChatService } from '../../services/videochat.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { environment } from "../../../environments/environment"
-import { DatatableFeedService } from 'src/app/datatable-feed.service';
+import { PatientService } from '../../patient/service/patient-service';
 import { PatientVideoCallService, PatientVideoCall } from 'src/app/Video/service/patientvideocall-service';
 import { ActivatedRoute } from '@angular/router';
 import { PatientVoiceCall } from 'src/app/Voice/service/patientvoicecall-service';
-import { PatientMessageRequest } from 'src/app/shared/patientMessagePagerModel';
+import { PatientListPagerModel,PatientMessageRequest } from '../../patient/models/patient';
 import { StorageService } from '../service/storageService';
 
 
@@ -22,23 +22,23 @@ import { StorageService } from '../service/storageService';
     providers: [StorageService]
 })
 export class participendVideoCallComponent implements OnInit {
-    @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
-    @ViewChild('camera', { static: false }) camera: CameraComponent;
-    @ViewChild('settings', { static: false }) settings: SettingsComponent;
-    @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
-    disable: boolean;
-    activeRoom: Room;
+    @ViewChild('rooms', { static: false }) rooms!: RoomsComponent;
+    @ViewChild('camera', { static: false }) camera!: CameraComponent;
+    @ViewChild('settings', { static: false }) settings!: SettingsComponent;
+    @ViewChild('participants', { static: false }) participants!: ParticipantsComponent;
+    disable!: boolean;
+    activeRoom!: Room;
     isRoomExist: boolean = false;
-    roomGuid: string;
+    roomGuid!: string;
     id: number;
     clinicId: number;
     patientId: string;
     meetingId: string;
-    private notificationHub: HubConnection;
+    private notificationHub!: HubConnection;
     data: any;
     constructor(
         private readonly videoChatService: VideoChatService,
-        private datatableFeedService: DatatableFeedService,
+        private patientService: PatientService,
         private patientVideoCallService: PatientVideoCallService,
 
         private activatedRoute: ActivatedRoute) {
@@ -75,7 +75,7 @@ export class participendVideoCallComponent implements OnInit {
             console.log(result)
         });
 
-        this.datatableFeedService.getPatient(this.clinicId, this.patientId).subscribe((result) => {
+        this.patientService.getPatient(this.clinicId, this.patientId).subscribe((result) => {
             this.data = result;
         });
 
@@ -88,7 +88,6 @@ export class participendVideoCallComponent implements OnInit {
     async onLeaveRoom(_: boolean) {
         if (this.activeRoom) {
             this.activeRoom.disconnect();
-            this.activeRoom = null;
         }
 
         this.camera.finalizePreview();
@@ -197,7 +196,7 @@ export class participendVideoCallComponent implements OnInit {
                     SMSPhoneNo: this.data.cellPhone,
                     IsRead: false,
                 }
-                this.datatableFeedService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();
+                this.patientService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();
                 this.disable = false;
             });
         });

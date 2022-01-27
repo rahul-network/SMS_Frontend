@@ -51,7 +51,7 @@ export class VideoChatService {
     }
     
     async joinOrCreateRoom(name: string, tracks: LocalTrack[]) {
-        let room: Room = null;
+        let room: Room = new Room();
         try {
             const token = await this.getAuthToken();
             room =

@@ -22,10 +22,10 @@ import {
     templateUrl: './participants.component.html',
 })
 export class ParticipantsComponent {
-    @ViewChild('list') listRef: ElementRef;
+    @ViewChild('list') listRef!: ElementRef;
     @Output('participantsChanged') participantsChanged = new EventEmitter<boolean>();
     @Output('leaveRoom') leaveRoom = new EventEmitter<boolean>();
-    @Input('activeRoomName') activeRoomName: string;
+    @Input('activeRoomName') activeRoomName!: string;
     audioTracks: any;
     tracks: any;
 
@@ -37,8 +37,8 @@ export class ParticipantsComponent {
         return this.participantCount === 0;
     }
 
-    private participants: Map<Participant.SID, RemoteParticipant>;
-    private dominantSpeaker: RemoteParticipant;
+    private participants!: Map<Participant.SID, RemoteParticipant>;
+    private dominantSpeaker!: RemoteParticipant;
 
     constructor(private readonly renderer: Renderer2) { }
 

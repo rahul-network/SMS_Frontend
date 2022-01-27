@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from "rxjs/operators";
-import { PagerModel } from 'src/app/shared/pagerModel';
+import { PatientListPagerModel } from '../../../patient/models/patient';
 import { environment } from "../../../../environments/environment" 
 
 @Injectable({
@@ -25,7 +25,7 @@ export class FormService {
     
   }
 
-  getFormsbyPatientId(cliniccode:number,patientid :string,_pagerModel: PagerModel) {
+  getFormsbyPatientId(cliniccode:number,patientid :string,_pagerModel: PatientListPagerModel) {
     let serverUrl = environment.apiUrl;
     return this.httpClient.get(`${serverUrl}/api/Clinic/${cliniccode}/Patient/${patientid}/MAWVForm/?PageNumber=${_pagerModel.PageNumber}&&PageSize=${_pagerModel.PageSize}&&Sort=${_pagerModel.Sort}`).pipe(
     //return this.httpClient.get(`${serverUrl}/api/CCM/getFormsByPatientId/${_id}`).pipe(

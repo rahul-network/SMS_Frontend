@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
 
 export type Devices = MediaDeviceInfo[];
 

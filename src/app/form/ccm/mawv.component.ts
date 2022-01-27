@@ -20,9 +20,9 @@ import * as moment from 'moment';
 export class MawvFormComponent implements OnInit {
     displayedColumns: string[] = ['edit', 'formId', 'createdDateTime', 'updatedDateTime'];
     detailDataSource = new MatTableDataSource<any>([]);
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatSort) sort!: MatSort;
 
-    form: FormGroup;
+    form!: FormGroup;
     id!: string;
     isAddMode!: boolean;
     loading = false;

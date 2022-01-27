@@ -2,26 +2,26 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DatatableFeedService } from '../datatable-feed.service';
-import { DetailDataComponent } from './detail-data/detail-data.component';
+import { PatientService } from './service/patient-service';
+import { PatientDetailComponent  } from './patient-detail/patient-detail.component';
 import { DialerAppComponent } from '../Voice/dialer-app.component';
-import { PatientFormsComponent } from '../../app/form/ccm/patient-forms.component';
+import { PatientFormsComponent } from '../form/ccm/patient-forms.component';
+import {PatientListPagerModel } from './models/patient'
 import { MctFormComponent } from '../form/mct/mct.component';
-import { PagerModel } from '../shared/pagerModel';
 import { Router } from '@angular/router'
 @Component({
-  selector: 'app-main-datatable',
-  templateUrl: './main-datatable.component.html',
-  styleUrls: ['./main-datatable.component.css']
+  selector: 'patient-list',
+  templateUrl: './patients-list.component.html',
+  styleUrls: ['./patients-list.component.css']
 })
-export class MainDatatableComponent implements OnInit, AfterViewInit {
+export class PatientListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['action', 'email', 'firstName', 'clinicId', 'cellPhone'];
   dataSource = new MatTableDataSource([]);
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private datatableFeedService: DatatableFeedService,
+  constructor(private patientService: PatientService,
     public dialog: MatDialog,
     private router: Router) { }
 
@@ -33,22 +33,19 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   feedDatatableData() {
-    let clinitId = 7;
-    let pager: PagerModel = {
+    let pager: PatientListPagerModel = {
       Sort: "1",
       PageNumber: 1,
       PageSize: 500
     };
-
-
-    this.datatableFeedService.getAllData('QAC', pager).subscribe((_feedData) => {
+    this.patientService.getAllData('QAC', pager).subscribe((_feedData) => {
       this.dataSource = new MatTableDataSource(_feedData.items);
       this.dataSource.sort = this.sort;
     });
   }
 
   openDetail(_data: any) {
-    const dialogRef = this.dialog.open(DetailDataComponent, {
+    const dialogRef = this.dialog.open(PatientDetailComponent, {
       width: '100vw',
       height: '100vh',
       data: _data,

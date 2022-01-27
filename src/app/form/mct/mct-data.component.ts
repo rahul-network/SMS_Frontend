@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { VideoCallComponent } from '../..//Video/Call/videoCall.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DatatableFeedService } from 'src/app/datatable-feed.service';
+import { PatientService } from '../../patient/service/patient-service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MessageComponent } from '../../messsage/message.component';
 import { DialerAppComponent } from 'src/app/Voice/dialer-app.component';
@@ -13,7 +13,6 @@ import { MatSort, SortDirection } from '@angular/material/sort';
 import { MctFormService } from './service/mct-service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
-import { IComms, LaraHealthHttpDatabase } from 'src/app/main-datatable/detail-data/detail-data.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { MctFormComponent } from './mct.component';
@@ -42,8 +41,8 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     detailDataSourceLength = 0;
     //detailDataSource = new MatTableDataSource<IComms>([]);
     detailDataSource = [];
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
     detailDataloading: boolean = false;
     constructor(
         private httpClient: HttpClient,
@@ -51,7 +50,7 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         public dialog: MatDialog) {
 
     }
-    result: any[];
+    result!: any[];
     ngOnInit(): void {
 
 

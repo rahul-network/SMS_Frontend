@@ -5,8 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MctFormService } from './service/mct-service';
-import { DatatableFeedService } from 'src/app/datatable-feed.service';
-import { PagerModel } from 'src/app/shared/pagerModel';
+import { PatientService  } from '../../patient/service/patient-service';
+import {PatientListPagerModel  } from '../../patient/models/patient';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 import { NotificationService } from '../../services/notification.service'
 import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
@@ -24,7 +24,7 @@ interface PatientModel {
     dateOfBirth: Date
 }
 
-const autocomplete = (time, selector) => (source$) =>
+const autocomplete = (time:any, selector:any) => (source$:any) =>
   source$.pipe(
     debounceTime(time),
     switchMap((...args: any[]) =>
@@ -43,9 +43,9 @@ export class MctFormComponent implements OnInit {
     
     myControl = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
-    filteredOptions: Observable<string[]>;
-    @ViewChild(MatSort) sort: MatSort;
-    form: FormGroup;
+    @ViewChild(MatSort,{ static: false }) sort!: MatSort;
+    filteredOptions!: Observable<string[]>;
+    form!: FormGroup;
     id!: string;
     loading = true;
     submitted = false;
@@ -54,19 +54,19 @@ export class MctFormComponent implements OnInit {
     patientType = "";
     selectedClinicCode = "";
     displayAutocomplete = false;
-    clinicModel: ClinicModel[];
+    clinicModel!: ClinicModel[];
     data: any;
-    loadPatients: boolean;
+    loadPatients!: boolean;
     dataSource: any;
     //patients: PatientModel[];
     term$ = new BehaviorSubject<string>('');
-    regions$ = this.term$.pipe(autocomplete(1000, (term) => this.fetch(term)));
+    regions$ = this.term$.pipe(autocomplete(1000, (term:any) => this.fetch(term)));
     constructor(
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<MctFormComponent>,
         public mctFormService: MctFormService,
         private notifyService: NotificationService,
-        private datatableFeedService: DatatableFeedService,
+        private patientService: PatientService,
         private formBuilder: FormBuilder,
         private httpClient: HttpClient
 
@@ -120,7 +120,7 @@ export class MctFormComponent implements OnInit {
     }
 
     onInput(event: Event): void {
-        this.mctFormService.setAction((event?.target as HTMLInputElement)?.value,this.form.get('ClinicCode').value);
+        this.mctFormService.setAction((event?.target as HTMLInputElement)?.value,this.form.get('ClinicCode')!.value);
       }
     ngOnInit() {
 
@@ -157,34 +157,34 @@ export class MctFormComponent implements OnInit {
         })
 
 
-        this.form.get('Rem_CPT93224').valueChanges
+        this.form.get('Rem_CPT93224')!.valueChanges
             .subscribe(value => {
                 if (value) {
-                    this.form.get('Rem_CPT93224_ServiceDt').setValidators(Validators.required)
-                    this.form.get('Rem_CPT93224_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93224_ServiceDt')!.setValidators(Validators.required)
+                    this.form.get('Rem_CPT93224_ServiceDt')!.updateValueAndValidity();
                 } else {
-                    this.form.get('Rem_CPT93224_ServiceDt').clearValidators();
-                    this.form.get('Rem_CPT93224_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93224_ServiceDt')!.clearValidators();
+                    this.form.get('Rem_CPT93224_ServiceDt')!.updateValueAndValidity();
                 }
             });
-            this.form.get('Rem_CPT93228').valueChanges
+            this.form.get('Rem_CPT93228')!.valueChanges
             .subscribe(value => {
                 if (value) {
-                    this.form.get('Rem_CPT93228_ServiceDt').setValidators(Validators.required)
-                    this.form.get('Rem_CPT93228_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93228_ServiceDt')!.setValidators(Validators.required)
+                    this.form.get('Rem_CPT93228_ServiceDt')!.updateValueAndValidity();
                 } else {
-                    this.form.get('Rem_CPT93228_ServiceDt').clearValidators();
-                    this.form.get('Rem_CPT93228_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93228_ServiceDt')!.clearValidators();
+                    this.form.get('Rem_CPT93228_ServiceDt')!.updateValueAndValidity();
                 }
             });
-            this.form.get('Rem_CPT93229').valueChanges
+            this.form.get('Rem_CPT93229')!.valueChanges
             .subscribe(value => {
                 if (value) {
-                    this.form.get('Rem_CPT93229_ServiceDt').setValidators(Validators.required)
-                    this.form.get('Rem_CPT93229_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93229_ServiceDt')!.setValidators(Validators.required)
+                    this.form.get('Rem_CPT93229_ServiceDt')!.updateValueAndValidity();
                 } else {
-                    this.form.get('Rem_CPT93229_ServiceDt').clearValidators();
-                    this.form.get('Rem_CPT93229_ServiceDt').updateValueAndValidity();
+                    this.form.get('Rem_CPT93229_ServiceDt')!.clearValidators();
+                    this.form.get('Rem_CPT93229_ServiceDt')!.updateValueAndValidity();
                 }
             });
 

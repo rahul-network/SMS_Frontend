@@ -10,12 +10,12 @@ import { NamedRoom, VideoChatService } from '../../services/videochat.service';
 })
 export class RoomsComponent implements OnInit, OnDestroy {
     @Output() roomChanged = new EventEmitter<string>();
-    @Input() activeRoomName: string;
+    @Input() activeRoomName!: string;
 
-    roomName: string;
-    rooms: NamedRoom[];
+    roomName!: string;
+    rooms!: NamedRoom[];
 
-    private subscription: Subscription;
+    private subscription!: Subscription;
 
     constructor(
         private readonly videoChatService: VideoChatService) { }
@@ -42,7 +42,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
     }
 
     onAddRoom(roomName: string) {
-        this.roomName = null;
+        this.roomName = '';
         this.roomChanged.emit(roomName);
     }
 
