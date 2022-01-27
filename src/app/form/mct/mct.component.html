@@ -12,9 +12,10 @@
       <table>
         <tr>
           <td colspan="2">
-            <mat-form-field appearance="fill" >
-              <mat-select required formControlName="ClinicId" (selectionChange)="clinicChange($event.value)" placeholder="Clinic Name" [(value)]="selectedClinicId" >
-                <mat-option *ngFor="let c of clinicModel" [value]="c.id">
+            <mat-form-field appearance="fill">
+              <mat-select required formControlName="ClinicCode"
+                placeholder="Clinic Name" [(value)]="selectedClinicCode">
+                <mat-option *ngFor="let c of clinicModel" [value]="c.code">
                   {{c.name}}
                 </mat-option>
               </mat-select>
@@ -27,24 +28,20 @@
         </tr>
         <tr>
           <td colspan="2" style="padding-top: 10px;padding-bottom: 10px;">
-            <ng-autocomplete [data]="patients" [searchKeyword]="keyword" placeholder="Search for Patient Name"
-              (selected)='selectEvent($event)' 
-              (inputCleared)='clearEventStatic()'
-
-              (inputChanged)='onChangeSearch($event)'
-              (inputFocused)='onFocused($event)' 
-              historyIdentifier="patients" 
-              [itemTemplate]="itemTemplate"
-               [notFoundTemplate]="notFoundTemplate">
-            </ng-autocomplete>
-            <ng-template #itemTemplate let-item>
-              <a [innerHTML]="item.fullName"></a>
-            </ng-template>
-
-            <ng-template #notFoundTemplate let-notFound>
-              <div [innerHTML]="notFound"></div>
-            </ng-template>
-            
+            <mat-form-field style="width: 300px;">
+              <input type="text" placeholder="Patient" aria-label="Patient" matInput formControlName="autocomplete"
+                [matAutocomplete]="auto" (input)="onInput($event)">
+              <mat-spinner *ngIf="loading$ | async" matSuffix [diameter]="18" style="float: right; margin-left: 8px">
+              </mat-spinner>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let patient of patients | async"
+                  [value]="patient.firstName  + ' - ' + patient.lastName"
+                  (onSelectionChange)="onSelectPatient(patient)">
+                  {{ patient.firstName + ' - ' + patient.lastName }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-hint>Enter at least 2 characters</mat-hint>
+            </mat-form-field>
           </td>
           <td>
             <mat-icon *ngIf="loadPatients">
@@ -55,14 +52,12 @@
         <tr>
           <td>
             <mat-form-field class="demo-full-width">
-              <input formControlName="FirstName" matInput
-                placeholder="Patient's First Name" required>
+              <input formControlName="FirstName" matInput placeholder="Patient's First Name" required>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="demo-full-width">
-              <input formControlName="LastName" matInput
-                placeholder="Patient's Last Name" required>
+              <input formControlName="LastName" matInput placeholder="Patient's Last Name" required>
             </mat-form-field>
           </td>
         </tr>
@@ -141,7 +136,7 @@
                 Cancel
               </button>
 
-              <button type="submit"  mat-raised-button color="primary" style="margin: 10px;">
+              <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
                 <mat-icon *ngIf="submitted">
                   <mat-spinner color="accent" diameter="20"></mat-spinner>
                 </mat-icon>

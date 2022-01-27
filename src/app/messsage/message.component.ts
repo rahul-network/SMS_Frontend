@@ -40,7 +40,7 @@ export class MessageComponent implements OnInit {
     let obj :PatientMessageRequest ={
       CellPhone:this.data.cellPhone,
       Content:this.registerForm.get('message')?.value,
-      SMSPhoneNo: this.data.clinic.smsPhoneNo,
+      SMSPhoneNo: this.data.cellPhone,
       IsRead:false,
 
     }

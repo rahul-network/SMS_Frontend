@@ -53,7 +53,7 @@ export class VideoCallComponent implements OnInit {
             }
             else
             {
-                this.clinicId = this.data.clinic.id as number;
+                this.clinicId = this.data.clinicId as number;
                 this.patientId = this.data.externalPatientId;
             }
         if (
@@ -67,7 +67,6 @@ export class VideoCallComponent implements OnInit {
     }
 
     async ngOnInit() {
-        debugger;
         this.disable = false;
         let serverUrl = environment.apiUrl;
         const builder =
@@ -93,7 +92,6 @@ export class VideoCallComponent implements OnInit {
     }
 
     async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
-        debugger;
         await this.camera.initializePreview(deviceInfo.deviceId);
     }
 
@@ -102,7 +100,6 @@ export class VideoCallComponent implements OnInit {
             this.activeRoom.disconnect();
             this.activeRoom = null;
         }
-debugger;
         this.camera.finalizePreview();
         const videoDevice = this.settings.hidePreviewCamera();
         await this.camera.initializePreview(videoDevice && videoDevice.deviceId);
@@ -207,7 +204,7 @@ debugger;
                 let obj: PatientMessageRequest = {
                     CellPhone: this.data.cellPhone,
                     Content: partipantURL,
-                    SMSPhoneNo: this.data.clinic.smsPhoneNo,
+                    SMSPhoneNo: this.data.cellPhone,
                     IsRead: false,
                 }
                 this.datatableFeedService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();

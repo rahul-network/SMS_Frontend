@@ -8,7 +8,7 @@ import { DialerAppComponent } from '../Voice/dialer-app.component';
 import { PatientFormsComponent } from '../../app/form/ccm/patient-forms.component';
 import { MctFormComponent } from '../form/mct/mct.component';
 import { PagerModel } from '../shared/pagerModel';
-
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-main-datatable',
   templateUrl: './main-datatable.component.html',
@@ -22,7 +22,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private datatableFeedService: DatatableFeedService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.feedDatatableData();
@@ -40,8 +41,8 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
     };
 
 
-    this.datatableFeedService.getAllData(7, pager).subscribe((_feedData) => {
-      this.dataSource = new MatTableDataSource(_feedData.rows);
+    this.datatableFeedService.getAllData('QAC', pager).subscribe((_feedData) => {
+      this.dataSource = new MatTableDataSource(_feedData.items);
       this.dataSource.sort = this.sort;
     });
   }
@@ -60,12 +61,13 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   openMCTForm() {
-    const dialogRef = this.dialog.open(MctFormComponent, {
-      width: '50%',
-      autoFocus: false
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    this.router.navigate(['mctform']);
+    // const dialogRef = this.dialog.open(MctFormComponent, {
+    //   width: '50%',
+    //   autoFocus: false
+    // });
+    // dialogRef.afterClosed().subscribe(result => {
+    // });
   }
 
   openVideoCall(_data: any) {
@@ -73,8 +75,10 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
   }
 
   openCall(_data: any) {
+    
     const dialogRef = this.dialog.open(DialerAppComponent, {
       disableClose: true,
+      hasBackdrop :false,
       width: '100vw',
       height: '100vh',
       panelClass: 'my-dialog',
@@ -85,7 +89,7 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         firstName: _data.firstName,
         clinicId: _data.clinicId,
         email: _data.email,
-        smsPhoneNo: _data.clinic.smsPhoneNo,
+        smsPhoneNo: _data.cellPhone,
         lastName: _data.lastName,
         gender: _data.gender,
         externalPatientId: _data.externalPatientId
@@ -106,7 +110,7 @@ export class MainDatatableComponent implements OnInit, AfterViewInit {
         firstName: _data.firstName,
         clinicId: _data.clinicId,
         email: _data.email,
-        smsPhoneNo: _data.clinic.smsPhoneNo,
+        smsPhoneNo: _data.cellPhone,
         dateOfBirth: _data.dateOfBirth,
         lastName: _data.lastName,
         externalPatientId: _data.externalPatientId

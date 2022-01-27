@@ -3,16 +3,19 @@ import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MctFormService } from './service/mct-service';
 import { DatatableFeedService } from 'src/app/datatable-feed.service';
 import { PagerModel } from 'src/app/shared/pagerModel';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 import { NotificationService } from '../../services/notification.service'
+import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
 
 interface ClinicModel {
     name: string;
-    id: number;
+    code: string;
 }
 interface PatientModel {
     firstName: string;
@@ -21,6 +24,13 @@ interface PatientModel {
     dateOfBirth: Date
 }
 
+const autocomplete = (time, selector) => (source$) =>
+  source$.pipe(
+    debounceTime(time),
+    switchMap((...args: any[]) =>
+      selector(...args).pipe(takeUntil(source$.pipe(skip(1))))
+    )
+  );
 @Component({
     selector: 'mct-form',
     styleUrls: ['./mct.component.css'],
@@ -29,7 +39,8 @@ interface PatientModel {
 
 
 export class MctFormComponent implements OnInit {
-
+    [x: string]: any;
+    
     myControl = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
     filteredOptions: Observable<string[]>;
@@ -41,32 +52,39 @@ export class MctFormComponent implements OnInit {
     selected = false;
     userState = "";
     patientType = "";
-    selectedClinicId = "";
+    selectedClinicCode = "";
     displayAutocomplete = false;
     clinicModel: ClinicModel[];
     data: any;
     loadPatients: boolean;
     dataSource: any;
-    patients: PatientModel[];
+    //patients: PatientModel[];
+    term$ = new BehaviorSubject<string>('');
+    regions$ = this.term$.pipe(autocomplete(1000, (term) => this.fetch(term)));
     constructor(
         public dialog: MatDialog,
         public dialogRef: MatDialogRef<MctFormComponent>,
         public mctFormService: MctFormService,
         private notifyService: NotificationService,
         private datatableFeedService: DatatableFeedService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private httpClient: HttpClient
 
     ) {
 
     }
 
+    loading$: Observable<boolean> = this.mctFormService.loading$; 
+    readonly patients: Observable<PatientModel[]> = this.mctFormService.autocomplete$;
 
-
+    fetch(term: string): Observable<any> {
+        console.log(term);
+        return this.httpClient.get('http://localhost:65172/api/Clinic/QAC/Patient?PageNumber=1&&PageSize=2&&SearchTerm=' + term);
+      }
 
     keyword = 'fullName';
 
     selectEvent(item: any) {
-        debugger;
         this.form.controls['PatientId'].setValue(item.value);
         this.form.controls['FirstName'].setValue(item.firstName);
         this.form.controls['LastName'].setValue(item.lastName);
@@ -80,15 +98,16 @@ export class MctFormComponent implements OnInit {
         this.form.controls['DOB'].setValue(null);
     }
 
-    onChangeSearch(search: string) {
-        // fetch remote data from here
-        // And reassign the 'data' which is binded to 'data' property.
-    }
 
     onFocused(e: any) {
         // do something
     }
-
+    onSelectPatient(patient:any) {
+        this.form.controls['PatientId'].setValue(patient.id);
+        this.form.controls['FirstName'].setValue(patient.firstName);
+        this.form.controls['LastName'].setValue(patient.lastName);
+        this.form.controls['DOB'].setValue(patient.dateOfBirth);
+    }
 
     getClinics(): void {
 
@@ -100,41 +119,13 @@ export class MctFormComponent implements OnInit {
         });
     }
 
-
-    clinicChange(value: string) {
-        this.loadPatients = true;
-        let pager: PagerModel = {
-            Sort: "1",
-            PageNumber: 1,
-            PageSize: 500
-        };
-
-        this.datatableFeedService.getAllData(Number(value), pager)
-            .subscribe(data => {
-                if (data) {
-                    debugger;
-                    this.patients = data.rows.map(
-
-                        (obj: PatientModel) => {
-                            return {
-                                fullName: obj.firstName + ' ' + obj.lastName,
-                                value: obj.id,
-                                firstName: obj.firstName,
-                                lastName: obj.lastName,
-                                dateOfBirth: obj.dateOfBirth
-                            };
-                        }
-                    );;
-                    this.loadPatients = false;
-
-                }
-            });
-    }
-
+    onInput(event: Event): void {
+        this.mctFormService.setAction((event?.target as HTMLInputElement)?.value,this.form.get('ClinicCode').value);
+      }
     ngOnInit() {
 
         this.form = this.formBuilder.group({
-            ClinicId: [''],
+            ClinicCode: [''],
             PatientId: [''],
             FirstName: [''],
             LastName: [''],
@@ -145,12 +136,12 @@ export class MctFormComponent implements OnInit {
             cpt93228: [''],
             cpt93228Date: [''],
             cpt93229: [''],
-            cpt93229Date: [''],
+            cpt93229Date: ['']
 
         });
         this.form = new FormGroup({
             patientType: new FormControl(),
-            ClinicId: new FormControl(),
+            ClinicCode: new FormControl(),
             PatientId: new FormControl(),
             FirstName: new FormControl({ value: '', disabled: false }),
             LastName: new FormControl(),
@@ -162,11 +153,12 @@ export class MctFormComponent implements OnInit {
             Rem_CPT93228_ServiceDt: new FormControl(),
             Rem_CPT93229: new FormControl(false),
             Rem_CPT93229_ServiceDt: new FormControl(),
+            autocomplete:new FormControl()
         })
+
 
         this.form.get('Rem_CPT93224').valueChanges
             .subscribe(value => {
-                debugger;
                 if (value) {
                     this.form.get('Rem_CPT93224_ServiceDt').setValidators(Validators.required)
                     this.form.get('Rem_CPT93224_ServiceDt').updateValueAndValidity();
@@ -177,7 +169,6 @@ export class MctFormComponent implements OnInit {
             });
             this.form.get('Rem_CPT93228').valueChanges
             .subscribe(value => {
-                debugger;
                 if (value) {
                     this.form.get('Rem_CPT93228_ServiceDt').setValidators(Validators.required)
                     this.form.get('Rem_CPT93228_ServiceDt').updateValueAndValidity();
@@ -188,7 +179,6 @@ export class MctFormComponent implements OnInit {
             });
             this.form.get('Rem_CPT93229').valueChanges
             .subscribe(value => {
-                debugger;
                 if (value) {
                     this.form.get('Rem_CPT93229_ServiceDt').setValidators(Validators.required)
                     this.form.get('Rem_CPT93229_ServiceDt').updateValueAndValidity();

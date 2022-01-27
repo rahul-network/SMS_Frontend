@@ -54,7 +54,7 @@ export class participendVideoCallComponent implements OnInit {
         }
         else
             this.isRoomExist = false;
-    }
+        }
 
     async ngOnInit() {
         this.disable = false;
@@ -111,7 +111,7 @@ export class participendVideoCallComponent implements OnInit {
             }
 
             this.camera.finalizePreview();
-            //const tracks = await this.settings.showPreviewCamera();
+           // const tracks = await this.settings.showPreviewCamera();
             const tracks = await Promise.all([
                 createLocalAudioTrack(),
                 this.settings.showPreviewCamera()
@@ -194,7 +194,7 @@ export class participendVideoCallComponent implements OnInit {
                 let obj: PatientMessageRequest = {
                     CellPhone: this.data.cellPhone,
                     Content: partipantURL,
-                    SMSPhoneNo: this.data.clinic.smsPhoneNo,
+                    SMSPhoneNo: this.data.cellPhone,
                     IsRead: false,
                 }
                 this.datatableFeedService.sendSms(Number(this.clinicId), this.patientId, obj).subscribe();

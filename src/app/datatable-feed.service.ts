@@ -12,9 +12,9 @@ export class DatatableFeedService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllData(clinicId : number,_pagerModel : PagerModel): Observable<any> {
+  getAllData(clinicId : string,_pagerModel : PagerModel): Observable<any> {
     let serverUrl = environment.apiUrl;
-    return this.httpClient.get(`${serverUrl}/api/Clinic/${clinicId}/Patient/all?PageNumber=${_pagerModel.PageNumber}&&PageSize=${_pagerModel.PageSize}&&Sort=${_pagerModel.Sort}`).pipe(
+    return this.httpClient.get(`${serverUrl}/api/Clinic/${clinicId}/Patient/?PageNumber=${_pagerModel.PageNumber}&&PageSize=${_pagerModel.PageSize}&&Sort=${_pagerModel.Sort}`).pipe(
       map((res: any) => {
         return res;
       })

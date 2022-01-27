@@ -156,6 +156,7 @@ export class DetailDataComponent implements OnInit {
   }
 
   openVideoCall() {
+    debugger;
     const dialogRef = this.dialog.open(VideoCallComponent, {
       disableClose: true,
       autoFocus:false,
@@ -165,9 +166,9 @@ export class DetailDataComponent implements OnInit {
       data: {
         id: this.data.id,
         firstName: this.data.firstName,
-        clinic: this.data.clinic,
+        clinicId: this.data.clinicId,
         email: this.data.email,
-        smsPhoneNo: this.data.clinic.smsPhoneNo,
+        smsPhoneNo: this.data.cellPhone,
         lastName: this.data.lastName,
         gender: this.data.gender,
         externalPatientId: this.data.externalPatientId
@@ -189,7 +190,7 @@ export class DetailDataComponent implements OnInit {
         firstName: this.data.firstName,
         clinic: this.data.clinic,
         email: this.data.email,
-        smsPhoneNo: this.data.clinic.smsPhoneNo,
+        smsPhoneNo: this.data.cellPhone,
         lastName: this.data.lastName,
         gender: this.data.gender,
         externalPatientId: this.data.externalPatientId
@@ -202,13 +203,14 @@ export class DetailDataComponent implements OnInit {
       disableClose: true,
       panelClass: 'my-dialog',
       autoFocus:false,
+     // hasBackdrop:false,
       data: {
         id: this.data.id,
         cellPhone: phoneNumber, //,
         firstName: this.data.firstName,
         clinicId: this.data.clinicId,
         email: this.data.email,
-        smsPhoneNo: this.data.clinic.smsPhoneNo,
+        smsPhoneNo: this.data.cellPhone,
         lastName: this.data.lastName,
         gender: this.data.gender,
         externalPatientId: this.data.externalPatientId

@@ -30,7 +30,6 @@ export class FormService {
     return this.httpClient.get(`${serverUrl}/api/Clinic/${cliniccode}/Patient/${patientid}/MAWVForm/?PageNumber=${_pagerModel.PageNumber}&&PageSize=${_pagerModel.PageSize}&&Sort=${_pagerModel.Sort}`).pipe(
     //return this.httpClient.get(`${serverUrl}/api/CCM/getFormsByPatientId/${_id}`).pipe(
       map((res: any) => {
-        debugger;
         return res.items;
       })
     );

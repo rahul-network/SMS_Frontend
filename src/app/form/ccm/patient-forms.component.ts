@@ -53,7 +53,6 @@ export class PatientFormsComponent implements OnInit {
         };
     
     
-debugger;
        //Checking
         this.ccmFormService.getFormsbyPatientId(this.data.clinicId, this.data.externalPatientId,pager).subscribe((_feedDataDetails) => {
           this.detailDataSource = new MatTableDataSource(_feedDataDetails);
