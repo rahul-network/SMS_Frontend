@@ -1,0 +1,54 @@
+@import "../../assets/scss/core/variables";
+:host {
+  .btn-outline,
+  .btn-success {
+    padding: 5px 10px;
+    border-color: #b3b3b3;
+  }
+  .btn-success,
+  .btn-outline-success {
+    min-width: 100px;
+    padding: 5px 5px;
+    //background-color: $green-light;
+    &:hover {
+      color: #ffffff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+  }
+  .disabled {
+    border-color: #b3b3b3;
+    color: #b3b3b3;
+  }
+  .mat-datepicker {
+    max-width: 130px;
+  }
+  .billing{
+      .input-group{
+          margin-top: 10px;
+      }
+      .form-group {
+        
+        margin: 2px 0 0;
+      }
+      .btn-group, .btn-group-vertical {
+      
+        margin-top: 6px;
+      }
+        
+  }
+
+  .mat-header-cell {
+    /* flex-direction: column; */
+    justify-content: center;
+  }
+
+.top-margin-2{
+  margin-top: 2em;
+}
+
+.bottom-margin-2{
+  margin-bottom: 2em;
+}
+
+}

@@ -28,6 +28,7 @@
     "@fullcalendar/interaction": "^5.4.0",
     "@fullcalendar/timegrid": "^5.4.0",
     "@microsoft/signalr": "^6.0.1",
+    "@ng-select/ng-select": "^8.1.1",
     "ag-grid-angular": "^25.1.0",
     "ag-grid-community": "^25.1.0",
     "angular-checklist": "^1.4.1",

@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card billing">
+            <div class="card-body">
+
+                <mat-tab-group animationDuration="0ms" (selectedTabChange)="onTabChanged($event)">
+                    <mat-tab label="Billing Log">
+                        <mat-divider class="bottom-margin-2"></mat-divider>
+                        <app-billing-timelog></app-billing-timelog>
+                    </mat-tab>
+                    <mat-tab label="CPT Codes">
+                        <mat-divider class="bottom-margin-2"></mat-divider>
+                        <app-billing-cptcodes></app-billing-cptcodes>
+                    </mat-tab>
+                    <mat-tab label="CPT Codes Submitted">
+
+                        <mat-divider class="bottom-margin-2"></mat-divider>
+                        <app-billing-submitted #submittedtab></app-billing-submitted>
+
+                    </mat-tab>
+                    <mat-tab label="Claim Errors">
+
+                        <mat-divider class="bottom-margin-2"></mat-divider>
+                        <app-billing-dirty></app-billing-dirty>
+
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<app-loader *ngIf="loading"></app-loader>
+
+<div class="row">
+    <div class="col-md-2">
+        <label>Start Date</label>
+        <mat-form-field floatLabel="never" apperance="fill" class="mat-datepicker" (click)="datepicker.open()">
+            <input matInput [matDatepicker]="datepicker" [max]="todayDate" autocomplete="off" [value]="fromDate.value"
+                (dateChange)="fromDate.setValue($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-2">
+
+        <label>End Date</label>
+        <mat-form-field floatLabel="never" apperance="fill" class="mat-datepicker" (click)="datepicker2.open()">
+            <input matInput [matDatepicker]="datepicker2" [max]="todayDate" [min]="fromDate.value" autocomplete="off"
+                [value]="toDate.value" (dateChange)="toDate.setValue($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-1" style="padding-right: 6em;">
+        <div style="padding-top: 2em;">
+            <button type="button" class="btn btn-primary " (click)="getBillingCPTInprogress()">Search</button>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        <div style="padding-top: 2em;">
+            <button type="button" class="btn btn-primary" (click)="exportBillingCPTInprogress()">Export</button>
+        </div>
+    </div>
+
+</div>
+<hr>
+
+
+
+<mat-table [dataSource]="dataSource" matSort matSortActive="createdDateTime" matSortDirection="desc"
+    matSortDisableClear>
+
+    <ng-container matColumnDef="cptcode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CPT Code
+            name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+
+            {{row.cptCode}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cptdescription">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Description
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.cptDescription}}
+        </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>First
+            name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.firstName}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Last name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.lastName}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>DOB
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{moment( row.dateOfBirth).format('MMM DD YYYY' ) | hideDefaultDate}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="enrolled">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Enrolled
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.enrolled}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="payer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Payer
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{row.payer}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="createdDateTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Created
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            {{moment( row.createdDateTime).format('MMM DD YYYY' )}}
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef class=""> Action
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="">
+
+            <a class="btn btn-primary btn-link btn-sm ml-3 " (click)="approveTimeLog(row)" title="File">
+                <i class="material-icons">done_outline</i> </a>
+        </mat-cell>
+
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+
+
+
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[ 10, 25, 100]" [length]="totalCount"></mat-paginator>

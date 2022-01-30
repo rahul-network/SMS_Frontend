@@ -1,39 +1,30 @@
-import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PatientService } from '../../patient/service/patient-service';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { merge, Observable } from 'rxjs';
-import { MatSort, SortDirection } from '@angular/material/sort';
+import { merge } from 'rxjs';
+import { MatSort} from '@angular/material/sort';
 import { MctFormService } from './service/mct-service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { MctFormComponent } from './mct.component';
+import * as moment from 'moment';
+const MAX_SIZE: number = 1048576;
 @Component({
     selector: 'mct-form-data',
     templateUrl: './mct-data.component.html',
-    styleUrls: ['./mct-data.component.css']
+    styleUrls: ['./mct-data.component.css'],
 })
-
-
 export class MctDataComponent implements OnInit, AfterViewInit {
+    moment: any = moment;
     displayedColumns: string[] = [
         'clinicName',
         'firstName',
         'lastName',
-        'dob', 
-        'icD10',
-        'rem_CPT93224',
-        'rem_CPT93224_ServiceDt',
-        'rem_CPT93228',
-        'rem_CPT93228_ServiceDt',
-        'rem_CPT93229',
-        'rem_CPT93229_ServiceDt',
-        'createdDateTime'
+        'dob', 'createdDateTime',
+        'report',
+        'cptCodes',
+        
     ];
     detailDataSourceLength = 0;
     //detailDataSource = new MatTableDataSource<IComms>([]);
@@ -41,6 +32,11 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     detailDataloading: boolean = false;
+    theFile: any = null;
+messages: string[] = [];
+ 
+// Maximum file size allowed to be uploaded = 1MB
+
     constructor(
         private httpClient: HttpClient,
         private mctFormService: MctFormService,
@@ -52,6 +48,53 @@ export class MctDataComponent implements OnInit, AfterViewInit {
 
 
     }
+    onFileChange(event: any) {
+        this.theFile = null;
+        if (event.target.files && event.target.files.length > 0) {
+            // Don't allow file sizes over 1MB
+            if (event.target.files[0].size < MAX_SIZE) {
+                // Set theFile property
+                this.theFile = event.target.files[0];
+            }
+            else {
+                // Display error message
+                this.messages.push("File: " + event.target.files[0].name + " is too large to upload.");
+            }
+        }
+    }
+
+    // private readAndUploadFile(theFile: any) {
+    //     let file = new FileToUpload();
+        
+    //     // Set File Information
+    //     file.fileName = theFile.name;
+    //     file.fileSize = theFile.size;
+    //     file.fileType = theFile.type;
+    //     file.lastModifiedTime = theFile.lastModified;
+    //     //file.lastModifiedDate = theFile.lastModifiedDate;
+        
+    //     // Use FileReader() object to get file to upload
+    //     // NOTE: FileReader only works with newer browsers
+    //     let reader = new FileReader();
+        
+    //     // Setup onload event for reader
+    //     reader.onload = () => {
+    //         // Store base64 encoded representation of file
+    //         file.fileAsBase64 = reader.result?.toString() ?? "";
+            
+    //         // POST to server
+    //         this.mctFormService.uploadFile(file).subscribe(resp => { 
+    //             this.messages.push("Upload complete"); });
+    //     }
+        
+    //     // Read the file
+    //     reader.readAsDataURL(theFile);
+    // }
+    // uploadFile(): void {
+    //     this.readAndUploadFile(this.theFile);
+    // }
+
+
     ngAfterViewInit() {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
         merge(this.sort.sortChange, this.paginator.page)

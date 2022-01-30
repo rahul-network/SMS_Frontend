@@ -1,14 +1,17 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+//import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MctFormService } from './service/mct-service';
 import { NotificationService } from '../../patient/patient-detail/Video/services/notification.service'
 import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
 
-
+interface FileUpload {
+    fileId: number;
+    fileName: string;
+}
 interface ClinicModel {
     name: string;
     code: string;
@@ -36,7 +39,8 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
 
 export class MctFormComponent implements OnInit {
     [x: string]: any;
-
+    @Input() files: FileUpload[];
+    maxDate = new Date();
     myControl = new FormControl();
     options: string[] = ['One', 'Two', 'Three'];
     @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -59,8 +63,6 @@ export class MctFormComponent implements OnInit {
     readonly patients: Observable<PatientModel[]> = this.mctFormService.autocomplete$;
     regions$ = this.term$.pipe(autocomplete(1000, (term: any) => this.fetch(term)));
     constructor(
-        public dialog: MatDialog,
-        public dialogRef: MatDialogRef<MctFormComponent>,
         public mctFormService: MctFormService,
         private notifyService: NotificationService,
         private formBuilder: FormBuilder
@@ -69,7 +71,7 @@ export class MctFormComponent implements OnInit {
 
     }
     ngOnInit() {
-
+        this.files = new Array()
         this.form = this.formBuilder.group({
             ClinicCode: [''],
             PatientId: [''],
@@ -136,6 +138,20 @@ export class MctFormComponent implements OnInit {
 
         this.getClinics();
     }
+    onFileSelect(event: any) {
+        debugger;
+        let name = event.target.files[0].name;
+        let newFile:FileUpload = {
+            fileId: 1,
+            fileName: name,
+        }
+        if (!this.files) {
+            this.files = new Array();
+        }
+        this.files = new Array()
+        this.files.push(newFile);
+    }
+
     selectEvent(item: any) {
         this.form.controls['PatientId'].setValue(item.value);
         this.form.controls['FirstName'].setValue(item.firstName);
@@ -181,7 +197,8 @@ export class MctFormComponent implements OnInit {
             this.submitted = true;
             this.mctFormService.saveMctForm(this.form.value).subscribe((res) => {
                 this.notifyService.showSuccess("Data Saved successfully !!", "")
-                this.dialogRef.close();
+                this.form.reset();
+                this.submitted = false;
             });
         }
         else {

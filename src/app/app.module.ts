@@ -38,13 +38,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule, } from '@angular/material/select';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {MctDataComponent} from './form/mct/mct-data.component';
+import {MctMainComponent} from './form/mct/mct-main.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatChipsModule } from '@angular/material/chips';
+import { EcgModule } from './ecg/ecg.module'
 
 @NgModule({
   declarations: [
    
     AppComponent,
+    MctMainComponent,
     PatientListComponent,
     MctDataComponent,
     PatientDetailComponent,
@@ -65,6 +68,7 @@ import { MatChipsModule } from '@angular/material/chips';
   ],
   imports: [
     MatChipsModule,
+    EcgModule,
     MatTabsModule,
     DragDropModule,
     BrowserAnimationsModule,

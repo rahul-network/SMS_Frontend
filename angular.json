@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": false
+    "analytics": "e5a5cb5a-f079-4603-a559-2405df1ab806"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -27,9 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
+              "src/assets/scss/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -45,7 +43,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
@@ -99,9 +97,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/assets/scss/styles.scss"
             ],
             "scripts": []
           }
@@ -135,7 +131,9 @@
     }
   },
   "defaultProject": "LH-UI",
-  "cli": {
-    "analytics": "e5a5cb5a-f079-4603-a559-2405df1ab806"
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }

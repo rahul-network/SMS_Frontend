@@ -1,0 +1,124 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="row">
+    <div class="col-md-2">
+        <label>Start Date</label>
+        <mat-form-field floatLabel="never" apperance="fill" class="mat-datepicker" (click)="datepicker.open()">
+            <input matInput [matDatepicker]="datepicker" [max]="todayDate" autocomplete="off" [value]="fromDate.value"
+                (dateChange)="fromDate.setValue($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-2">
+
+        <label>End Date</label>
+        <mat-form-field floatLabel="never" apperance="fill" class="mat-datepicker" (click)="datepicker2.open()">
+            <input matInput [matDatepicker]="datepicker2" [max]="todayDate" [min]="fromDate.value" autocomplete="off"
+                [value]="toDate.value" (dateChange)="toDate.setValue($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-1" style="padding-right: 6em;">
+        <div style="padding-top: 2em;">
+            <button type="button" class="btn btn-primary" (click)="getBillingTimlog()">Search</button>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        <div style="padding-top: 2em;">
+            <button type="button" class="btn btn-primary" (click)="exportBillingTimelog()">Export</button>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div *ngIf=" dataSource && dataSource.data.length>0">
+
+    <mat-table [dataSource]="dataSource" matSort matSortActive="startTime" matSortDirection="desc" matSortDisableClear>
+
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>First
+                name
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstName}}
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Last name
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.lastName}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateOfBirth">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>DOB
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+
+                {{moment(row.dateOfBirth).format('MMM DD YYYY') | hideDefaultDate}}
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="activityDescription">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Activity
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.activityDescription}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="notes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Note
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.notes}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="startTime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.startTime | date : 'MMM dd yyyy hh:mm a'}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="durationInMinutes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Duration (mins)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <span *ngIf="row.duration>0">{{row.duration | minuteSeconds}}</span>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="createdByName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Created by
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <div *ngIf="row.createdByName">{{row.createdByName}}</div>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef class=""> Action
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="">
+                <a class="btn btn-primary btn-link btn-sm" (click)="editTimeLog(row)" title="Edit">
+                    <i class="material-icons " *ngIf="row.isRecordInCurrentMonth">edit </i>
+                </a>
+                <a class="btn btn-primary btn-link btn-sm" (click)="deleteTimeLog(row)" class="ml-3" title="Delete">
+                    <i class="material-icons red" *ngIf="row.isRecordInCurrentMonth">clear </i> </a>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+
+
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[10,25,100]" [length]="totalCount"></mat-paginator>
+</div>
