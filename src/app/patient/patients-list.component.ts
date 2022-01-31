@@ -60,12 +60,11 @@ export class PatientListComponent implements OnInit, AfterViewInit {
 
   openMCTForm() {
     this.router.navigate(['mctform']);
-    // const dialogRef = this.dialog.open(MctFormComponent, {
-    //   width: '50%',
-    //   autoFocus: false
-    // });
-    // dialogRef.afterClosed().subscribe(result => {
-    // });
+   
+  }
+  openECGForm() {
+    this.router.navigate(['ecg']);
+   
   }
 
   openVideoCall(_data: any) {
@@ -76,7 +75,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     
     const dialogRef = this.dialog.open(DialerAppComponent, {
       disableClose: true,
-      hasBackdrop :false,
+      hasBackdrop :true,
       width: '100vw',
       height: '100vh',
       panelClass: 'my-dialog',

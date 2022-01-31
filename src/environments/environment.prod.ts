@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "http://localhost:65172"
+  apiUrl: "https://prowesolutiondemo.azurewebsites.net"
 };

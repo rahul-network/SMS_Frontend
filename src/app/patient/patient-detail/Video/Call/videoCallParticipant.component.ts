@@ -26,7 +26,9 @@ export class participendVideoCallComponent implements OnInit {
     @ViewChild('settings', { static: false }) settings!: SettingsComponent;
     @ViewChild('participants', { static: false }) participants!: ParticipantsComponent;
     disable!: boolean;
+    muted:boolean = false;
     activeRoom!: Room;
+    callParticipant : boolean = true;
     isRoomExist: boolean = false;
     roomGuid!: string;
     id: number;
@@ -100,8 +102,24 @@ export class participendVideoCallComponent implements OnInit {
             Id: this.id,
         }
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
+        window.close();
     }
 
+    toggleMute() {
+        this.muted = !this.muted;
+        if (this.muted) {
+            var localParticipant = this.activeRoom.localParticipant;
+            localParticipant.audioTracks.forEach(function (audioTrack) {
+                audioTrack.track.disable();
+            });
+        }
+        else {  
+            var localParticipant = this.activeRoom.localParticipant;
+            localParticipant.audioTracks.forEach(function (audioTrack) {
+                audioTrack.track.enable();
+            });
+        }
+      }
     async onRoomChanged(roomName: string) {
         if (roomName) {
             if (this.activeRoom) {
@@ -231,5 +249,6 @@ export class participendVideoCallComponent implements OnInit {
 
 
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
+        
     }
 }

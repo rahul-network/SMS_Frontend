@@ -4,25 +4,35 @@
     <div class="video-call-wrapper">
       <div class="video-participant">
         <header class="site-header">
-          <span class="video-title">{{data.firstName}} {{data.lastName}}</span>
+
+          <span *ngIf="showSendInvite" class="video-title">{{data.firstName}} {{data.lastName}}</span>
+          <span *ngIf="!showSendInvite" class="video-title">{{data.clinicName}}</span>
           <!-- <h5 class="participant-actions video-title">{{data.firstName}} {{data.lastName}}</h5> -->
-          <button mat-icon-button [mat-dialog-close]="true" style="float: right;">
-            <mat-icon class="close-icon">close</mat-icon>
+          <button mat-icon-button [mat-dialog-close]="true" (click)="window.close();"  style="float: right">
+            <mat-icon class="close-icon"  >close</mat-icon>
           </button>
         </header>
         <app-camera #camera class="appclass" [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
         <footer id="colophon" class="site-footer">
-          <button *ngIf="isRoomExist" style="background-color:#ffc500;"
+          <button *ngIf="activeRoom !callParticipant" mat-fab mat-raised-button color="primary" 
+          (click)="toggleMute()">
+            <mat-icon *ngIf="!muted">mic</mat-icon>
+            <mat-icon *ngIf="muted">mic_off</mat-icon>
+          </button>
+          <button *ngIf="!activeRoom && !showSendInvite" class="btn b"
+            style="background-color:#ffc500;font-size:18px;height:50px"
             class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="joinMeeting()">
-            Join
+            JOIN
           </button>
-          <button *ngIf="!isRoomExist" [disabled]="disable" class="btn btn-lg btn-outline-secondary twitter-red"
-            type="button" (click)="sendInvite()">
-            Send Invite
+          <button style="font-size:18px;height:50px" *ngIf="showSendInvite && !activeRoom" [disabled]="disable"
+            class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="sendInvite()">
+            SEND INVITE
           </button>
-          <button *ngIf="activeRoom" type="button" class="btn btn-lg btn-outline-secondary twitter-red"
-            style="background-color: red;" title="Click to leave this room." (click)="onLeaveRoom(true)">
-            Leave Meeting ?
+          <button *ngIf="activeRoom !callParticipant" type="button"
+            class="btn btn-lg btn-outline-secondary twitter-red"
+            style="background-color: red;font-size:18px;height:50px" title="Click to leave this room."
+            (click)="onLeaveRoom(true)">
+            LEAVE MEETING ?
           </button>
           <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
         </footer>

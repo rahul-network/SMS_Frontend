@@ -2,7 +2,7 @@ import { AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { merge } from 'rxjs';
-import { MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MctFormService } from './service/mct-service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
@@ -24,7 +24,7 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         'dob', 'createdDateTime',
         'report',
         'cptCodes',
-        
+
     ];
     detailDataSourceLength = 0;
     //detailDataSource = new MatTableDataSource<IComms>([]);
@@ -33,9 +33,9 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     detailDataloading: boolean = false;
     theFile: any = null;
-messages: string[] = [];
- 
-// Maximum file size allowed to be uploaded = 1MB
+    messages: string[] = [];
+
+    // Maximum file size allowed to be uploaded = 1MB
 
     constructor(
         private httpClient: HttpClient,
@@ -65,28 +65,28 @@ messages: string[] = [];
 
     // private readAndUploadFile(theFile: any) {
     //     let file = new FileToUpload();
-        
+
     //     // Set File Information
     //     file.fileName = theFile.name;
     //     file.fileSize = theFile.size;
     //     file.fileType = theFile.type;
     //     file.lastModifiedTime = theFile.lastModified;
     //     //file.lastModifiedDate = theFile.lastModifiedDate;
-        
+
     //     // Use FileReader() object to get file to upload
     //     // NOTE: FileReader only works with newer browsers
     //     let reader = new FileReader();
-        
+
     //     // Setup onload event for reader
     //     reader.onload = () => {
     //         // Store base64 encoded representation of file
     //         file.fileAsBase64 = reader.result?.toString() ?? "";
-            
+
     //         // POST to server
     //         this.mctFormService.uploadFile(file).subscribe(resp => { 
     //             this.messages.push("Upload complete"); });
     //     }
-        
+
     //     // Read the file
     //     reader.readAsDataURL(theFile);
     // }
@@ -119,10 +119,10 @@ messages: string[] = [];
 
     openMCTForm() {
         const dialogRef = this.dialog.open(MctFormComponent, {
-          width: '50%',
-          autoFocus: false
+            width: '50%',
+            autoFocus: false
         });
         dialogRef.afterClosed().subscribe(result => {
         });
-      }
+    }
 }

@@ -28,11 +28,13 @@ export class VideoCallComponent implements OnInit {
     disable!: boolean;
     activeRoom!: Room;
     isRoomExist: boolean = false;
+    showSendInvite : boolean = true;
     roomGuid!: string;
     id!: number;
     clinicId: number;
     patientId: string;
     meetingId!: string;
+    muted: boolean = false;
     private notificationHub!: HubConnection;
 
     constructor(public dialogRef: MatDialogRef<VideoCallComponent>,
@@ -110,6 +112,7 @@ export class VideoCallComponent implements OnInit {
             Id: this.id,
         }
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
+        this.dialogRef.close();
     }
 
     async onRoomChanged(roomName: string) {
@@ -162,6 +165,25 @@ export class VideoCallComponent implements OnInit {
             && ((track as LocalAudioTrack).detach !== undefined
                 || (track as LocalVideoTrack).detach !== undefined);
     }
+
+    
+    
+    
+    toggleMute() {
+        this.muted = !this.muted;
+        if (this.muted) {
+            var localParticipant = this.activeRoom.localParticipant;
+            localParticipant.audioTracks.forEach(function (audioTrack) {
+                audioTrack.track.disable();
+            });
+        }
+        else {  
+            var localParticipant = this.activeRoom.localParticipant;
+            localParticipant.audioTracks.forEach(function (audioTrack) {
+                audioTrack.track.enable();
+            });
+        }
+      }
 
     sendInvite() {
         this.disable = true;

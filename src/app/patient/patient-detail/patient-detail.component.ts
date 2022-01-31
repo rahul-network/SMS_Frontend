@@ -200,7 +200,7 @@ export class PatientDetailComponent implements OnInit {
       disableClose: true,
       panelClass: 'my-dialog',
       autoFocus:false,
-     // hasBackdrop:false,
+      hasBackdrop:false,
       data: {
         id: this.data.id,
         cellPhone: phoneNumber, //,

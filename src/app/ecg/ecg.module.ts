@@ -19,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
 
 
 const routes: Routes = [
@@ -33,15 +34,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  
   declarations: [
     EcgMainComponent,
     EcgReportsComponent,
     EcgCptcodesComponent,
     EcgSubmittedComponent,
     
+    
   ],
   imports: [
     MatTabsModule,
+    
     RouterModule.forChild(routes),
     CommonModule,
     FormsModule,

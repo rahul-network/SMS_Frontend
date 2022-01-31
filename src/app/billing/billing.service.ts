@@ -20,7 +20,7 @@ export class BillingService {
 
     this.billingUrl = `${this.patientBaseUrl}/api/clinic/${this.userService.getCurrentClinic()}/billing`;
   }
-
+  
 
   getBillingTimlog(dateFrom: Date, toDate: Date, pageIndex = 0, pageSize = 10, sort: any): Observable<any> {
 

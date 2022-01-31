@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-1" style="padding-right: 6em;">
         <div style="padding-top: 2em;">
-            <button type="button" class="btn btn-primary ">Search</button>
+            <button type="button" class="btn btn-primary " (click)="getEcgReport()">Search</button>
         </div>
     </div>
 </div>
@@ -86,16 +86,10 @@
             <a class="btn btn-primary btn-link btn-sm ml-3 " (click)="approveTimeLog(row)" title="File">
                 <i class="material-icons">done_outline</i> </a>
         </mat-cell>
-
     </ng-container>
-
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;">
     </mat-row>
-
-
-
 </mat-table>
 
 <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" [length]="totalCount"></mat-paginator>
