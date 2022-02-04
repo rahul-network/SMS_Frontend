@@ -14,7 +14,7 @@
         </header>
         <app-camera #camera class="appclass" [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera>
         <footer id="colophon" class="site-footer">
-          <button *ngIf="activeRoom !callParticipant" mat-fab mat-raised-button color="primary" 
+          <button style="margin-right: 30px;"*ngIf="activeRoom !callParticipant" mat-fab mat-raised-button color="primary" 
           (click)="toggleMute()">
             <mat-icon *ngIf="!muted">mic</mat-icon>
             <mat-icon *ngIf="muted">mic_off</mat-icon>
@@ -22,17 +22,17 @@
           <button *ngIf="!activeRoom && !showSendInvite" class="btn b"
             style="background-color:#ffc500;font-size:18px;height:50px"
             class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="joinMeeting()">
-            JOIN
+            JOIN VIDEO CALL NOW
           </button>
-          <button style="font-size:18px;height:50px" *ngIf="showSendInvite && !activeRoom" [disabled]="disable"
+          <button style="font-size:18px;height:50px;background-color:green" *ngIf="showSendInvite && !activeRoom" [disabled]="disable"
             class="btn btn-lg btn-outline-secondary twitter-red" type="button" (click)="sendInvite()">
-            SEND INVITE
+            INVITE PATIENT TO VIDEO CALL
           </button>
           <button *ngIf="activeRoom !callParticipant" type="button"
             class="btn btn-lg btn-outline-secondary twitter-red"
             style="background-color: red;font-size:18px;height:50px" title="Click to leave this room."
             (click)="onLeaveRoom(true)">
-            LEAVE MEETING ?
+            LEAVE VIDEO CALL
           </button>
           <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
         </footer>

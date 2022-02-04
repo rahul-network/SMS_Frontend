@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { MctFormService } from './service/mct-service';
 import { NotificationService } from '../../patient/patient-detail/Video/services/notification.service'
 import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
-
+import * as moment from "moment";
 interface FileUpload {
     fileId: number;
     fileName: string;
@@ -38,6 +38,8 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
 
 
 export class MctFormComponent implements OnInit {
+    moment: any = moment;
+    selectedFile: File = null;
     [x: string]: any;
     @Input() files: FileUpload[];
     maxDate = new Date();
@@ -101,8 +103,11 @@ export class MctFormComponent implements OnInit {
             Rem_CPT93228_ServiceDt: new FormControl(),
             Rem_CPT93229: new FormControl(false),
             Rem_CPT93229_ServiceDt: new FormControl(),
-            autocomplete: new FormControl()
+            autocomplete: new FormControl(),
+            report: new FormControl(null, [Validators.required, this.requiredFileType('pdf')])
         })
+
+
 
 
         this.form.get('Rem_CPT93224')!.valueChanges
@@ -138,10 +143,32 @@ export class MctFormComponent implements OnInit {
 
         this.getClinics();
     }
+
+    requiredFileType(type: string) {
+        return function (control: FormControl) {
+            const file = control.value;
+            if (file) {
+                const extension = file.split('.')[1].toLowerCase();
+                if (type.toLowerCase() !== extension.toLowerCase()) {
+                    return {
+                        requiredFileType: true
+                    };
+                }
+
+                return null;
+            }
+
+            return null;
+        };
+    }
+
     onFileSelect(event: any) {
         debugger;
+        this.selectedFile = <File>event.target.files[0];
+        //this.form.controls["report"].setValue(this.selectedFile);
+
         let name = event.target.files[0].name;
-        let newFile:FileUpload = {
+        let newFile: FileUpload = {
             fileId: 1,
             fileName: name,
         }
@@ -193,9 +220,21 @@ export class MctFormComponent implements OnInit {
     }
 
     onSubmit() {
+        // const data = FormDataToObject.toObj(formObject): 
+        let formData = new FormData();
+        this.form.controls["DOB"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
+        this.form.controls["Rem_CPT93228_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
+        this.form.controls["Rem_CPT93229_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
+        this.form.controls["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
+
+
+        formData = this.convertoFormData(this.form.value);
+        formData.append('Report', this.selectedFile);
+        console.log(formData.getAll('report'));
+         
         if (this.form.valid) {
             this.submitted = true;
-            this.mctFormService.saveMctForm(this.form.value).subscribe((res) => {
+            this.mctFormService.saveMctForm(formData).subscribe((res) => {
                 this.notifyService.showSuccess("Data Saved successfully !!", "")
                 this.form.reset();
                 this.submitted = false;
@@ -204,6 +243,17 @@ export class MctFormComponent implements OnInit {
         else {
             this.notifyService.showError("Please fill required fields", "")
         }
+    }
+
+    convertoFormData<T>(formValue: T) {
+        let formData = new FormData();
+
+        for (const key of Object.keys(formValue)) {
+            const value = formValue[key];
+            formData.append(key, value);
+        }
+
+        return formData;
     }
 
 }

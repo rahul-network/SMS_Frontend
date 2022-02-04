@@ -9,7 +9,9 @@ import { environment } from "../../../../environments/environment"
 const API_URL = "http://localhost:65172/api/mct";
 const httpOptions = {
     headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        
+      'enctype': 'multipart/form-data',
+      'Accept': 'application/json'
     })
 };
 
@@ -58,10 +60,10 @@ export class MctFormService {
     );
   }
 
-  saveMctForm(_data: PostMctForm) {
-
+  saveMctForm(_data: FormData) {
+    
     let serverUrl = environment.apiUrl;
-    return this.httpClient.post(`${serverUrl}/api/mct/saveDetails`, _data).pipe(
+    return this.httpClient.post(`${serverUrl}/api/mct/saveDetails`, _data,httpOptions).pipe(
       map((res: any) => {
         return res;
       })
