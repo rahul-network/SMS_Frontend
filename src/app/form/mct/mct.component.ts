@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroupDirective} from '@angular/forms';
 //import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -38,6 +39,7 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
 
 
 export class MctFormComponent implements OnInit {
+    @ViewChild(FormGroupDirective) myNgForm;
     moment: any = moment;
     selectedFile: File = null;
     [x: string]: any;
@@ -161,12 +163,19 @@ export class MctFormComponent implements OnInit {
             return null;
         };
     }
+    isFieldValid(field: string) {
+        return !this.form.get(field).valid && this.form.get(field).touched;
+      }
+      
+      displayFieldCss(field: string) {
+        return {
+          'has-error': this.isFieldValid(field),
+          'has-feedback': this.isFieldValid(field)
+        };
+      }
 
     onFileSelect(event: any) {
-        debugger;
         this.selectedFile = <File>event.target.files[0];
-        //this.form.controls["report"].setValue(this.selectedFile);
-
         let name = event.target.files[0].name;
         let newFile: FileUpload = {
             fileId: 1,
@@ -220,27 +229,38 @@ export class MctFormComponent implements OnInit {
     }
 
     onSubmit() {
-        // const data = FormDataToObject.toObj(formObject): 
         let formData = new FormData();
-        this.form.controls["DOB"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
-        this.form.controls["Rem_CPT93228_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
-        this.form.controls["Rem_CPT93229_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
-        this.form.controls["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00"))
+        // const data = FormDataToObject.toObj(formObject): 
+        this.form.controls["DOB"].value !== null ?
+        this.form.controls["DOB"].setValue(this.moment(this.form.controls["DOB"]).format("YYYY-MM-DDT00:00:00")) :
+        this.form.controls["DOB"].setValue('');
+        
+        this.form.controls["Rem_CPT93228_ServiceDt"].value !== null ?
+        this.form.controls["Rem_CPT93228_ServiceDt"].setValue(this.moment(this.form.controls["Rem_CPT93228_ServiceDt"]).format("YYYY-MM-DDT00:00:00")) :
+        this.form.controls["Rem_CPT93228_ServiceDt"].setValue('');
 
+        this.form.controls["Rem_CPT93229_ServiceDt"].value !== null ?
+        this.form.controls["Rem_CPT93229_ServiceDt"].setValue(this.moment(this.form.controls["Rem_CPT93229_ServiceDt"]).format("YYYY-MM-DDT00:00:00")) :
+        this.form.controls["Rem_CPT93229_ServiceDt"].setValue('');
+
+        this.form.controls["Rem_CPT93224_ServiceDt"].value !== null ?
+        this.form.controls["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.form.controls["Rem_CPT93224_ServiceDt"]).format("YYYY-MM-DDT00:00:00")) :
+        this.form.controls["Rem_CPT93224_ServiceDt"].setValue('');
 
         formData = this.convertoFormData(this.form.value);
         formData.append('Report', this.selectedFile);
-        console.log(formData.getAll('report'));
-         
         if (this.form.valid) {
             this.submitted = true;
             this.mctFormService.saveMctForm(formData).subscribe((res) => {
                 this.notifyService.showSuccess("Data Saved successfully !!", "")
-                this.form.reset();
+                this.myNgForm.reset();
+                this.files = new Array();
                 this.submitted = false;
+                this.selectedClinicCode = "";
             });
         }
         else {
+             this.validateAllFormFields(this.form);
             this.notifyService.showError("Please fill required fields", "")
         }
     }
@@ -251,9 +271,21 @@ export class MctFormComponent implements OnInit {
         for (const key of Object.keys(formValue)) {
             const value = formValue[key];
             formData.append(key, value);
+            console.log(key + value);
         }
 
         return formData;
     }
+
+    validateAllFormFields(formGroup: FormGroup) {   
+        Object.keys(formGroup.controls).forEach(field => {  //{2}
+          const control = formGroup.get(field);             //{3}
+          if (control instanceof FormControl) {             //{4}
+            control.markAsTouched({ onlySelf: true });
+          } else if (control instanceof FormGroup) {        //{5}
+            this.validateAllFormFields(control);            //{6}
+          }
+        });
+      }
 
 }

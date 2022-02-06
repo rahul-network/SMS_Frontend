@@ -1,5 +1,5 @@
 import { AfterViewInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { merge } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { MctFormComponent } from './mct.component';
 import * as moment from 'moment';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog.component';
 const MAX_SIZE: number = 1048576;
 @Component({
     selector: 'mct-form-data',
@@ -24,7 +25,6 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         'dob', 'createdDateTime',
         'report',
         'cptCodes',
-
     ];
     detailDataSourceLength = 0;
     //detailDataSource = new MatTableDataSource<IComms>([]);
@@ -63,38 +63,6 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         }
     }
 
-    // private readAndUploadFile(theFile: any) {
-    //     let file = new FileToUpload();
-
-    //     // Set File Information
-    //     file.fileName = theFile.name;
-    //     file.fileSize = theFile.size;
-    //     file.fileType = theFile.type;
-    //     file.lastModifiedTime = theFile.lastModified;
-    //     //file.lastModifiedDate = theFile.lastModifiedDate;
-
-    //     // Use FileReader() object to get file to upload
-    //     // NOTE: FileReader only works with newer browsers
-    //     let reader = new FileReader();
-
-    //     // Setup onload event for reader
-    //     reader.onload = () => {
-    //         // Store base64 encoded representation of file
-    //         file.fileAsBase64 = reader.result?.toString() ?? "";
-
-    //         // POST to server
-    //         this.mctFormService.uploadFile(file).subscribe(resp => { 
-    //             this.messages.push("Upload complete"); });
-    //     }
-
-    //     // Read the file
-    //     reader.readAsDataURL(theFile);
-    // }
-    // uploadFile(): void {
-    //     this.readAndUploadFile(this.theFile);
-    // }
-
-
     ngAfterViewInit() {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
         merge(this.sort.sortChange, this.paginator.page)
@@ -117,12 +85,21 @@ export class MctDataComponent implements OnInit, AfterViewInit {
 
     }
 
-    openMCTForm() {
-        const dialogRef = this.dialog.open(MctFormComponent, {
-            width: '50%',
-            autoFocus: false
-        });
+    downloadReport(row: any) {
+        const dialogConfig = new MatDialogConfig();
+        const message = "Do you want to download report ?";
+        dialogConfig.data = {
+            message
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+
+                this.mctFormService.downloadReport(row.clinicCode,row.s3PdfName).subscribe(response => {
+                      window.location.href = response.url;
+                  }),error => console.log('Error downloading the file'),
+                  () => console.info('File downloaded successfully');;
+            }
         });
     }
 }

@@ -73,7 +73,6 @@ export class ParticipantsComponent {
     }
 
     onLeaveRoom() {
-        console.log("leave button click");       
         this.leaveRoom.emit(true);
     }
     private registerParticipantEvents(participant: RemoteParticipant) {

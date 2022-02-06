@@ -92,9 +92,7 @@ export class BillingCptcodesComponent  implements AfterViewInit {
 
     const dialogConfig = new MatDialogConfig();
     const displayText = "Are you sure you want to approve this entry?";
-    dialogConfig.data = {
-      displayText
-    };
+    dialogConfig.data = displayText;
    // const dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
 
     // dialogRef.afterClosed().subscribe(result => {

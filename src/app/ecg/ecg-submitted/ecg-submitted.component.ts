@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { merge, Subject } from 'rxjs';
 import { startWith, switchMap, map } from 'rxjs/operators';
 import { MctFormService } from 'src/app/form/mct/service/mct-service';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component';
-
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog.component';
+import { EcgFormService } from '../ecg-service';
 
 @Component({
   selector: 'app-ecg-submitted',
@@ -48,6 +48,7 @@ export class EcgSubmittedComponent implements OnInit {
     private mctFormService: MctFormService,
     private router: Router, private route: ActivatedRoute, private dialog: MatDialog
     , private toastr: ToastrService,
+    private ecgFormService : EcgFormService,
     ) {
   }
   result!: any[];
@@ -55,14 +56,15 @@ export class EcgSubmittedComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    var index = this.paginator ? this.paginator.pageIndex : 0;
+    var pageSize = this.paginator ? this.paginator.pageSize : 10;
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           //this.isLoadingResults = true;
-          return this.mctFormService!.getMctForms(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex, 10)
+          return this.ecgFormService.getEcgFormsCPTCodeSubmitted(this.fromDate.value, this.toDate.value, index, pageSize,this.sort)
             .pipe();
         }),
         map(data => {
@@ -80,7 +82,7 @@ export class EcgSubmittedComponent implements OnInit {
     this.loading = true;
     var index = this.paginator ? this.paginator.pageIndex : 0;
     var pageSize = this.paginator ? this.paginator.pageSize : 10;
-    this.mctFormService.getMctForms(this.fromDate.value, this.toDate.value, index, pageSize).subscribe(results => {
+    this.ecgFormService.getEcgFormsCPTCodeSubmitted(this.fromDate.value, this.toDate.value, index, pageSize,this.sort).subscribe(results => {
       this.dataSource = new MatTableDataSource(results.items);
       this.loading = false;
       this.totalCount = results.totalCount;
@@ -90,36 +92,5 @@ export class EcgSubmittedComponent implements OnInit {
 
   }
 
-  approveTimeLog(row :any) {
-
-    const dialogConfig = new MatDialogConfig();
-    const displayText = "Are you sure you want to approve this entry?";
-    dialogConfig.data = {
-      displayText
-    };
-   const dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-
-      if (result) {
-        alert(result)
-        // this.loading = true;
-        // this.billingService.approveCptCode(row.id).subscribe(p => {
-
-        //   this.loading = false;
-        //   this.toastr.success('Save CPT Codes', 'Successful!');
-        //   this.getBillingCPTInprogress();
-        //   this.newItemEvent.emit(row);
-
-        // },
-        //   error => {
-
-        //     this.loading = false;
-        //   }
-        // );
-      }
-      console.log(`Dialog result: ${result}`);
-    });
-
-  }
+  
 }

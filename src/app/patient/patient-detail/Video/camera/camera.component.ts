@@ -19,7 +19,6 @@ export class CameraComponent implements AfterViewInit {
 
     async ngAfterViewInit() 
     {
-        console.log("ngAfterViewInit");
         if (this.previewElement && this.previewElement.nativeElement) {
             const selectedVideoInput = this.storageService.get('videoInputId');
             await this.initializeDevice(selectedVideoInput);

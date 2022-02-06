@@ -27,7 +27,7 @@
       </div>
         <div class="row">
           <div class="col-md-12">
-          <mat-form-field style="width: 300px;">
+          <mat-form-field style="width: 300px;" *ngIf="selectedClinicCode !== ''" >
             <input type="text" placeholder="Patient" aria-label="Patient" matInput formControlName="autocomplete"
               [matAutocomplete]="auto" (input)="onInput($event)">
             <mat-spinner *ngIf="loading$ | async" matSuffix [diameter]="18" style="float: right; margin-left: 8px">
@@ -47,12 +47,21 @@
           <div class="col-md-6">
             <mat-form-field class="demo-full-width">
               <input formControlName="FirstName" matInput placeholder="Patient's First Name" required>
+            
             </mat-form-field>
+            <app-field-error-display 
+            [displayError]="isFieldValid('FirstName')" 
+            errorMsg="Required">
+          </app-field-error-display>
           </div>
           <div class="col-md-6">
             <mat-form-field class="demo-full-width">
               <input formControlName="LastName" matInput placeholder="Patient's Last Name" required>
             </mat-form-field>
+            <app-field-error-display 
+            [displayError]="isFieldValid('LastName')" 
+            errorMsg="Required">
+          </app-field-error-display>
           </div>
         </div>
         <div class="row">
@@ -62,6 +71,10 @@
             <mat-datepicker-toggle matSuffix [for]="DOB" ></mat-datepicker-toggle>
             <mat-datepicker #DOB></mat-datepicker>
           </mat-form-field>
+          <app-field-error-display 
+            [displayError]="isFieldValid('DOB')" 
+            errorMsg="Required">
+          </app-field-error-display>
         </div>
         </div>
         <div class="row">
@@ -126,11 +139,16 @@
             <div class="file-upload">
               <div class="file-select">
                 <div class="file-select-button" id="fileName">Upload File</div>
-                <input formControlName="report" placeholder="Select File" type="file" (change)="onFileSelect($event)" />
+                <input formControlName="report" matFileInput placeholder="Select File" type="file" 
+                (change)="onFileSelect($event)" required />
                 {{files.length > 0 ? files[0].fileName : 'No file chosen...'}}
               </div>
+             
             </div>
-            
+            <app-field-error-display 
+            [displayError]="isFieldValid('report')" 
+            errorMsg="File is required">
+          </app-field-error-display>
           </div>
         </div>
       </div>

@@ -11,6 +11,13 @@
 .file-upload .file-select.file-select-disabled{opacity:0.65;}
 .file-upload .file-select.file-select-disabled:hover{cursor:default;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;margin-top:5px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 
+.control-label.required:after { 
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 5px;
+  top:7px;
+}
 
 .center {
   display: block;

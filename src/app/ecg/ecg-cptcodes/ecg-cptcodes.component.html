@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-1" style="padding-right: 6em;">
         <div style="padding-top: 2em;">
-            <button type="button" class="btn btn-primary " (click)="getEcgReport()">Search</button>
+            <button type="button" class="btn btn-primary " (click)="getcptCpdes()">Search</button>
         </div>
     </div>
 </div>
@@ -78,7 +78,7 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let row" class="">
 
-            <a class="btn btn-primary btn-link btn-sm ml-3 " (click)="approveTimeLog(row)" title="File">
+            <a class="btn btn-primary btn-link btn-sm ml-3 " (click)="submitReport(row)" title="File">
                 <i class="material-icons">done_outline</i> </a>
         </mat-cell>
     </ng-container>

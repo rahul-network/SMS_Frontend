@@ -12,7 +12,6 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PatientDetailComponent } from './patient/patient-detail/patient-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CameraComponent } from './patient/patient-detail/Video/camera/camera.component';
 import { ParticipantsComponent } from './patient/patient-detail/Video/participants/participants.component';
@@ -42,6 +41,7 @@ import {MctMainComponent} from './form/mct/mct-main.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatChipsModule } from '@angular/material/chips';
 import { EcgModule } from './ecg/ecg.module'
+import {FieldErrorDisplayComponent  } from '../app/form/mct/field-error-display.component'
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { EcgModule } from './ecg/ecg.module'
     PatientListComponent,
     MctDataComponent,
     PatientDetailComponent,
+    FieldErrorDisplayComponent,
     TitleCaseDirective,
     CameraComponent,
     ParticipantsComponent,
@@ -68,6 +69,7 @@ import { EcgModule } from './ecg/ecg.module'
   ],
   imports: [
     MatChipsModule,
+    MaterialModule,
     EcgModule,
     MatTabsModule,
     DragDropModule,
@@ -77,7 +79,7 @@ import { EcgModule } from './ecg/ecg.module'
     AppRoutingModule,
     HttpClientModule,
     //NoopAnimationsModule,
-    MaterialModule,
+    
     FormsModule,
     AutocompleteLibModule,
     ReactiveFormsModule,
@@ -86,7 +88,6 @@ import { EcgModule } from './ecg/ecg.module'
     MatSortModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule,
     MatSelectModule,
     ToastrModule.forRoot()
   ],

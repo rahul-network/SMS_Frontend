@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { debug } from 'console';
@@ -63,7 +63,7 @@ export class MctFormService {
   saveMctForm(_data: FormData) {
     
     let serverUrl = environment.apiUrl;
-    return this.httpClient.post(`${serverUrl}/api/mct/saveDetails`, _data,httpOptions).pipe(
+    return this.httpClient.post(`${serverUrl}/api/mct/`, _data,httpOptions).pipe(
       map((res: any) => {
         return res;
       })
@@ -82,9 +82,14 @@ export class MctFormService {
     return this.httpClient.get<any>(requestUrl);
   }
 
-  uploadFile(theFile: FileToUpload): Observable<any> {
-    let serverUrl = environment.apiUrl;
-    return this.httpClient.post<FileToUpload>(`http://localhost:65172/api/mct/saveDetails`, theFile, httpOptions);
+  
+
+  downloadReport(clinicCode : string,formId : string): Observable<HttpResponse<Blob>>{
+    
+    const href = environment.apiUrl;
+    const requestUrl = `${href}/api/mct/${clinicCode}/${formId}`;
+    return this.httpClient.get(requestUrl, {responseType: 'blob',observe:'response'});
+
   }
 
 }

@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 //import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EcgMainComponent } from './ecg.component';
-import { EcgReportsComponent } from './ecg-reports/ecg-reports.component';
-import { EcgCptcodesComponent  } from './ecg-cptcodes/ecg-cptcodes.component';
-import { EcgSubmittedComponent } from './ecg-submitted/ecg-submitted.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -19,35 +15,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import {SharedModule  } from '../shared/shaered.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent  } from './confirmation-dialog.component';
 
-
-
-const routes: Routes = [
-  {
-    path: '',
-    children: [
-      { path: '', component: EcgMainComponent },
-      // {path: 'patients', component: PatientsOverviewComponent },
-    ]
-  },
-
-];
 
 @NgModule({
   
   declarations: [
-    EcgMainComponent,
-    EcgReportsComponent,
-    EcgCptcodesComponent,
-    EcgSubmittedComponent,
-    
-    
+   
+    ConfirmationDialogComponent
   ],
   imports: [
     MatTabsModule,
-    
-    RouterModule.forChild(routes),
     CommonModule,
     FormsModule,
     MatTabsModule,
@@ -64,9 +43,8 @@ const routes: Routes = [
     MatPaginatorModule,
     MatButtonModule,
     MatSelectModule,
-    SharedModule
   ]
 })
-export class EcgModule { 
+export class SharedModule { 
 
 }

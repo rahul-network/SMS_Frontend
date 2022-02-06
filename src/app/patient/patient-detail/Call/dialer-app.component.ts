@@ -82,7 +82,6 @@ export class DialerAppComponent implements OnInit {
     Twilio.Device.on("connect", (connection: any) => {
       console.log("This is a listener that fires when your device is connected to a phone call")
       console.log(connection);
-      debugger;
       this.PatientAddOrUpdate(connection.parameters.CallSid,connection.message.To,connection.outboundConnectionId)
     });
     Twilio.Device.on("disconnect", (connection: any) => {

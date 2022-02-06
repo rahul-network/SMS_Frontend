@@ -45,7 +45,6 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   }
 
   openDetail(_data: any) {
-    debugger;
     const dialogRef = this.dialog.open(PatientDetailComponent, {
       width: '100vw',
       height: '100vh',

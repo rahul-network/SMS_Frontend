@@ -42,7 +42,7 @@ matSortDisableClear>
     <mat-header-cell *matHeaderCellDef mat-sort-header>Report
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-        <a class="btn btn-primary btn-link btn-sm ml-3 " (click)="approveTimeLog(row)" title="File">
+        <a class="btn btn-primary btn-link btn-sm ml-3 "    (click)="downloadReport(row)" title="File">
             <i class="material-icons">picture_as_pdf </i> </a>
     </mat-cell>
 </ng-container>

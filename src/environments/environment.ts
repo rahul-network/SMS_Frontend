@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:65172"
+  apiUrl: "https://prowesolutiondemo.azurewebsites.net",
+  patientUrl: "https://prowesolutiondemo.azurewebsites.net",
+  
 };
 
 /*

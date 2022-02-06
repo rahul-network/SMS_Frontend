@@ -5,12 +5,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Subject } from 'rxjs';
 import { startWith, switchMap, map } from 'rxjs/operators';
-import { MctFormService } from 'src/app/form/mct/service/mct-service';
+import { EcgFormService } from '../ecg-service';
 import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog.component';
 @Component({
   selector: 'app-ecg-cptcodes',
   templateUrl: './ecg-cptcodes.component.html',
@@ -43,7 +43,7 @@ export class EcgCptcodesComponent implements OnInit {
 
   submitted: boolean = false;
   constructor(
-    private mctFormService: MctFormService,
+    private ecgFormService: EcgFormService,
     private router: Router, private route: ActivatedRoute, private dialog: MatDialog
     , private toastr: ToastrService,
     ) {
@@ -53,14 +53,15 @@ export class EcgCptcodesComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    var index = this.paginator ? this.paginator.pageIndex : 0;
+    var pageSize = this.paginator ? this.paginator.pageSize : 10;
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           //this.isLoadingResults = true;
-          return this.mctFormService!.getMctForms(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex, 10)
+          return this.ecgFormService!.getEcgFormsCPTCode(this.fromDate.value, this.toDate.value, index, pageSize,this.sort)
             .pipe();
         }),
         map(data => {
@@ -73,12 +74,11 @@ export class EcgCptcodesComponent implements OnInit {
       ).subscribe(data => this.dataSource = data);
 
   }
-  getEcgReport(){
-
+  getcptCpdes(){
     this.loading = true;
     var index = this.paginator ? this.paginator.pageIndex : 0;
     var pageSize = this.paginator ? this.paginator.pageSize : 10;
-    this.mctFormService.getMctForms(this.fromDate.value, this.toDate.value, index, pageSize).subscribe(results => {
+    this.ecgFormService.getEcgFormsCPTCode(this.fromDate.value, this.toDate.value, index, pageSize,this.sort).subscribe(results => {
       this.dataSource = new MatTableDataSource(results.items);
       this.loading = false;
       this.totalCount = results.totalCount;
@@ -88,36 +88,37 @@ export class EcgCptcodesComponent implements OnInit {
 
   }
 
-  approveTimeLog(row :any) {
+  submitReport(row: any) {
 
     const dialogConfig = new MatDialogConfig();
-    const displayText = "Are you sure you want to approve this entry?";
+    const message = "Are you sure you want to submit this entry?";
     dialogConfig.data = {
-      displayText
+      message
     };
-   const dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-
       if (result) {
-        alert(result)
-        // this.loading = true;
-        // this.billingService.approveCptCode(row.id).subscribe(p => {
+        this.loading = true;
+        this.ecgFormService.approveReport(
+          {
+            "id": row.id,
+            "UniqueId": row.uniqueId,
+            "SubmitAction": 1
+          }
+        ).subscribe(p => {
 
-        //   this.loading = false;
-        //   this.toastr.success('Save CPT Codes', 'Successful!');
-        //   this.getBillingCPTInprogress();
-        //   this.newItemEvent.emit(row);
+          this.loading = false;
+          this.toastr.success('CPI code submitted successfully.', 'Successful!');
+          this.getcptCpdes();
+          this.newItemEvent.emit(row);
+        },
+          error => {
 
-        // },
-        //   error => {
-
-        //     this.loading = false;
-        //   }
-        // );
+            this.loading = false;
+          }
+        );
       }
-      console.log(`Dialog result: ${result}`);
     });
-
   }
 }
