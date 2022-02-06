@@ -1,12 +1,9 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
-import { debug } from 'console';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { debounceTime, map, switchMap, tap } from "rxjs/operators";
-import { FileToUpload } from '../file-to-upload';
-import { environment } from "../../../../environments/environment"
-const API_URL = "http://localhost:65172/api/mct";
+import { environment } from "../../../environments/environment"
 const httpOptions = {
     headers: new HttpHeaders({
         

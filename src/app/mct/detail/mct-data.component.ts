@@ -3,14 +3,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { merge } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
-import { MctFormService } from './service/mct-service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { MctFormService } from '../services/mct-service';
 import { MatPaginator } from '@angular/material/paginator';
 import { map, startWith, switchMap } from 'rxjs/operators';
-import { MctFormComponent } from './mct.component';
 import * as moment from 'moment';
-import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog.component';
-const MAX_SIZE: number = 1048576;
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog.component';
 @Component({
     selector: 'mct-form-data',
     templateUrl: './mct-data.component.html',
@@ -27,40 +24,18 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         'cptCodes',
     ];
     detailDataSourceLength = 0;
-    //detailDataSource = new MatTableDataSource<IComms>([]);
     detailDataSource = [];
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     detailDataloading: boolean = false;
     theFile: any = null;
     messages: string[] = [];
-
-    // Maximum file size allowed to be uploaded = 1MB
-
     constructor(
-        private httpClient: HttpClient,
         private mctFormService: MctFormService,
         public dialog: MatDialog) {
-
     }
     result!: any[];
     ngOnInit(): void {
-
-
-    }
-    onFileChange(event: any) {
-        this.theFile = null;
-        if (event.target.files && event.target.files.length > 0) {
-            // Don't allow file sizes over 1MB
-            if (event.target.files[0].size < MAX_SIZE) {
-                // Set theFile property
-                this.theFile = event.target.files[0];
-            }
-            else {
-                // Display error message
-                this.messages.push("File: " + event.target.files[0].name + " is too large to upload.");
-            }
-        }
     }
 
     ngAfterViewInit() {

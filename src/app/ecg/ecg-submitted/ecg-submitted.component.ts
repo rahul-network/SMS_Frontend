@@ -9,8 +9,6 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { merge, Subject } from 'rxjs';
 import { startWith, switchMap, map } from 'rxjs/operators';
-import { MctFormService } from 'src/app/form/mct/service/mct-service';
-import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog.component';
 import { EcgFormService } from '../ecg-service';
 
 @Component({
@@ -31,7 +29,6 @@ export class EcgSubmittedComponent implements OnInit {
     'dob', 
     'createdDateTime',
     'submitted',
-
   ];
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
@@ -45,7 +42,6 @@ export class EcgSubmittedComponent implements OnInit {
 
   submitted: boolean = false;
   constructor(
-    private mctFormService: MctFormService,
     private router: Router, private route: ActivatedRoute, private dialog: MatDialog
     , private toastr: ToastrService,
     private ecgFormService : EcgFormService,
@@ -77,7 +73,7 @@ export class EcgSubmittedComponent implements OnInit {
       ).subscribe(data => this.dataSource = data);
 
   }
-  getEcgReport(){
+  getSubmittedCPT(){
 
     this.loading = true;
     var index = this.paginator ? this.paginator.pageIndex : 0;

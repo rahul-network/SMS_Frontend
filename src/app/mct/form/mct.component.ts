@@ -2,27 +2,13 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormGroupDirective} from '@angular/forms';
-//import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MctFormService } from './service/mct-service';
-import { NotificationService } from '../../patient/patient-detail/Video/services/notification.service'
+import { MctFormService, PatientModel } from '../services/mct-service';
 import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
 import * as moment from "moment";
-interface FileUpload {
-    fileId: number;
-    fileName: string;
-}
-interface ClinicModel {
-    name: string;
-    code: string;
-}
-interface PatientModel {
-    firstName: string;
-    lastName: string;
-    id: number,
-    dateOfBirth: Date
-}
+import { ClinicModel, FileUpload } from '../interface/mctFormInterface';
+
 
 const autocomplete = (time: any, selector: any) => (source$: any) =>
     source$.pipe(
@@ -36,7 +22,6 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
     styleUrls: ['./mct.component.css'],
     templateUrl: './mct.component.html',
 })
-
 
 export class MctFormComponent implements OnInit {
     @ViewChild(FormGroupDirective) myNgForm;
@@ -68,7 +53,6 @@ export class MctFormComponent implements OnInit {
     regions$ = this.term$.pipe(autocomplete(1000, (term: any) => this.fetch(term)));
     constructor(
         public mctFormService: MctFormService,
-        private notifyService: NotificationService,
         private formBuilder: FormBuilder
 
     ) {
@@ -252,7 +236,7 @@ export class MctFormComponent implements OnInit {
         if (this.form.valid) {
             this.submitted = true;
             this.mctFormService.saveMctForm(formData).subscribe((res) => {
-                this.notifyService.showSuccess("Data Saved successfully !!", "")
+                //this.notifyService.showSuccess("Data Saved successfully !!", "")
                 this.myNgForm.reset();
                 this.files = new Array();
                 this.submitted = false;
@@ -261,7 +245,7 @@ export class MctFormComponent implements OnInit {
         }
         else {
              this.validateAllFormFields(this.form);
-            this.notifyService.showError("Please fill required fields", "")
+            //this.notifyService.showError("Please fill required fields", "")
         }
     }
 

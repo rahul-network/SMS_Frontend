@@ -7,7 +7,6 @@ import { PatientDetailComponent  } from './patient-detail/patient-detail.compone
 import { DialerAppComponent } from './patient-detail/Call/dialer-app.component';
 import { PatientFormsComponent } from './patient-detail/Forms/patient-forms.component';
 import {PatientListPagerModel } from './models/patient'
-import { MctFormComponent } from '../form/mct/mct.component';
 import { Router } from '@angular/router'
 @Component({
   selector: 'patient-list',
@@ -58,7 +57,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   }
 
   openMCTForm() {
-    this.router.navigate(['mctform']);
+    this.router.navigate(['mct']);
    
   }
   openECGForm() {

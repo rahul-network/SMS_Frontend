@@ -6,7 +6,6 @@ import { MatSortModule } from '@angular/material/sort';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PatientListComponent } from './patient/patients-list.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +25,6 @@ import { participendVideoCallComponent } from './patient/patient-detail/Video/Ca
 import { SpinnersAngularModule } from 'spinners-angular';
 import {DialerAppComponent  } from './patient/patient-detail/Call/dialer-app.component';
 import {CcmFormComponent  } from './patient/patient-detail/Forms/component/ccm/ccm.component';
-import {MctFormComponent  } from './form/mct/mct.component';
 import {MawvFormComponent  } from './patient/patient-detail/Forms/component/mawv/mawv.component';
 import {PatientFormsComponent} from './patient/patient-detail/Forms/patient-forms.component';
 import {PatientSmsComponent} from './patient/patient-detail/Sms/patient-sms.component';
@@ -36,22 +34,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule, } from '@angular/material/select';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-import {MctDataComponent} from './form/mct/mct-data.component';
-import {MctMainComponent} from './form/mct/mct-main.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatChipsModule } from '@angular/material/chips';
 import { EcgModule } from './ecg/ecg.module'
-import {FieldErrorDisplayComponent  } from '../app/form/mct/field-error-display.component'
+import { MctModule  } from './mct/mct.module'
+
 
 @NgModule({
   declarations: [
    
     AppComponent,
-    MctMainComponent,
     PatientListComponent,
-    MctDataComponent,
     PatientDetailComponent,
-    FieldErrorDisplayComponent,
     TitleCaseDirective,
     CameraComponent,
     ParticipantsComponent,
@@ -62,7 +56,6 @@ import {FieldErrorDisplayComponent  } from '../app/form/mct/field-error-display.
     participendVideoCallComponent,
     DialerAppComponent,
     CcmFormComponent,
-    MctFormComponent,
     MawvFormComponent,
     PatientFormsComponent,
     PatientSmsComponent
@@ -71,6 +64,7 @@ import {FieldErrorDisplayComponent  } from '../app/form/mct/field-error-display.
     MatChipsModule,
     MaterialModule,
     EcgModule,
+    MctModule,
     MatTabsModule,
     DragDropModule,
     BrowserAnimationsModule,
@@ -78,8 +72,6 @@ import {FieldErrorDisplayComponent  } from '../app/form/mct/field-error-display.
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    //NoopAnimationsModule,
-    
     FormsModule,
     AutocompleteLibModule,
     ReactiveFormsModule,
