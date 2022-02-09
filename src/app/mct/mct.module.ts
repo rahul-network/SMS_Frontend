@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MctMainComponent } from './mct-main.component';
 import { MctDataComponent} from './detail/mct-data.component';
-import { MctFormComponent} from './form/mct.component';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,7 +39,6 @@ const routes: Routes = [
     
      MctMainComponent, 
      MctDataComponent,
-     MctFormComponent,
      FieldErrorDisplayComponent,
   ],
   imports: [

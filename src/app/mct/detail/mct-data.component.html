@@ -1,6 +1,176 @@
+<form [formGroup]="form" >
+    <mat-card>
+      <mat-card-content>
+        
+        <div class="row">
+          <img aria-label="podiatrist" src="assets/YMiaq9zL.jpeg" class="center" height="100px" width="250px" />
+        </div>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-2">
+            <div class="row">
+              <div class="col-md-11">
+              <mat-form-field appearance="fill" style="width:100%">
+                <mat-select required formControlName="ClinicCode" placeholder="Clinic Name" [(value)]="selectedClinicCode">
+                  <mat-option *ngFor="let c of clinicModel" [value]="c.code">
+                    {{c.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+            <div class="col-md-1">
+              <mat-spinner *ngIf="loading" matSuffix [diameter]="18" style="float: right; margin-left: 8px">
+              </mat-spinner>
+            </div>
+            
+          </div>
+            <div class="row">
+              <div class="col-md-12">
+              <mat-form-field style="width: 300px;" *ngIf="selectedClinicCode !== ''" >
+                <input type="text" placeholder="Patient" aria-label="Patient" matInput formControlName="autocomplete"
+                  [matAutocomplete]="auto" (input)="onInput($event)">
+                <mat-spinner *ngIf="loading$ | async" matSuffix [diameter]="18" style="float: right; margin-left: 8px">
+                </mat-spinner>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let patient of patients | async"
+                    [value]="patient.firstName  + ' - ' + patient.lastName" (onSelectionChange)="onSelectPatient(patient)">
+                    {{ patient.firstName + ' - ' + patient.lastName }}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-hint>Enter at least 2 characters</mat-hint>
+              </mat-form-field>
+             
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="demo-full-width">
+                  <input formControlName="FirstName" matInput placeholder="Patient's First Name" required>
+                
+                </mat-form-field>
+                <app-field-error-display 
+                [displayError]="isFieldValid('FirstName')" 
+                errorMsg="Required">
+              </app-field-error-display>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="demo-full-width">
+                  <input formControlName="LastName" matInput placeholder="Patient's Last Name" required>
+                </mat-form-field>
+                <app-field-error-display 
+                [displayError]="isFieldValid('LastName')" 
+                errorMsg="Required">
+              </app-field-error-display>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              <mat-form-field>
+                <input placeholder="DOB" formControlName="DOB" [max]="maxDate" matInput [matDatepicker]="DOB" required readonly>
+                <mat-datepicker-toggle matSuffix [for]="DOB" ></mat-datepicker-toggle>
+                <mat-datepicker #DOB disabled="false"></mat-datepicker>
+              </mat-form-field>
+              <app-field-error-display 
+                [displayError]="isFieldValid('DOB')" 
+                errorMsg="Required">
+              </app-field-error-display>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              <mat-form-field class="demo-full-width">
+                <input matInput placeholder="ICD 10" formControlName="ICD10">
+              </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="row">
+              <div class="col-md-9"  style="float:right" >Reimbursement
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" style="margin:16px">
+                <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93224">CPT 93224
+                </mat-checkbox>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input placeholder="Service Date" [max]="maxDate" formControlName="Rem_CPT93224_ServiceDt" matInput
+                    [matDatepicker]="cpt93224" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="cpt93224"></mat-datepicker-toggle>
+                  <mat-datepicker #cpt93224></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+         
+          <div class="row">
+            <div class="col-md-3" style="margin:16px">
+              <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93228">CPT 93228
+              </mat-checkbox>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <input placeholder="Service Date" [max]="maxDate" formControlName="Rem_CPT93228_ServiceDt" matInput
+                  [matDatepicker]="cpt93228" readonly>
+                <mat-datepicker-toggle matSuffix [for]="cpt93228"></mat-datepicker-toggle>
+                <mat-datepicker #cpt93228></mat-datepicker>
+              </mat-form-field>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" style="margin:16px">
+                <mat-checkbox class="checkbox-margin" formControlName="Rem_CPT93229">CPT 93229
+                </mat-checkbox>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input placeholder="Service Date" [max]="maxDate" formControlName="Rem_CPT93229_ServiceDt" matInput
+                    [matDatepicker]="cpt93229" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="cpt93229"></mat-datepicker-toggle>
+                  <mat-datepicker #cpt93229></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+                <div class="file-upload">
+                  <div class="file-select">
+                    <div class="file-select-button" id="fileName">Upload File</div>
+                    <input formControlName="report" matFileInput placeholder="Select File" type="file" 
+                    (change)="onFileSelect($event)" required />
+                    {{files.length > 0 ? files[0].fileName : 'No file chosen...'}}
+                  </div>
+                 
+                </div>
+                <app-field-error-display 
+                [displayError]="isFieldValid('report')" 
+                errorMsg="File is required">
+              </app-field-error-display>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row offset-5">
+          <button type="submit" mat-raised-button color="primary" (click)="onSubmit()" style="margin: 10px;">
+            <mat-icon *ngIf="submitted">
+              <mat-spinner color="accent" diameter="20"></mat-spinner>
+            </mat-icon>
+            Save
+          </button>
+          <button mat-stroked-button style="margin: 10px;"  [mat-dialog-close]="true">
+            Cancel
+          </button>
+    
+        </div>
+      </mat-card-content>
+    </mat-card>
+    </form>
 
-
-<mat-table [dataSource]="detailDataSource" matSort matSortActive="createdDateTime" matSortDirection="desc"
+<mat-table [dataSource]="dataSource" matSort matSortActive="createdDateTime" matSortDirection="desc"
 matSortDisableClear>
 
 <ng-container matColumnDef="clinicName">
@@ -57,5 +227,5 @@ matSortDisableClear>
 </mat-row>
 </mat-table>
 
-<mat-paginator [pageSizeOptions]="[ 10, 25, 100]" [length]="detailDataSourceLength"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[ 10, 25, 100]" [length]="totalCount"></mat-paginator>
 

@@ -27,7 +27,7 @@ export class EcgSubmittedComponent implements OnInit {
     'firstName',
     'lastName',
     'dob', 
-    'createdDateTime',
+    'serviceDate',
     'submitted',
   ];
 

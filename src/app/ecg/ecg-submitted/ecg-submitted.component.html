@@ -66,11 +66,11 @@
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="createdDateTime">
+    <ng-container matColumnDef="serviceDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Created
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            {{moment( row.createdDateTime).format('MMM DD YYYY' )}}
+            {{moment(row.serviceDate).format('MMM DD YYYY' )}}
         </mat-cell>
     </ng-container>
     <ng-container matColumnDef="submitted">

@@ -27,7 +27,7 @@ export class EcgCptcodesComponent implements OnInit {
     'firstName',
     'lastName',
     'dob', 
-    'createdDateTime',
+    'serviceDate',
     'action',
 
   ];
