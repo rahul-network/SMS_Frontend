@@ -286,6 +286,9 @@ export class MctDataComponent implements OnInit, AfterViewInit {
                 this.form.controls["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.form.controls["Rem_CPT93224_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
                 this.form.controls["Rem_CPT93224_ServiceDt"].setValue('');
 
+                this.form.controls["PatientId"].value === null ?
+                this.form.controls["PatientId"].setValue(0) :
+                '';
             formData = this.convertoFormData(this.form.value);
             formData.append('Report', this.selectedFile);
             this.submitted = true;
