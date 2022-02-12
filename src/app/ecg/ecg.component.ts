@@ -25,10 +25,10 @@ export class EcgMainComponent implements OnInit {
     this.ecgType = type;
     switch (this.ecgType) {
       case 2:
-        //this.ecgCptcodesComponent.getBillingCPTCompleted();
+        this.ecgCptcodesComponent.getcptCpdes();
         break;
       case 3:
-       // this.ecgSubmittedComponent.getBillingCPTCompleted();
+       this.ecgSubmittedComponent.getSubmittedCPT();
     }
   }
 

@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent  } from './confirmation-dialog.component';
 
 
+
 @NgModule({
   
   declarations: [
@@ -43,6 +44,7 @@ import { ConfirmationDialogComponent  } from './confirmation-dialog.component';
     MatPaginatorModule,
     MatButtonModule,
     MatSelectModule,
+    
   ]
 })
 export class SharedModule { 

@@ -38,8 +38,8 @@ const routes: Routes = [
   declarations: [
     
      MctMainComponent, 
-     MctDataComponent,
-     FieldErrorDisplayComponent,
+     MctDataComponent
+     
   ],
   imports: [
     MatTabsModule,

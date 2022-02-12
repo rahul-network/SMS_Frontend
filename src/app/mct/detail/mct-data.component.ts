@@ -1,5 +1,6 @@
 import { AfterViewInit, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+//import { FileInput, FileValidator } from 'ngx-material-file-input';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
@@ -9,8 +10,10 @@ import { debounceTime, map, skip, startWith, switchMap, takeUntil } from 'rxjs/o
 import * as moment from 'moment';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog.component';
 import { ClinicModel, FileUpload } from '../interface/mctFormInterface';
-import { FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn, ValidationErrors, RequiredValidator } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { FileValidator } from 'ngx-material-file-input';
+import { debug } from 'console';
 
 
 const autocomplete = (time: any, selector: any) => (source$: any) =>
@@ -27,6 +30,8 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
 })
 export class MctDataComponent implements OnInit, AfterViewInit {
     @ViewChild(FormGroupDirective) myNgForm;
+    /** Max file size upto 2 MB */
+    readonly maxSize = 2097152;
     moment: any = moment;
     selectedFile: File = null;
     [x: string]: any;
@@ -78,20 +83,23 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.files = new Array()
         this.form = this.formBuilder.group({
+            patientType: [''],
             ClinicCode: [''],
             PatientId: [''],
             FirstName: [''],
             LastName: [''],
             DOB: [''],
-            icd10: [''],
-            cpt93224: [false],
-            cpt93224Date: [''],
-            cpt93228: [false],
-            cpt93228Date: [''],
-            cpt93229: [false],
-            cpt93229Date: ['']
-
+            ICD10: [''],
+            Rem_CPT93224: [''],
+            Rem_CPT93224_ServiceDt: [''],
+            Rem_CPT93228: [''],
+            Rem_CPT93228_ServiceDt: [''],
+            Rem_CPT93229: [''],
+            Rem_CPT93229_ServiceDt: [''],
+            autocomplete: [''],
+            report: [''],
         });
+
         this.form = new FormGroup({
             patientType: new FormControl(),
             ClinicCode: new FormControl(),
@@ -107,8 +115,10 @@ export class MctDataComponent implements OnInit, AfterViewInit {
             Rem_CPT93229: new FormControl(false),
             Rem_CPT93229_ServiceDt: new FormControl(),
             autocomplete: new FormControl(),
-            report: new FormControl(null, [Validators.required, this.requiredFileType('pdf')])
-        })
+
+            report: new FormControl(null, [Validators.required, FileValidator.maxContentSize(this.maxSize)])
+        });
+        this.form.setValidators(this.comparisonValidator())
         this.form.get('Rem_CPT93224')!.valueChanges
             .subscribe(value => {
                 if (value) {
@@ -142,10 +152,7 @@ export class MctDataComponent implements OnInit, AfterViewInit {
         this.getClinics();
     }
 
-    Update() {
 
-
-    }
 
     ngAfterViewInit() {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -266,7 +273,7 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     }
 
     onSubmit() {
-
+        this.submitted = true;
         if (this.form.valid) {
             let formData = new FormData();
             // const data = FormDataToObject.toObj(formObject): 
@@ -286,25 +293,16 @@ export class MctDataComponent implements OnInit, AfterViewInit {
                 this.form.controls["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.form.controls["Rem_CPT93224_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
                 this.form.controls["Rem_CPT93224_ServiceDt"].setValue('');
 
-                this.form.controls["PatientId"].value === null ?
+            this.form.controls["PatientId"].value === null ?
                 this.form.controls["PatientId"].setValue(0) :
                 '';
             formData = this.convertoFormData(this.form.value);
             formData.append('Report', this.selectedFile);
             this.submitted = true;
             this.mctFormService.saveMctForm(formData).subscribe((res) => {
-                setTimeout(() => {
-                    
-                        this.myNgForm.resetForm(),
-                        this.form.controls["Rem_CPT93224"].setValue(false),
-                        this.form.controls["Rem_CPT93228"].setValue(false),
-                        this.form.controls["Rem_CPT93229"].setValue(false)
-                }
-                    , 0)
+
+                this.ResetForm();
                 this.getMctForms()
-                this.files = new Array();
-                this.submitted = false;
-                this.selectedClinicCode = "";
             });
         }
         else {
@@ -312,6 +310,21 @@ export class MctDataComponent implements OnInit, AfterViewInit {
             //this.notifyService.showError("Please fill required fields", "")
         }
     }
+
+    ResetForm() {
+        setTimeout(() => {
+
+            this.myNgForm.resetForm(),
+                this.form.controls["Rem_CPT93224"].setValue(false),
+                this.form.controls["Rem_CPT93228"].setValue(false),
+                this.form.controls["Rem_CPT93229"].setValue(false),
+                this.files = new Array(),
+                this.submitted = false,
+                this.selectedClinicCode = ""
+        }
+            , 0)
+    }
+
 
     convertoFormData<T>(formValue: T) {
         let formData = new FormData();
@@ -335,4 +348,34 @@ export class MctDataComponent implements OnInit, AfterViewInit {
             }
         });
     }
+    public comparisonValidator(): ValidatorFn {
+        return (group: FormGroup): ValidationErrors => {
+            debugger;
+
+            const CPT93224Dt = this.parseDate(group.controls['Rem_CPT93224_ServiceDt']?.value);
+            const CPT93228Dt = this.parseDate(group.controls['Rem_CPT93228_ServiceDt']?.value);
+            const CPT93229Dt = this.parseDate(group.controls['Rem_CPT93229_ServiceDt']?.value);
+            if (this.moment(CPT93224Dt).isAfter(CPT93228Dt) || this.moment(CPT93224Dt).isAfter(CPT93229Dt)) {
+                group.controls['Rem_CPT93224_ServiceDt'].setErrors({ notEquivalent: true });
+            }
+            else {
+                group.controls['Rem_CPT93224_ServiceDt'].setErrors(null);
+                if (group.controls['Rem_CPT93224'].value === true && CPT93224Dt === null) {
+                    group.controls['Rem_CPT93224_ServiceDt'].setErrors({required: true});
+                }
+            }
+            return;
+        };
+    }
+
+    public parseDate(value) {
+
+        if (isNaN((this.moment(value)))) {
+            return null;
+        }
+        else {
+            return this.moment(value);
+        }
+    }
+
 }

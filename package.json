@@ -40,6 +40,7 @@
     "jquery": "^3.5.1",
     "mobile-drag-drop": "^2.3.0-rc.2",
     "moment": "2.24.0",
+    "ngx-material-file-input": "^2.1.1",
     "ng-select2": "^1.2.4",
     "ngx-chips": "^2.2.2",
     "ngx-drag-drop": "^2.0.0",
