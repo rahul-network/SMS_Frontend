@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MctMainComponent } from './mct-main.component';
 import { MctDataComponent} from './detail/mct-data.component';
+import { MctFormComponent} from './form/mct-form.component';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +20,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {SharedModule  } from '../shared/shaered.module';
-import {FieldErrorDisplayComponent  } from '../mct/form/field-error-display.component';
 
 
 const routes: Routes = [
@@ -38,7 +38,8 @@ const routes: Routes = [
   declarations: [
     
      MctMainComponent, 
-     MctDataComponent
+     MctDataComponent,
+     MctFormComponent
      
   ],
   imports: [

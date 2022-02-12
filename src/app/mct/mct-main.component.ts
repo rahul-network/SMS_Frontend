@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MctDataComponent } from './detail/mct-data.component';
 
 @Component({
   selector: 'app-mct-main',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mct-main.component.css']
 })
 export class MctMainComponent implements OnInit {
-
+  @ViewChild(MctDataComponent) mctDataComponent;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  refreshMctForms(){
+    this.mctDataComponent.getMctForms();
+  }
 }
