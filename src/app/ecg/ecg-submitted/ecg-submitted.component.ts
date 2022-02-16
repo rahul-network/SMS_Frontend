@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { merge, Subject } from 'rxjs';
-import { startWith, switchMap, map } from 'rxjs/operators';
+import { startWith, switchMap, map, tap } from 'rxjs/operators';
 import { EcgFormService } from '../ecg-service';
 
 @Component({
@@ -52,25 +52,32 @@ export class EcgSubmittedComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    var index = this.paginator ? this.paginator.pageIndex : 0;
-    var pageSize = this.paginator ? this.paginator.pageSize : 10;
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          //this.isLoadingResults = true;
-          return this.ecgFormService.getEcgFormsCPTCodeSubmitted(this.fromDate.value, this.toDate.value, index, pageSize,this.sort)
-            .pipe();
-        }),
-        map(data => {
-          if (data === null) {
-            return [];
-          }
-          this.totalCount = data.totalCount;
-          return data.items;
-        })
-      ).subscribe(data => this.dataSource = data);
+
+    setTimeout(() => {
+
+      this.getSubmittedCPT();
+
+      if (this.paginator)
+        this.dataSource.paginator = this.paginator;
+      if (this.sort) {
+        this.dataSource.sort = this.sort;
+
+        const sortChange$ = this.sort.sortChange.pipe(tap(_ => {
+          this.paginator.pageIndex = 0;
+        }))
+        merge(sortChange$, this.paginator.page, this.sort.sortChange)
+          .pipe(
+            tap(() => {
+              this.getSubmittedCPT()
+            })
+          )
+          .subscribe();
+
+      }
+    }, 1000);
+
+
+    
 
   }
   getSubmittedCPT(){

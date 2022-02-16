@@ -1,11 +1,11 @@
 import { AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Component,  OnInit, ViewChild } from '@angular/core';
-import {  merge, Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { merge, Observable } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MctFormService } from '../services/mct-service';
 import { MatPaginator } from '@angular/material/paginator';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,7 +24,7 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     selectedFile: File = null;
     totalCount: number = 0;
     loading = true;
-    dataSource: any;
+    dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
     loading$: Observable<boolean> = this.mctFormService.loading$;
     displayedColumns: string[] = [
         'clinicName',
@@ -43,33 +43,47 @@ export class MctDataComponent implements OnInit, AfterViewInit {
     ) {
     }
     ngOnInit(): void {
-        
+
     }
     ngAfterViewInit() {
-        this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-        merge(this.sort.sortChange, this.paginator.page)
-            .pipe(
-                startWith({}),
-                switchMap(() => {
-                    //this.isLoadingResults = true;
-                    return this.mctFormService!.getMctForms(
-                        this.sort.active, this.sort.direction, this.paginator.pageIndex, 10)
-                        .pipe();
-                }),
-                map(data => {
-                    if (data === null) {
-                        return [];
-                    }
-                    this.totalCount = data.totalCount;
-                    return data.items;
-                })
-            ).subscribe(data => this.dataSource = data);
+
+        setTimeout(() => {
+
+            this.getMctForms();
+
+            if (this.paginator)
+                this.dataSource.paginator = this.paginator;
+            if (this.sort) {
+                this.dataSource.sort = this.sort;
+
+                const sortChange$ = this.sort.sortChange.pipe(tap(_ => {
+                    this.paginator.pageIndex = 0;
+                }))
+                merge(sortChange$, this.paginator.page, this.sort.sortChange)
+                    .pipe(
+                        tap(() => {
+                            this.getMctForms()
+                        })
+                    )
+                    .subscribe();
+
+            }
+        }, 1000);
+
 
     }
 
     getMctForms() {
         this.loading = true;
-        this.mctFormService.getMctForms(this.sort.active, this.sort.direction, this.paginator.pageIndex, 10).subscribe(results => {
+        var index = this.paginator ? this.paginator.pageIndex : 0;
+        var pageSize = this.paginator ? this.paginator.pageSize : 10;
+        this.mctFormService.getMctForms(index, pageSize, this.sort).subscribe(results => {
+            this.dataSource = new MatTableDataSource(results.items);
+            this.loading = false;
+            this.totalCount = results.totalCount;
+        })
+        this.loading = true;
+        this.mctFormService.getMctForms(index, pageSize, this.sort).subscribe(results => {
             this.dataSource = new MatTableDataSource(results.items);
             this.loading = false;
             this.totalCount = results.totalCount;

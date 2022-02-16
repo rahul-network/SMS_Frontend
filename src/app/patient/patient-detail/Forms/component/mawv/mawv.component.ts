@@ -283,4 +283,8 @@ export class MawvFormComponent implements OnInit {
             return;
         }
     }
+
+    onPrint() {
+        window.print();  
+      }
 }

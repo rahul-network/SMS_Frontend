@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Subject } from 'rxjs';
-import { startWith, switchMap, map } from 'rxjs/operators';
+import { startWith, switchMap, map, tap } from 'rxjs/operators';
 import { MctFormService } from '../../mct/services/mct-service';
 import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
@@ -55,27 +55,28 @@ export class EcgReportsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.loading = true;
-    var index = this.paginator ? this.paginator.pageIndex : 0;
-    var pageSize = this.paginator ? this.paginator.pageSize : 10;
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          //this.isLoadingResults = true;
-          return this.ecgFormService.getMctReports(this.fromDate.value, this.toDate.value, index, pageSize, this.sort)
-            .pipe();
-        }),
-        map(data => {
-          if (data === null) {
-            return [];
-          }
-          this.totalCount = data.totalCount;
-          this.loading = false;
-          return data.items;
-        })
-      ).subscribe(data => this.dataSource = data);
+    setTimeout(() => {
+
+      this.getEcgReport();
+
+      if (this.paginator)
+        this.dataSource.paginator = this.paginator;
+      if (this.sort) {
+        this.dataSource.sort = this.sort;
+
+        const sortChange$ = this.sort.sortChange.pipe(tap(_ => {
+          this.paginator.pageIndex = 0;
+        }))
+        merge(sortChange$, this.paginator.page, this.sort.sortChange)
+          .pipe(
+            tap(() => {
+              this.getEcgReport()
+            })
+          )
+          .subscribe();
+
+      }
+    }, 1000);
 
   }
   getEcgReport() {

@@ -38,7 +38,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatChipsModule } from '@angular/material/chips';
 import { EcgModule } from './ecg/ecg.module'
 import { MctModule  } from './mct/mct.module'
-
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -80,6 +80,7 @@ import { MctModule  } from './mct/mct.module'
     MatSortModule,
     MatTableModule,
     MatPaginatorModule,
+    NgxPrintModule,
     MatSelectModule,
     ToastrModule.forRoot()
   ],

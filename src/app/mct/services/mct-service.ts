@@ -67,15 +67,18 @@ export class MctFormService {
     );
   }
 
-  getMctForms(sort: string, order: SortDirection, page: number, pageSize: number): Observable<any> {
-    if (sort === undefined)
-      sort = 'createdDateTime';
-    if (order !== 'asc' && sort !== undefined)
-      sort = `-${sort}`;
-    else
-      sort
+  getMctForms(pageIndex = 0, pageSize = 10, sort: any): Observable<any> {
+    var _pageIndex = pageIndex + 1;
+    var _sort = "createdDateTime";
+    var _direction = "-"
+    if (sort && sort.active && sort._direction) {
+      _sort = sort.active;
+      _direction = sort._direction == "asc" ? "" : "-";
+    }
+
+   
     const href = environment.apiUrl;
-    const requestUrl = `${href}/api/mct/?&Sort=${sort}&order=${order}&PageNumber=${page + 1}&PageSize=${pageSize}`;
+    const requestUrl = `${href}/api/mct/?PageSize=${pageSize}&PageNumber=${_pageIndex}&Sort=${_direction}${_sort}`;
     return this.httpClient.get<any>(requestUrl);
   }
 
