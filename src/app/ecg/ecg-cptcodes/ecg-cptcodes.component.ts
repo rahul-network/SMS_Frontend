@@ -27,6 +27,7 @@ export class EcgCptcodesComponent implements OnInit {
     'firstName',
     'lastName',
     'dob', 
+    'icD10',
     'serviceDate',
     'action',
 
@@ -82,6 +83,7 @@ export class EcgCptcodesComponent implements OnInit {
     var index = this.paginator ? this.paginator.pageIndex : 0;
     var pageSize = this.paginator ? this.paginator.pageSize : 10;
     this.ecgFormService.getEcgFormsCPTCode(this.fromDate.value, this.toDate.value, index, pageSize,this.sort).subscribe(results => {
+      debugger;
       this.dataSource = new MatTableDataSource(results.items);
       this.loading = false;
       this.totalCount = results.totalCount;

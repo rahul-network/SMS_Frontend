@@ -1,12 +1,12 @@
 import { AfterViewInit, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Component,  OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject,  Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MctFormService, PatientModel } from '../services/mct-service';
-import { debounceTime,  skip,  switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, skip, switchMap, takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import { ClinicModel, FileUpload } from '../interface/mctFormInterface';
-import { FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder,  ValidatorFn, ValidationErrors, RequiredValidator } from '@angular/forms';
+import { FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, ValidationErrors, RequiredValidator } from '@angular/forms';
 import { FileValidator } from 'ngx-material-file-input';
 
 const autocomplete = (time: any, selector: any) => (source$: any) =>
@@ -136,7 +136,7 @@ export class MctFormComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
     }
-    
+
     // Add File on selection CBT Report from file upload control.
     onFileSelect(event: any) {
         this.selectedFile = <File>event.target.files[0];
@@ -158,6 +158,7 @@ export class MctFormComponent implements OnInit, AfterViewInit {
         this.form.controls['FirstName'].setValue(patient.firstName);
         this.form.controls['LastName'].setValue(patient.lastName);
         this.form.controls['DOB'].setValue(patient.dateOfBirth);
+        this.form.controls['ICD10'].setValue(patient.icd10);
     }
 
     //Get List of Clinic and Bind 
@@ -184,19 +185,19 @@ export class MctFormComponent implements OnInit, AfterViewInit {
             let formData = new FormData();
             // const data = FormDataToObject.toObj(formObject): 
             !isNaN(Date.parse(this.f["DOB"].value)) ?
-            this.f["DOB"].setValue(this.moment(this.f["DOB"].value).format("YYYY-MM-DDT00:00:00")) :
-            this.f["DOB"].setValue('');
+                this.f["DOB"].setValue(this.moment(this.f["DOB"].value).format("YYYY-MM-DDT00:00:00")) :
+                this.f["DOB"].setValue('');
             !isNaN(Date.parse(this.f["Rem_CPT93228_ServiceDt"].value)) ?
-            this.f["Rem_CPT93228_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93228_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
-            this.f["Rem_CPT93228_ServiceDt"].setValue('');
+                this.f["Rem_CPT93228_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93228_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
+                this.f["Rem_CPT93228_ServiceDt"].setValue('');
             !isNaN(Date.parse(this.f["Rem_CPT93229_ServiceDt"].value)) ?
-            this.f["Rem_CPT93229_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93229_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
-            this.f["Rem_CPT93229_ServiceDt"].setValue('');
+                this.f["Rem_CPT93229_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93229_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
+                this.f["Rem_CPT93229_ServiceDt"].setValue('');
             !isNaN(Date.parse(this.f["Rem_CPT93224_ServiceDt"].value)) ?
-            this.f["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93224_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
-            this.f["Rem_CPT93224_ServiceDt"].setValue('');
+                this.f["Rem_CPT93224_ServiceDt"].setValue(this.moment(this.f["Rem_CPT93224_ServiceDt"].value).format("YYYY-MM-DDT00:00:00")) :
+                this.f["Rem_CPT93224_ServiceDt"].setValue('');
 
-            this.f["PatientId"].value === null ? this.f["PatientId"].setValue(0) :'';
+            this.f["PatientId"].value === null ? this.f["PatientId"].setValue(0) : '';
             formData = this.convertoFormData(this.form.value);
             formData.append('Report', this.selectedFile);
             this.submitted = true;
@@ -210,9 +211,9 @@ export class MctFormComponent implements OnInit, AfterViewInit {
     ResetForm() {
         setTimeout(() => {
             this.myNgForm.resetForm(),
-            this.f["Rem_CPT93224"].setValue(false),
-            this.f["Rem_CPT93228"].setValue(false),
-            this.f["Rem_CPT93229"].setValue(false),
+                this.f["Rem_CPT93224"].setValue(false),
+                this.f["Rem_CPT93228"].setValue(false),
+                this.f["Rem_CPT93229"].setValue(false),
                 this.files = new Array(),
                 this.submitted = false,
                 this.selectedClinicCode = ""
@@ -222,13 +223,14 @@ export class MctFormComponent implements OnInit, AfterViewInit {
         let formData = new FormData();
         for (const key of Object.keys(formValue)) {
             const value = formValue[key];
-            formData.append(key, value);
+            if (value !== null)
+                formData.append(key, value);
             console.log(key + value);
         }
         return formData;
     }
 
-    
+
     public serviceDateValidator(): ValidatorFn {
         return (group: FormGroup): ValidationErrors => {
             const CPT93224Dt = this.parseDate(group.controls['Rem_CPT93224_ServiceDt']?.value);
@@ -240,7 +242,7 @@ export class MctFormComponent implements OnInit, AfterViewInit {
             else {
                 group.controls['Rem_CPT93224_ServiceDt'].setErrors(null);
                 if (group.controls['Rem_CPT93224'].value === true && CPT93224Dt === null) {
-                    group.controls['Rem_CPT93224_ServiceDt'].setErrors({required: true});
+                    group.controls['Rem_CPT93224_ServiceDt'].setErrors({ required: true });
                 }
             }
             return;
