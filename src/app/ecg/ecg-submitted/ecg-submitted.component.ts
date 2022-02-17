@@ -14,7 +14,7 @@ import { EcgFormService } from '../ecg-service';
 @Component({
   selector: 'app-ecg-submitted',
   templateUrl: './ecg-submitted.component.html',
-  styleUrls: ['./ecg-submitted.component.css']
+  styleUrls: ['./ecg-submitted.component.scss']
 })
 export class EcgSubmittedComponent implements OnInit {
   moment: any = moment;

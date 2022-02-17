@@ -19,7 +19,7 @@ const autocomplete = (time: any, selector: any) => (source$: any) =>
 @Component({
     selector: 'mct-form',
     templateUrl: './mct-form.component.html',
-    styleUrls: ['./mct-form.component.css'],
+    styleUrls: ['./mct-form.component.scss'],
 })
 export class MctFormComponent implements OnInit, AfterViewInit {
     @Output("refreshMctForms") RefreshMctForms: EventEmitter<any> = new EventEmitter();

@@ -9,6 +9,7 @@ import { ViewChild } from '@angular/core';
 import { CcmFormComponent } from './component/ccm/ccm.component';
 import { MawvFormComponent } from './component/mawv/mawv.component';
 import { PatientListPagerModel } from '../../models/patient';
+import * as moment from 'moment';
 @Component({
   selector: 'patient-forms',
   styleUrls: ['./patient-forms.component.css'],
@@ -19,6 +20,7 @@ export class PatientFormsComponent implements OnInit {
   displayedColumns: string[] = ['edit', 'formId', 'formName', 'createdDateTime', 'updatedDateTime'];
   detailDataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatSort) sort!: MatSort;
+  moment: any = moment;
   form!: FormGroup;
   id!: string;
   isAddMode!: boolean;

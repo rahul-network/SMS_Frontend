@@ -6,43 +6,60 @@
     <mat-icon>add</mat-icon>
     MAWV
   </button>
-<table mat-table [dataSource]="detailDataSource" *ngIf="detailDataSource.data.length > 0" matSort class="mat-elevation-z8">
-    <ng-container matColumnDef="edit">
-       <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit</th>
-       <td mat-cell *matCellDef="let element">
-           <div style="cursor: pointer;" (click)="openForm(element,false)">
-               <mat-icon>edit</mat-icon>
-           </div>
-       </td>
-       
-   </ng-container>
-     <!-- Content Column -->
-     <ng-container matColumnDef="formId">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header> Form Id </th>
-         <td mat-cell *matCellDef="let element"> {{element.formId}} </td>
-     </ng-container>
-     <ng-container matColumnDef="formName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Form Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.formName}} </td>
-    </ng-container>
+
+  <hr>
+  
+  <mat-table [dataSource]="detailDataSource" matSort 
+  matSortActive="createdDateTime" matSortDirection="desc" matSortDisableClear>
+
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Edit
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <div style="cursor: pointer;" (click)="openForm(row,false)">
+            <mat-icon>edit</mat-icon>
+        </div>
+    </mat-cell>
+</ng-container>
+<ng-container matColumnDef="formId">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Form Id
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row.formId}}
+    </mat-cell>
+</ng-container>
+<ng-container matColumnDef="formName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Form Name
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row.formName}}
+    </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="createdDateTime">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Create Date Time
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{moment( row.createdDateTime).format('MMM DD YYYY HH:mm' )}}
+    </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="updatedDateTime">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Updated Date Time
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{moment( row.updatedDateTime).format('MMM DD YYYY HH:mm' )}}
+    </mat-cell>
+</ng-container>
+
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;">
+</mat-row>
+</mat-table>
+
+
+
      
-   
-     <!-- Sent/Recieved Column -->
-     <ng-container matColumnDef="createdDateTime">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date Time</th>
-         <td mat-cell *matCellDef="let element"> {{element.createdDateTime | date: 'MM/dd/yyyy HH:MM:ss' :'+0000'}} </td>
-     </ng-container>
-   
-     <!-- SMS Type Column -->
-     <ng-container matColumnDef="updatedDateTime">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header> Update Date Time </th>
-         <td mat-cell *matCellDef="let element">  {{element.updatedDateTime | date: 'MM/dd/yyyy HH:MM:ss' :'+0000'}} </td>
-     </ng-container>
-     <ng-template [ngIf]="detailDataSource.data.length === 0">
-        <tr mat-footer-row *matFooterRowDef="['noRecord']">
-        </tr>
-    </ng-template>
-     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-   </table>
+    
    

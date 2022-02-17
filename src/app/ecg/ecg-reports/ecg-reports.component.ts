@@ -15,7 +15,7 @@ import { EcgFormService } from '../ecg-service';
 @Component({
   selector: 'app-ecg-reports',
   templateUrl: './ecg-reports.component.html',
-  styleUrls: ['./ecg-reports.component.css']
+  styleUrls: ['./ecg-reports.component.scss']
 })
 export class EcgReportsComponent implements OnInit {
   moment: any = moment;

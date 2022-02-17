@@ -3,7 +3,7 @@
     <div class="col-md-2">
         <label>Start Date</label>
         <mat-form-field floatLabel="never" apperance="fill" class="mat-datepicker" (click)="datepicker.open()">
-            <input placeholder="Start Date" matInput [matDatepicker]="datepicker" [max]="todayDate" autocomplete="off" [value]="fromDate.value"
+            <input matInput [matDatepicker]="datepicker" [max]="todayDate" autocomplete="off" [value]="fromDate.value"
                 (dateChange)="fromDate.setValue($event.value)">
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker></mat-datepicker>

@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
 @Component({
   selector: 'patient-list',
   templateUrl: './patients-list.component.html',
-  styleUrls: ['./patients-list.component.css']
+  styleUrls: ['./patients-list.component.scss']
 })
 export class PatientListComponent implements OnInit, AfterViewInit {
 

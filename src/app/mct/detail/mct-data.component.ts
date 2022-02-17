@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
     selector: 'mct-form-data',
     templateUrl: './mct-data.component.html',
-    styleUrls: ['./mct-data.component.css'],
+    styleUrls: ['./mct-data.component.scss'],
 })
 export class MctDataComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort, { static: false }) sort!: MatSort;

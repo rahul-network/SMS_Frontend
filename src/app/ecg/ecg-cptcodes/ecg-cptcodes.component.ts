@@ -14,7 +14,7 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog.co
 @Component({
   selector: 'app-ecg-cptcodes',
   templateUrl: './ecg-cptcodes.component.html',
-  styleUrls: ['./ecg-cptcodes.component.css']
+  styleUrls: ['./ecg-cptcodes.component.scss']
 })
 export class EcgCptcodesComponent implements OnInit {
   moment: any = moment;

@@ -12,6 +12,7 @@ import { DialerAppComponent } from './Call/dialer-app.component';
 import { merge, Observable } from 'rxjs';
 import { startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import * as moment from 'moment';
 @Component({
   selector: 'patient-detail',
   templateUrl: './patient-detail.component.html',
@@ -20,7 +21,7 @@ import { environment } from '../../../environments/environment';
 
 
 export class PatientDetailComponent implements OnInit {
-
+  moment: any = moment;
   displayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
   messageDisplayedColumns: string[] = ['createdDateTime', 'smsType','smsStatus', 'content', 'createdByName', 'markread'];
   callsDisplayedColumns: string[] = ['createdDateTime', 'calledTo', 'callLength', 'callStartDateTime', 'remarks','createdByName'];
