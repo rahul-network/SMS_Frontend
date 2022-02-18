@@ -18,14 +18,15 @@
                         {{c.name}}
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="form.hasError('ClinicCode') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('ClinicCode').hasError('required') && submitted">
-                      Please select clinic
-                    </mat-error>
+                    
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('ClinicCode') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('ClinicCode').hasError('required') && submitted">
+                    Please select clinic
+                  </mat-error>
 
                 </div>
                 <div class="col-md-1">
@@ -60,27 +61,29 @@
                   <label>First Name</label>
                   <mat-form-field class="mat-datepicker">
                     <input formControlName="FirstName" matInput required>
-                    <mat-error *ngIf="form.hasError('mismatch') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('FirstName').hasError('required') && submitted">
-                      Required
-                    </mat-error>
+                   
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('mismatch') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('FirstName').hasError('required') && submitted">
+                    Required
+                  </mat-error>
                 </div>
                 <div class="col-md-6">
                   <label>Last Name</label>
                   <mat-form-field class="mat-datepicker">
                     <input formControlName="LastName" matInput required>
-                    <mat-error *ngIf="form.hasError('mismatch') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('LastName').hasError('required') && submitted">
-                      Required
-                    </mat-error>
+                   
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('mismatch') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('LastName').hasError('required') && submitted">
+                    Required
+                  </mat-error>
 
                 </div>
               </div>
@@ -92,6 +95,9 @@
                     <input formControlName="DOB" [max]="maxDate" matInput [matDatepicker]="DOB" required readonly>
                     <mat-datepicker-toggle matSuffix [for]="DOB"></mat-datepicker-toggle>
                     <mat-datepicker #DOB disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                  
+                    
                     <mat-error *ngIf="form.hasError('mismatch') && submitted">
                       must matcher
                     </mat-error>
@@ -99,7 +105,6 @@
                     <mat-error *ngIf="form.get('DOB').hasError('required') && submitted">
                       Required
                     </mat-error>
-                  </mat-form-field>
 
                 </div>
               </div>
@@ -133,19 +138,20 @@
                       formControlName="Rem_CPT93224_ServiceDt" matInput [matDatepicker]="cpt93224" readonly>
                     <mat-datepicker-toggle matSuffix [for]="cpt93224"></mat-datepicker-toggle>
                     <mat-datepicker #cpt93224></mat-datepicker>
-                    <mat-error *ngIf="form.hasError('Rem_CPT93224_ServiceDt') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('Rem_CPT93224_ServiceDt').hasError('required') && submitted">
-                      Required
-                    </mat-error>
-
-
-                    <mat-error *ngIf="form.get('Rem_CPT93224_ServiceDt').hasError('notEquivalent') && submitted">
-                      Service Date can not be greater than cpt93228 or cpt93229
-                    </mat-error>
+                   
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('Rem_CPT93224_ServiceDt') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('Rem_CPT93224_ServiceDt').hasError('required') && submitted">
+                    Required
+                  </mat-error>
+
+
+                  <mat-error *ngIf="form.get('Rem_CPT93224_ServiceDt').hasError('notEquivalent') && submitted">
+                    Service Date can not be greater than CPT 93228 or CPT 93229.
+                  </mat-error>
                 </div>
               </div>
 
@@ -163,14 +169,15 @@
                       readonly>
                     <mat-datepicker-toggle matSuffix [for]="cpt93228"></mat-datepicker-toggle>
                     <mat-datepicker #cpt93228></mat-datepicker>
-                    <mat-error *ngIf="form.hasError('Rem_CPT93228_ServiceDt') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('Rem_CPT93228_ServiceDt').hasError('required') && submitted">
-                      Required
-                    </mat-error>
+                   
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('Rem_CPT93228_ServiceDt') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('Rem_CPT93228_ServiceDt').hasError('required') && submitted">
+                    Required
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
@@ -186,14 +193,15 @@
                       readonly>
                     <mat-datepicker-toggle matSuffix [for]="cpt93229"></mat-datepicker-toggle>
                     <mat-datepicker #cpt93229></mat-datepicker>
-                    <mat-error *ngIf="form.hasError('Rem_CPT93229_ServiceDt') && submitted">
-                      must matcher
-                    </mat-error>
-                    <!--here show the error is form.get('passwordConfirm').hasError-->
-                    <mat-error *ngIf="form.get('Rem_CPT93229_ServiceDt').hasError('required') && submitted">
-                      Required
-                    </mat-error>
+                   
                   </mat-form-field>
+                  <mat-error *ngIf="form.hasError('Rem_CPT93229_ServiceDt') && submitted">
+                    must matcher
+                  </mat-error>
+                  <!--here show the error is form.get('passwordConfirm').hasError-->
+                  <mat-error *ngIf="form.get('Rem_CPT93229_ServiceDt').hasError('required') && submitted">
+                    Required
+                  </mat-error>
                 </div>
               </div>
               <div class="row">
@@ -204,30 +212,31 @@
                       [accept]="'.pdf'" [valuePlaceholder]="Report"></ngx-mat-file-input>
                     <mat-icon matSuffix>file_upload</mat-icon>
 
-                    <mat-error *ngIf="form.hasError('report') && submitted">
-                      must matcher
-                    </mat-error>
-                    <mat-error *ngIf="form.get('report').hasError('required') && submitted">
-                      Required
-                    </mat-error>
-                    <mat-error *ngIf="submitted &&
-                    form.get('report')
-                        ?.hasError('maxContentSize')
-                    ">
-                      File size
-                      {{
-                      form.get("report")
-                      ?.getError("maxContentSize")?.maxSize | byteFormat
-                      }}
-                      exceeded maximum limit. Uploaded file size is
-                      {{
-                      form.get("report")
-                      ?.getError("maxContentSize")?.actualSize | byteFormat
-                      }}.
-                    </mat-error>
+                   
 
                   </mat-form-field>
                   <mat-hint>**Only pdf file allowed upto 2MB.</mat-hint>
+                  <mat-error *ngIf="form.hasError('report') && submitted">
+                    must matcher
+                  </mat-error>
+                  <mat-error *ngIf="form.get('report').hasError('required') && submitted">
+                    Required
+                  </mat-error>
+                  <mat-error *ngIf="submitted &&
+                  form.get('report')
+                      ?.hasError('maxContentSize')
+                  ">
+                    File size
+                    {{
+                    form.get("report")
+                    ?.getError("maxContentSize")?.maxSize | byteFormat
+                    }}
+                    exceeded maximum limit. Uploaded file size is
+                    {{
+                    form.get("report")
+                    ?.getError("maxContentSize")?.actualSize | byteFormat
+                    }}.
+                  </mat-error>
                 </div>
               </div>
             </div>
