@@ -1,48 +1,67 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
- @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
- @import '~bootstrap/scss/functions';
-@import 'bootstrap-variables';
+@import "~bootstrap/scss/functions";
+@import "bootstrap-variables";
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
- @import "core/variables";
- @import "core/mixins";
- @import "~bootstrap/scss/bootstrap";
+@import "core/variables";
+@import "core/mixins";
+@import "~bootstrap/scss/bootstrap";
 
+// Core Components
+@import "core/buttons";
+@import "core/checkboxes";
+@import "core/radios";
+@import "core/forms";
+@import "core/input-group";
+@import "core/images";
+@import "core/navbar";
+@import "core/alerts";
+@import "core/type";
+@import "core/tabs";
+@import "core/tooltip";
+@import "core/popover";
+@import "core/dropdown";
+@import "core/togglebutton";
+@import "core/ripples";
+@import "core/footers";
+@import "core/sidebar-and-main-panel";
+@import "core/fixed-plugin";
+@import "core/tables";
+@import "core/misc";
 
- // Core Components
- @import "core/buttons";
- @import "core/checkboxes";
- @import "core/radios";
- @import "core/forms";
- @import "core/input-group";
- @import "core/images";
- @import "core/navbar";
- @import "core/alerts";
- @import "core/type";
- @import "core/tabs";
- @import "core/tooltip";
- @import "core/popover";
- @import "core/dropdown";
- @import "core/togglebutton";
- @import "core/ripples";
- @import "core/footers";
- @import "core/sidebar-and-main-panel";
- @import "core/fixed-plugin";
- @import "core/tables";
- @import "core/misc"; 
-
- @import "core/cards";
+@import "core/cards";
 @import "core/cards/card-stats";
 @import "core/cards/card-profile";
-@import "core/cards/card-plain"; 
+@import "core/cards/card-plain";
 
- //plugin scss
- @import "core/plugins/animate";
- @import "core/plugins/chartist";
- @import "core/plugins/perfect-scrollbar";
+//plugin scss
+@import "core/plugins/animate";
+@import "core/plugins/chartist";
+@import "core/plugins/perfect-scrollbar";
 
- @import "core/responsive";
+@import "core/responsive";
 
 @import "core/angular-modal.scss";
 @import "material-dashboard.scss";
+
+@media print {
+  .mat-radio-inner-circle {
+    box-shadow: 0 0 0 1000px #ff4081 inset !important;
+  }
+  .mat-checkbox-background {
+    border: 2px solid rgba(0, 0, 0, 0) !important;
+    background-color: transparent !important;
+  }
+  .mat-checkbox-checked {
+    .mat-checkbox-checkmark {
+      background: black !important;
+      .mat-checkbox-checkmark-path {
+        stroke: #ff4081 !important;
+        stroke-width: 5px !important;
+      }
+    }
+  }
+
+  
+}

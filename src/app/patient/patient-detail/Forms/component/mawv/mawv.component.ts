@@ -10,7 +10,7 @@ import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
 @Component({
     selector: 'mawv-form',
-    styleUrls: ['./mawv.component.css'],
+    styleUrls: ['./mawv.component.scss'],
     templateUrl: './mawv.component.html',
 })
 export class MawvFormComponent implements OnInit {
@@ -283,8 +283,4 @@ export class MawvFormComponent implements OnInit {
             return;
         }
     }
-
-    onPrint() {
-        window.print();  
-      }
 }

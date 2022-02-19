@@ -1,1313 +1,1352 @@
 <button mat-icon-button class="close-button" [mat-dialog-close]="true">
   <mat-icon class="close-icon">close</mat-icon>
 </button>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <mat-card>
-    <mat-card-content>
-      <header>
-        <p>
-          <img aria-label="podiatrist" src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px" width="250px" />
-        </p>
-        <span>
+<div id="demo">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-content>
+        <header>
+          <img aria-label="podiatrist" src="assets/YMiaq9zL.jpeg" style="align-items: center;" height="100px"
+            width="250px" />
           <h1>CHRONIC CARE MANAGEMENT PROGRAM</h1>
-        </span>
-      </header>
-      <p>
-        <span>
           <h2>Care plan review notes</h2>
-        </span>
-      </p>
-      <p>
-        <span>
           <h2>MEDICAL PRACTICE</h2>
-        </span>
-      </p>
-      <p style="margin-left:40%;margin-right: 40%;">
-        <span>
           <h3> {{data.medicalPractice}}</h3>
-        </span>
-      </p>
-      <p>
-        <span>
           <h2>DOCUMENT CREATED</h2>
-        </span>
-      </p>
-      <p style="margin-left:40%;margin-right: 40%;">
-        <span>
-      <h3>{{todayDate}}</h3>
-      </span>
-      </p>
-      <span>PATIENT DETAILS</span>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <p>First name</p>
-            </td>
-            <td>
-              <p>Last name</p>
-            </td>
-            <td>
-              <p>Date of birth</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+          <h3>{{todayDate}}</h3>
+        </header>
+        <span>PATIENT DETAILS</span>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                First name
+              </td>
+              <td>
+                Last name
+              </td>
+              <td>
+                Date of birth
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 &nbsp;&nbsp; {{this.data.firstName}}
-              </p>
-            </td>
-            <td>
-              <p>
+
+              </td>
+              <td>
+
                 &nbsp;&nbsp;{{this.data.lastName}}
 
-              </p>
-            </td>
-            <td>
-              <p>
+
+              </td>
+              <td>
+
                 &nbsp;&nbsp;{{data.dateOfBirth | date: 'MMMM dd yyyy'}}
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>PATIENT&rsquo;S CHRONIC CONDITIONS</span>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <p>Diagnosis 1</p>
-            </td>
-            <td>
-              <p>Diagnosis 2</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input aria-label="diagnose1" appTitleCase type="text" formControlName="diagnose1" class="form-control" />
-              </p>
-            </td>
-            <td>
-              <p>
-                <input aria-label="diagnose2" appTitleCase type="text" formControlName="diagnose2" class="form-control" />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>PATIENT&rsquo;S CARE TEAM</span>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <p>Primary care physician</p>
-            </td>
-            <td>
-              <p>Care lead</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input aria-label="primaryCarePhysician" appTitleCase type="text" formControlName="primaryCarePhysician" class="form-control" />
-              </p>
-            </td>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT&rsquo;S CHRONIC CONDITIONS</span>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                Diagnosis 1
+              </td>
+              <td>
+                Diagnosis 2
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <input aria-label="diagnose1" appTitleCase type="text" formControlName="diagnose1"
+                  class="form-control" />
+
+              </td>
+              <td>
+
+                <input aria-label="diagnose2" appTitleCase type="text" formControlName="diagnose2"
+                  class="form-control" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT&rsquo;S CARE TEAM</span>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                Primary care physician
+              </td>
+              <td>
+                Care lead
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <input aria-label="primaryCarePhysician" appTitleCase type="text" formControlName="primaryCarePhysician"
+                  class="form-control" />
+
+              </td>
+              <td>
+
                 <input aria-label="careLead" appTitleCase type="text" formControlName="careLead" class="form-control" />
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>Other provider/specialist</p>
-            </td>
-            <td>
-              <p>Podiatrist</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input aria-label="otherProvideOrSpecialist" appTitleCase type="text" formControlName="otherProvideOrSpecialist" class="form-control" />
-              </p>
-            </td>
-            <td>
-              <p>
-                <input  aria-label="podiatrist" appTitleCase type="text" formControlName="podiatrist" class="form-control" />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>PATIENT'S CARE PLAN</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgray;">
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Other provider/specialist
+              </td>
+              <td>
+                Podiatrist
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <input aria-label="otherProvideOrSpecialist" appTitleCase type="text"
+                  formControlName="otherProvideOrSpecialist" class="form-control" />
+
+              </td>
+              <td>
+
+                <input aria-label="podiatrist" appTitleCase type="text" formControlName="podiatrist"
+                  class="form-control" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>PATIENT'S CARE PLAN</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgray;">
+              <td>
+
                 <strong>Measurable treatment goals over 12 month period</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt1">Improve knowledge deficit
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt1">Improve knowledge
+                  deficit
                   related to disease process
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt2">Improve knowledge of
                   medication use/compliance</mat-checkbox>
-              </p>
-              <p>
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt3">Alteration in lifestyle
                   secondary to disease</mat-checkbox>
-              </p>
-              <p>
+
+                <br>
                 <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt4">Coping related to
                   diagnosis and prognosis</mat-checkbox>
-              </p>
-              <p>
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt5">Improved level of
                   independence/function</mat-checkbox>
-              </p>
-              <p>
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="MsrableTrtmntGoalOpt6">Manage co-existing
                   conditions</mat-checkbox>
-              </p>
 
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Planned interventions/conditions mgmt over 12 month period from initiation of plan</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt1">Understand life planning
                   documents ( DPOA, living will, healthcare
                   proxy)
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt2">Develop personal safety plan
                   (home safety/fall prevention)
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt3">Improve cognitive function
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt4">Improve mood
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt5">Support/caregiver resources and
                   involvement
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt6">Control pain
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt7">Medication adherence
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt8">Understand polypharmacy
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt9">Monitor weight
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt10">Improve sleep
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt11">Dash Diet
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt12">Decrease salt intake
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt13">Stop smoking
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt14">Stop tobacco use
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt15">Reduce alcohol use
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt16">Monitor glucose at home
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt17">Monitor blood pressure at home
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt18">Keep record of readings
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt19">Manage anxiety
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt20">Manage stress
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt21">Regularly keep doctors appts
                 </mat-checkbox>
-              </p>
-              <p>
-                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt22">Community resource availability
+                <br>
+
+
+                <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt22">Community resource
+                  availability
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt23">Improve mobility
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PlannedMgtOpt24">Exercise at least 30 min a day
                 </mat-checkbox>
-              </p>
 
 
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Symptoms management - current month</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text" formControlName="Symptomsmanagementcurrentmonth" class="form-control" />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>Periodic labs and medications review</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <input aria-label="Symptomsmanagementcurrentmonth" appTitleCase type="text"
+                  formControlName="Symptomsmanagementcurrentmonth" class="form-control" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Periodic labs and medications review</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Key labs noted this month</strong>
-              </p>
-            </td>
-            <td>
-              <p>
+
+              </td>
+              <td>
+
                 <strong>Medication management - key medication changes noted this month</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input aria-label="Keylabsnotedthismonth" appTitleCase type="text" formControlName="Keylabsnotedthismonth" class="form-control" />
-              </p>
-            </td>
-            <td>
-              <p>
-                <input aria-label="Medicationmanagementkeymedicationchangesnotedthismonth" appTitleCase type="text" formControlName="Medicationmanagementkeymedicationchangesnotedthismonth"
-                  class="form-control" />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>Telephone interventions with patient this month</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <input aria-label="Keylabsnotedthismonth" appTitleCase type="text"
+                  formControlName="Keylabsnotedthismonth" class="form-control" />
+
+              </td>
+              <td>
+
+                <input aria-label="Medicationmanagementkeymedicationchangesnotedthismonth" appTitleCase type="text"
+                  formControlName="Medicationmanagementkeymedicationchangesnotedthismonth" class="form-control" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Telephone interventions with patient this month</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Discuss of disease process</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt1">Assess weight (on
                   patient's own scale if avaialable)
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt2">Evaluate knowledge
                   of disease process
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="DiscussofDiseaseProcessOpt3">Instruct on
                   definition
                 </mat-checkbox>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Medication</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt1">Instruct on medication schedule
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt2">Evaluate effectiveness of
                   medications/symptom control
                 </mat-checkbox>
-              </p>
-              <p>
-                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt3">Educate on purpose, action, side
+                <br>
+
+
+                <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt3">Educate on purpose, action,
+                  side
                   effects, and interations of
                   medications
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="MedicationOpt4">Instruct on medication changes
                 </mat-checkbox>
-              </p>
 
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Nutrition/hydration/elimication</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt1">Assess
                   appropriate fluid and dietarty intake
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt2">Evaluate
                   knowledge of diet restrictions/fluid requirement
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt3">Instruct on
                   diet/fluid requirement as appropriate
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt4">Provide
                   assistance with meal planning
                 </mat-checkbox>
-              </p>
-              <p>
-                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt5">Assess bowel and
+                <br>
+
+
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt5">Assess bowel
+                  and
                   urinary function
                 </mat-checkbox>
-              </p>
-              <p>
-                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt6">Instruct to avoid
+                <br>
+
+
+                <mat-checkbox class="checkbox-margin" formControlName="NutrnHydrationElimincationOpt6">Instruct to
+                  avoid
                   straining with bowel movements
                 </mat-checkbox>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Activity</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="ActivityOp1">Assess current acitivity and
                   tolerance levels
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="ActivityOp2">Instruct to avoid overexertion
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="ActivityOp3">Instruct on importance of frequent
                   rest periods and pacing
                   activities
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="ActivityOp4">Improve sleep quality and duration
                   of sleep
                 </mat-checkbox>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+
                 <strong>Phycho/Social</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+
+              </td>
+            </tr>
+            <tr>
+              <td>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt1">Assess social support systems
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt2">Evacuated caregiver coping
                   status
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt3">Completed PHQ9
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt4">Completed PHQ2
                 </mat-checkbox>
-              </p>
-              <p>
+
+                <br>
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt5">Completed GADQ2
                 </mat-checkbox>
-              </p>
-              <p>
+                <br>
+
+
                 <mat-checkbox class="checkbox-margin" formControlName="PhychoSocialOpt6">Assess safety and fall risk
                 </mat-checkbox>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <p>
-                <strong>Patient response for interventions outlined above</strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                <input  aria-label="Patientresponseforinterventionsoutlinedabove" appTitleCase type="text" formControlName="Patientresponseforinterventionsoutlinedabove"
-                  class="form-control" />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>Progress/reduction of barriers noted by patient</span>
-      <table>
-        <thead>
-          <tr style="background-color: lightgrey;">
-            <td>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Excellent</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Good</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Poor</strong>
-              </p>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt1" style="display: contents;">
-            <tr>
-              <td>
-                <p>How would you evaluate your progress toward goals ?</p>
               </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Excellent"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Good"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Poor"> </mat-radio-button>
-                </p>
-              </td>
+            </tr>
+          </tbody>
+        </table>
 
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt2" style="display: contents;">
-            <tr>
-              <td>
-                <p>How would rate the education information provided this time ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Excellent"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Good"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Poor"> </mat-radio-button>
-                </p>
-              </td>
-
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt3" style="display: contents;">
-            <tr>
-              <td>
-                <p>How would you rate your mental health, including your mood and ability to think?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Excellent"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Good"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Poor"> </mat-radio-button>
-                </p>
-              </td>
-
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt4" style="display: contents;">
-            <tr>
-              <td>
-                <p>How is your follow-up with all medical appointments ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Excellent"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Good"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Poor"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <td>
-              <p><strong>Rate level of pain</strong> </p>
-            </td>
-            <td>
-              <input aria-label="Ratelevelofpain" appTitleCase type="text" formControlName="Ratelevelofpain" class="form-control" />
-            </td>
-          </tr>
-        </thead>
-
-      </table>
-      <span>Medication adherence</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Yes</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>No</strong>
-              </p>
-            </td>
-          </tr>
-          <mat-radio-group formControlName="MedicationAdherenceOpt1" style="display: contents;">
-            <tr>
-
-              <td>
-                <p>Do you forget to take your medication ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt2" style="display: contents;">
-            <tr>
-              <td>
-                <p>Are you confused about how to take your medication?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt3" style="display: contents;">
-            <tr>
-              <td>
-                <p>Have a hard time opening the bottles or self administering the medication ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt4" style="display: contents;">
-            <tr>
-              <td>
-                <p>You don't know what they are for ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt5" style="display: contents;">
-            <tr>
-              <td>
-                <p>Are you worried or are you experiencing side effects ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt6" style="display: contents;">
-            <tr>
-              <td>
-                <p>Are they too expensive ?</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="MedicationAdherenceOpt7" style="display: contents;">
-            <tr>
-              <td>
-                <p>Pharmacist says they are not available at the time</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Yes"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="No"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-        </tbody>
-      </table>
-
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <strong>Comments</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input aria-label="MedicationadherenceComments" appTitleCase type="text" formControlName="MedicationadherenceComments" class="form-control" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <span>PHQ2 reported By patient</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Not at all (0)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Several days (1)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>More than half days (2)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Nearly every day (3)</strong>
-              </p>
-            </td>
-          </tr>
-          <mat-radio-group formControlName="PHQ2ReportedByPatientOpt1" style="display: contents;">
-            <tr>
-              <td>
-                <p>Feeling down, depressed or hopeless</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PHQ2ReportedByPatientOpt2" style="display: contents;">
-            <tr>
-              <td>
-                <p>Little interest or pleasure in doing things</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-        </tbody>
-      </table>
-
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td colspan="2">
-              <strong>PHQ2 patient score</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>Greater than 3 is that depressive disorder is likely</td>
-            <td><input aria-label="PHQ2patientscore" appTitleCase type="text" formControlName="PHQ2patientscore" class="form-control" /></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <span>Generalized anxiety disorder 2-item (GAD-2)</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Not at All(0)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Several Days (1)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>More than Half Days (2)</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Nearly Every Day (3)</strong>
-              </p>
-            </td>
-          </tr>
-          <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt1" style="display: contents;">
-            <tr>
-              <td>
-                <p>Feeling nervous anxious or on edge</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt2" style="display: contents;">
-            <tr>
-              <td>
-                <p>Not being able to stop or control worrying.</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-        </tbody>
-      </table>
-
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td colspan="2">
-              <strong>GAD Patient Scrore</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>Greater than 3 is that depressive disorder is likely</td>
-            <td><input aria-label="GADPatientScrore" appTitleCase type="text" formControlName="GADPatientScrore" class="form-control" /></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-              <strong>GAD2Comments</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input aria-label="GAD2Comments" appTitleCase type="text" formControlName="GAD2Comments" class="form-control" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <span>Patient/caregiver outcomes achieved this month</span>
-      <table>
-        <tbody>
-          <tr style="background-color: lightgrey;">
-            <td>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Met</strong>
-              </p>
-            </td>
-            <td>
-              <p style="text-align: center;">
-                <strong>Not Met</strong>
-              </p>
-            </td>
-          </tr>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt1" style="display: contents;">
-            <tr>
-              <td>
-                <p>Demonstrates ability to maintain medical condition with appts kept</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt2" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes understanding of purpose, action and side effects of each medication instructed</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt3" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes general dietary restrictions discussed</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt4" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes fluid restrictions such as alcohol or caffeine</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt5" style="display: contents;">
-            <tr>
-              <td>
-                <p>Achieved optimal GI function</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt6" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes plan to meet basic ADL/IADL needs</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt7" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt8" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes how and when to call for help</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt9" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes members of support system</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-          </mat-radio-group>
-          <mat-radio-group formControlName="PatientCaregiveroutcomesOpt10" style="display: contents;">
-            <tr>
-              <td>
-                <p>Verbalizes knowledge of plan.barriers to care</p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> </mat-radio-button>
-                </p>
-              </td>
-            </tr>
-
-          </mat-radio-group>
-        </tbody>
-      </table>
-      <table>
-        <tbody>
-          <mat-radio-group formControlName="ServiceOrders" style="display: contents;">
+        <table>
+          <tbody>
             <tr style="background-color: lightgrey;">
               <td>
-                <strong>Community or social service orders given this month</strong>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Met"> Yes </mat-radio-button>
-                </p>
-              </td>
-              <td>
-                <p style="text-align: center;">
-                  <mat-radio-button value="Not Met"> No </mat-radio-button>
-                </p>
+
+                <strong>Patient response for interventions outlined above</strong>
+
               </td>
             </tr>
-          </mat-radio-group>
-        </tbody>
-      </table>
-      <br />
-      <span>ADDITIONAL NOTES</span>
-      <p>
-        <textarea aria-label="AdditionaNotes" rows="5" style="width: 100%;" formControlName="AdditionaNotes" class="form-control">
-          </textarea>
-      </p>
-      <span>PATIENT'S CONSENT</span>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <p>Date of verbal consent:</p>
-            </td>
-            <td>
-              <input aria-label="DateIfVerbalConsent" appTitleCase type="text" formControlName="DateIfVerbalConsent" class="form-control" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table>
-        <tbody>
-          <tr>
-            <td colspan="2">Patient was informed about the availability of CCM services and applicable cost sharing and
-              their right to opt-out anytime. Patient was informed only one practitioner can furnish and be paid for CCM
-              services during a calendar month.</td>
-          </tr>
-        </tbody>
-      </table>
-    </mat-card-content>
-  </mat-card>
-  <div flex layout="row" layout-align="end center" class="fullWidth pad-right-sm"
-    style="text-align: center;margin: 10px;">
-    <button mat-stroked-button  style="margin: 10px;" [mat-dialog-close]="true">
-      Cancel
-    </button>
+            <tr>
+              <td>
 
-    <button type="submit" mat-raised-button color="primary" style="margin: 10px;">
+                <input aria-label="Patientresponseforinterventionsoutlinedabove" appTitleCase type="text"
+                  formControlName="Patientresponseforinterventionsoutlinedabove" class="form-control" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Progress/reduction of barriers noted by patient</span>
+        <table>
+          <thead>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+
+                <strong>Excellent</strong>
+
+              </td>
+              <td>
+
+                <strong>Good</strong>
+
+              </td>
+              <td>
+
+                <strong>Poor</strong>
+
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt1" style="display: contents;">
+              <tr>
+                <td>
+                  How would you evaluate your progress toward goals ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Good"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+
+                </td>
+
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt2" style="display: contents;">
+              <tr>
+                <td>
+                  How would rate the education information provided this time ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Good"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+
+                </td>
+
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt3" style="display: contents;">
+              <tr>
+                <td>
+                  How would you rate your mental health, including your mood and ability to think?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Good"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+
+                </td>
+
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PrgrsRdctnOfBarriersOpt4" style="display: contents;">
+              <tr>
+                <td>
+                  How is your follow-up with all medical appointments ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Excellent"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Good"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Poor"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <strong>Rate level of pain</strong>
+              </td>
+              <td>
+                <input aria-label="Ratelevelofpain" appTitleCase type="text" formControlName="Ratelevelofpain"
+                  class="form-control" />
+              </td>
+            </tr>
+          </thead>
+
+        </table>
+        <span>Medication adherence</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+
+                <strong>Yes</strong>
+
+              </td>
+              <td>
+
+                <strong>No</strong>
+
+              </td>
+            </tr>
+            <mat-radio-group formControlName="MedicationAdherenceOpt1" style="display: contents;">
+              <tr>
+
+                <td>
+                  Do you forget to take your medication ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt2" style="display: contents;">
+              <tr>
+                <td>
+                  Are you confused about how to take your medication?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt3" style="display: contents;">
+              <tr>
+                <td>
+                  Have a hard time opening the bottles or self administering the medication ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt4" style="display: contents;">
+              <tr>
+                <td>
+                  You don't know what they are for ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt5" style="display: contents;">
+              <tr>
+                <td>
+                  Are you worried or are you experiencing side effects ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt6" style="display: contents;">
+              <tr>
+                <td>
+                  Are they too expensive ?
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="MedicationAdherenceOpt7" style="display: contents;">
+              <tr>
+                <td>
+                  Pharmacist says they are not available at the time
+                </td>
+                <td>
+
+                  <mat-radio-button value="Yes"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="No"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>Comments</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input aria-label="MedicationadherenceComments" appTitleCase type="text"
+                  formControlName="MedicationadherenceComments" class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <span>PHQ2 reported By patient</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+
+                <strong>Not at all (0)</strong>
+
+              </td>
+              <td>
+
+                <strong>Several days (1)</strong>
+
+              </td>
+              <td>
+
+                <strong>More than half days (2)</strong>
+
+              </td>
+              <td>
+
+                <strong>Nearly every day (3)</strong>
+
+              </td>
+            </tr>
+            <mat-radio-group formControlName="PHQ2ReportedByPatientOpt1" style="display: contents;">
+              <tr>
+                <td>
+                  Feeling down, depressed or hopeless
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PHQ2ReportedByPatientOpt2" style="display: contents;">
+              <tr>
+                <td>
+                  Little interest or pleasure in doing things
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td colspan="2">
+                <strong>PHQ2 patient score</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Greater than 3 is that depressive disorder is likely</td>
+              <td><input aria-label="PHQ2patientscore" appTitleCase type="text" formControlName="PHQ2patientscore"
+                  class="form-control" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <span>Generalized anxiety disorder 2-item (GAD-2)</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+
+                <strong>Not at All(0)</strong>
+
+              </td>
+              <td>
+
+                <strong>Several Days (1)</strong>
+
+              </td>
+              <td>
+
+                <strong>More than Half Days (2)</strong>
+
+              </td>
+              <td>
+
+                <strong>Nearly Every Day (3)</strong>
+
+              </td>
+            </tr>
+            <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt1" style="display: contents;">
+              <tr>
+                <td>
+                  Feeling nervous anxious or on edge
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="GeneralizedAnxietyDisroder2itemGAD2Opt2" style="display: contents;">
+              <tr>
+                <td>
+                  Not being able to stop or control worrying.
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not at All(0)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Several Days (1)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="More than Half Days (2)"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Nearly Every Day (3)"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td colspan="2">
+                <strong>GAD Patient Scrore</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Greater than 3 is that depressive disorder is likely</td>
+              <td><input aria-label="GADPatientScrore" appTitleCase type="text" formControlName="GADPatientScrore"
+                  class="form-control" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+                <strong>GAD2Comments</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input aria-label="GAD2Comments" appTitleCase type="text" formControlName="GAD2Comments"
+                  class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <span>Patient/caregiver outcomes achieved this month</span>
+        <table>
+          <tbody>
+            <tr style="background-color: lightgrey;">
+              <td>
+              </td>
+              <td>
+
+                <strong>Met</strong>
+
+              </td>
+              <td>
+
+                <strong>Not Met</strong>
+
+              </td>
+            </tr>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt1" style="display: contents;">
+              <tr>
+                <td>
+                  Demonstrates ability to maintain medical condition with appts kept
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt2" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes understanding of purpose, action and side effects of each medication instructed
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt3" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes general dietary restrictions discussed
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt4" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes fluid restrictions such as alcohol or caffeine
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt5" style="display: contents;">
+              <tr>
+                <td>
+                  Achieved optimal GI function
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt6" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes plan to meet basic ADL/IADL needs
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt7" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes importance of frequent appropriate activity level, rest periods and pacing activities
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt8" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes how and when to call for help
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt9" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes members of support system
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+            <mat-radio-group formControlName="PatientCaregiveroutcomesOpt10" style="display: contents;">
+              <tr>
+                <td>
+                  Verbalizes knowledge of plan.barriers to care
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> </mat-radio-button>
+
+                </td>
+              </tr>
+
+            </mat-radio-group>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <mat-radio-group formControlName="ServiceOrders" style="display: contents;">
+              <tr style="background-color: lightgrey;">
+                <td>
+                  <strong>Community or social service orders given this month</strong>
+                </td>
+                <td>
+
+                  <mat-radio-button value="Met"> Yes </mat-radio-button>
+
+                </td>
+                <td>
+
+                  <mat-radio-button value="Not Met"> No </mat-radio-button>
+
+                </td>
+              </tr>
+            </mat-radio-group>
+          </tbody>
+        </table>
+        <br />
+        <span>ADDITIONAL NOTES</span>
+
+        <textarea aria-label="AdditionaNotes" rows="5" style="width: 100%;" formControlName="AdditionaNotes"
+          class="form-control">
+          </textarea>
+
+        <span>PATIENT'S CONSENT</span>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                Date of verbal consent:
+              </td>
+              <td>
+                <input aria-label="DateIfVerbalConsent" appTitleCase type="text" formControlName="DateIfVerbalConsent"
+                  class="form-control" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="2">Patient was informed about the availability of CCM services and applicable cost sharing
+                and
+                their right to opt-out anytime. Patient was informed only one practitioner can furnish and be paid for
+                CCM
+                services during a calendar month.</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+<div class="row offset-5 col-md-7" style="padding-right: 6em;">
+  <div style="padding: 0.5em;">
+    <button type="button" (click)="onSubmit()" class="btn btn-primary ">
       <mat-icon *ngIf="submitted">
         <mat-spinner color="accent" diameter="20"></mat-spinner>
       </mat-icon>
       Save
     </button>
-    
   </div>
-</form>
+  <div style="padding: 0.5em;">
+    <button type="submit" class="btn btn-secondary " [mat-dialog-close]="true"> Cancel</button>
+  </div>
+  <div style="padding: 0.5em;">
+    <button printSectionId="demo" class="btn btn-secondary " [mat-dialog-close]="true" printTitle="MAWV Form" ngxPrint
+      [useExistingCss]="true"> Print</button>
+  </div>
+</div>

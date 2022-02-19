@@ -10,7 +10,7 @@ import { ViewChild } from '@angular/core';
 import * as moment from 'moment';
 @Component({
     selector: 'ccm-form',
-    styleUrls: ['./ccm.component.css'],
+    styleUrls: ['./ccm.component.scss'],
     templateUrl: './ccm.component.html',
 })
 
