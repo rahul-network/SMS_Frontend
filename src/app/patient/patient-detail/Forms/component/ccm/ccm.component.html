@@ -1346,7 +1346,7 @@
     <button type="submit" class="btn btn-secondary " [mat-dialog-close]="true"> Cancel</button>
   </div>
   <div style="padding: 0.5em;">
-    <button printSectionId="demo" class="btn btn-secondary " [mat-dialog-close]="true" printTitle="MAWV Form" ngxPrint
+    <button printSectionId="demo" *ngIf="data.formId !== undefined" class="btn btn-secondary " [mat-dialog-close]="true" printTitle="MAWV Form" ngxPrint
       [useExistingCss]="true"> Print</button>
   </div>
 </div>
