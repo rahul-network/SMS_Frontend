@@ -13,7 +13,9 @@
           <h2>MEDICAL PRACTICE</h2>
           <h3> {{data.medicalPractice}}</h3>
           <h2>DOCUMENT CREATED</h2>
-          <h3>{{todayDate}}</h3>
+          <input aria-label="documentCreated"style="border: none;text-align: center;" appTitleCase type="text" formControlName="documentCreated"
+           class="form-control" />
+
         </header>
         <span>PATIENT DETAILS</span>
         <table>
@@ -1335,6 +1337,10 @@
 </div>
 <div class="row offset-5 col-md-7" style="padding-right: 6em;">
   <div style="padding: 0.5em;">
+    <button printSectionId="demo" *ngIf="data.formId !== undefined" class="btn btn-secondary " [mat-dialog-close]="true" printTitle="MAWV Form" ngxPrint
+      [useExistingCss]="true"> Print</button>
+  </div>
+  <div style="padding: 0.5em;">
     <button type="button" (click)="onSubmit()" class="btn btn-primary ">
       <mat-icon *ngIf="submitted">
         <mat-spinner color="accent" diameter="20"></mat-spinner>
@@ -1345,8 +1351,5 @@
   <div style="padding: 0.5em;">
     <button type="submit" class="btn btn-secondary " [mat-dialog-close]="true"> Cancel</button>
   </div>
-  <div style="padding: 0.5em;">
-    <button printSectionId="demo" *ngIf="data.formId !== undefined" class="btn btn-secondary " [mat-dialog-close]="true" printTitle="MAWV Form" ngxPrint
-      [useExistingCss]="true"> Print</button>
-  </div>
+  
 </div>

@@ -22,7 +22,7 @@ export class MawvFormComponent implements OnInit {
     isAddMode!: boolean;
     loading = false;
     submitted = false;
-    todayDate = moment(new Date()).format('MMMM DD yyyy');
+    todayDate = moment(new Date()).format('MMMM DD YYYY');
     constructor(public dialog: MatDialog,
         public dialogRef: MatDialogRef<MawvFormComponent>,
         @Inject(MAT_DIALOG_DATA,
@@ -58,7 +58,8 @@ export class MawvFormComponent implements OnInit {
         this.form = new FormGroup({
             mawv_patientId: new FormControl(),
             mawv_medicalPractice: new FormControl(),
-            mawv_documentCreated: new FormControl(),
+            mawv_documentCreated: new FormControl(moment(new Date()).format('MMMM DD YYYY')),
+            
             mawv_firstName: new FormControl(this.data.firstName),
             mawv_lastName: new FormControl(this.data.lastName),
             typeOfVisit: new FormControl(),	//	TYPE OF VISIT
@@ -259,8 +260,10 @@ export class MawvFormComponent implements OnInit {
             additionalNotes: new FormControl(),	//	ADDITIONAL NOTES
         })
         if (this.data.formId !== null) {
+            debugger;
+            this.todayDate =moment(this.data.createdDateTime).format('MMMM DD YYYY');
             this.MAWVFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
-                this.todayDate = res.documentCreated;
+                
                 res.forEach((element: any) => {
                     (this.form.controls[element.fieldKey] as FormControl).patchValue(element.fieldValue)
                 })

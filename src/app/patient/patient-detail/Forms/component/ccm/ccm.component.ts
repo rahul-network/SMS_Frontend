@@ -24,7 +24,7 @@ export class CcmFormComponent implements OnInit {
     isAddMode!: boolean;
     loading = false;
     submitted = false;
-    todayDate = moment(new Date()).format('MMMM DD yyyy');
+    todayDate = moment(new Date()).format('MMMM DD YYYY');
     constructor(public dialog: MatDialog,
         public dialogRef: MatDialogRef<CcmFormComponent>,
         @Inject(MAT_DIALOG_DATA,
@@ -60,7 +60,7 @@ export class CcmFormComponent implements OnInit {
         this.form = new FormGroup({
             patientId: new FormControl(),
             medicalPractice: new FormControl(),
-            documentCreated: new FormControl(),
+            documentCreated: new FormControl(moment(new Date()).format('MMMM DD YYYY')),
             firstName: new FormControl(this.data.firstName),
             lastName: new FormControl(this.data.lastName),
             diagnose1: new FormControl(),
@@ -192,7 +192,7 @@ export class CcmFormComponent implements OnInit {
         })
         if (this.data.formId !== null) {
             this.ccmFormService.getDetailsbyFormId(this.data.formId).subscribe((res) => {
-                this.todayDate = res.documentCreated;
+                //this.todayDate = res.documentCreated;
                 res.forEach((element: any) => {
                     (this.form.controls[element.fieldKey] as FormControl).patchValue(element.fieldValue)
                 })
