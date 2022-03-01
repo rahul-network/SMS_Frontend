@@ -3452,6 +3452,9 @@
              printTitle="MAWV Form" ngxPrint [useExistingCss]="true"
              > Print</button>
           </div>
+          <div style="padding: 0.5em;">
+            <button type="submit" class="btn btn-secondary " [mat-dialog-close]="true"> Cancel</button>
+          </div>
         <div style="padding: 0.5em;">
           <button type="button" (click)="onSubmit()" class="btn btn-primary "  >
             <mat-icon *ngIf="submitted">
@@ -3459,9 +3462,7 @@
             </mat-icon>
               Save</button>
         </div>
-        <div style="padding: 0.5em;">
-          <button type="submit" class="btn btn-secondary " [mat-dialog-close]="true"> Cancel</button>
-        </div>
+       
         
       </div>
 
