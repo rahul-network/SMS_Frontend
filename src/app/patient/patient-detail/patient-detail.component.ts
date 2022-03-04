@@ -180,6 +180,8 @@ export class PatientDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(PatientSmsComponent, {
       disableClose: true,
       autoFocus:false,
+      hasBackdrop:false,
+      panelClass: 'my-dialog',
       width: '50vw',
       height: '50vh',
       data: {
