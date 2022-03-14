@@ -42,39 +42,7 @@
       </div>
     </div>
     <div class="footer-button">
-      <!-- <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings> -->
+    
     </div>
   </div>
 </div>
-
-
-<!-- <div *ngIf="data" class="main" style="height: 100%;">
-    <div  style="height: 10%;">
-    <p><span><strong>Name : </strong>{{data.firstName}} {{data.lastName}}</span></p>
-    <p><span><strong>Cell Phone : </strong>{{data.cellPhone}}</span></p>
-    <button *ngIf="!isRoomExist" style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
-        type="button" (click)="sendInvite()">
-        <i class="far fa-plus-square"></i> Send Invite
-    </button>
-    <button *ngIf="isRoomExist" style="background-color:#ffc500;" class="btn btn-lg btn-outline-secondary twitter-red"
-        type="button" (click)="joinMeeting()">
-        <i class="far fa-plus-square"></i> Join
-    </button>
-</div>
-<div  style="height: 15%;">
-    <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
-</div>
-<div  style="height: 75%;">
-      
-        <div class="row" style="border: 1px solid #ffc500;">
-          <div class="col-6 col-sm-12">  <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'"></app-camera></div>
-          <div class="col-6 col-sm-12"> <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
-            (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
-            [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants></div>
-        </div>
-    
-
-    
-
-    
-</div> -->

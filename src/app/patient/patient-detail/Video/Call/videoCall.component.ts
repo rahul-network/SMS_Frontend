@@ -16,7 +16,7 @@ import { StorageService } from '../services/storageService';
 
 @Component({
     selector: 'video-call',
-    styleUrls: ['./videoCall.component.css'],
+    styleUrls: ['./videoCall.component.scss'],
     templateUrl: './videoCall.component.html',
     providers: [StorageService]
 })

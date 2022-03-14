@@ -18,7 +18,7 @@ import {
 
 @Component({
     selector: 'app-participants',
-    styleUrls: ['./participants.component.css'],
+    styleUrls: ['./participants.component.scss'],
     templateUrl: './participants.component.html',
 })
 export class ParticipantsComponent {

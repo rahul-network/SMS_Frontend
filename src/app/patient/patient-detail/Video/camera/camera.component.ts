@@ -4,7 +4,7 @@ import { StorageService } from '../services/storage.service';
 
 @Component({
     selector: 'app-camera',
-    styleUrls: ['./camera.component.css'],
+    styleUrls: ['./camera.component.scss'],
     templateUrl: './camera.component.html',
 })
 export class CameraComponent implements AfterViewInit {

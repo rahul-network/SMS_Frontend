@@ -5,7 +5,7 @@ import { NamedRoom, VideoChatService } from '../services/videochat.service';
 
 @Component({
     selector: 'app-rooms',
-    styleUrls: ['./rooms.component.css'],
+    styleUrls: ['./rooms.component.scss'],
     templateUrl: './rooms.component.html',
 })
 export class RoomsComponent implements OnInit, OnDestroy {
