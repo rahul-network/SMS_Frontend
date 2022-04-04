@@ -264,4 +264,8 @@ export class VideoCallComponent implements OnInit {
 
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
     }
+
+    onNoClick(): void {
+        this.dialogRef.close();
+      }
 }

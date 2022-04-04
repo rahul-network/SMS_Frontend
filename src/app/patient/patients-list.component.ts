@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from './service/patient-service';
@@ -8,6 +8,7 @@ import { DialerAppComponent } from './patient-detail/Call/dialer-app.component';
 import { PatientFormsComponent } from './patient-detail/Forms/patient-forms.component';
 import {PatientListPagerModel } from './models/patient'
 import { Router } from '@angular/router'
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog.component';
 @Component({
   selector: 'patient-list',
   templateUrl: './patients-list.component.html',
@@ -63,6 +64,24 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   openECGForm() {
     this.router.navigate(['ecg']);
    
+  }
+
+  downloadPatientDeviceHistory(){
+    const dialogConfig = new MatDialogConfig();
+    const message = "Do you want to download report ?";
+    dialogConfig.data = {
+      message
+    };
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.patientService.downloadDeviceHistoryReport('QAC').subscribe(response => {
+          window.location.href = response.url;
+        }), error => console.log('Error downloading the file'),
+          () => console.info('File downloaded successfully');;
+      }
+    });
+
   }
 
   openVideoCall(_data: any) {

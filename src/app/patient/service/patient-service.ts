@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
@@ -65,4 +65,15 @@ export class PatientService {
       })
     );
   }
+  downloadDeviceHistoryReport(clinicCode : string): Observable<HttpResponse<Blob>>{
+    
+    const href = environment.apiUrl;
+    const requestUrl = `${href}/api/DeviceHistory/?&PageSize=1000000&PageNumber=1&Sort=1&ClinicCode=${clinicCode}`
+    return this.httpClient.get(requestUrl, {responseType: 'blob',observe:'response'});
+
+  }
+
+
+
+  
 }
