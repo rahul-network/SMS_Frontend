@@ -102,7 +102,6 @@ export class participendVideoCallComponent implements OnInit {
             Id: this.id,
         }
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
-        window.close();
     }
 
     toggleMute() {

@@ -8,7 +8,7 @@
           <span *ngIf="showSendInvite" class="video-title">{{data.firstName}} {{data.lastName}}</span>
           <span *ngIf="!showSendInvite" class="video-title">{{data.clinicName}}</span>
           <!-- <h5 class="participant-actions video-title">{{data.firstName}} {{data.lastName}}</h5> -->
-          <button mat-icon-button [mat-dialog-close]="true" (click)="window.close();"  style="float: right">
+          <button mat-icon-button  (click)="onNoClick();"  style="float: right">
             <mat-icon class="close-icon"  >close</mat-icon>
           </button>
         </header>

@@ -5,7 +5,7 @@ import { CameraComponent } from '../camera/camera.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { ParticipantsComponent } from '../participants/participants.component';
 import { VideoChatService } from '../services/videochat.service';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel, Subject } from '@microsoft/signalr';
 import { environment } from "../../../../../environments/environment"
 import { PatientService } from '../../../../patient/service/patient-service';
 import { PatientVideoCallService, PatientVideoCall } from '../services/patientvideocall-service';
@@ -36,6 +36,7 @@ export class VideoCallComponent implements OnInit {
     meetingId!: string;
     muted: boolean = false;
     private notificationHub!: HubConnection;
+    readonly imageTrigger: Subject<void> = new Subject<void>();
 
     constructor(public dialogRef: MatDialogRef<VideoCallComponent>,
 
@@ -45,6 +46,12 @@ export class VideoCallComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA)
         public data: any,
         private activatedRoute: ActivatedRoute) {
+            
+            dialogRef.afterClosed().subscribe((res)=> {
+                
+               alert('Called')
+          
+              });
 
         if (this.activatedRoute.snapshot.params.meetingId !== undefined) {
             this.clinicId = this.activatedRoute.snapshot.params.clinicId as number;
@@ -64,7 +71,16 @@ export class VideoCallComponent implements OnInit {
         }
         else
             this.isRoomExist = false;
+
+
+            
     }
+    ngOnDestroy(): void {
+        this.imageTrigger.complete();
+        this.camera.finalizePreview();
+        
+        console.log("ngOnDestroy completed");
+      }
 
     async ngOnInit() {
         this.disable = false;
@@ -264,8 +280,11 @@ export class VideoCallComponent implements OnInit {
 
         this.patientVideoCallService.CreateOrUpdateMeeting('QAC', this.patientId, obj).subscribe();
     }
+    
 
     onNoClick(): void {
         this.dialogRef.close();
       }
+
+      
 }

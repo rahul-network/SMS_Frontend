@@ -39,7 +39,22 @@ export class CameraComponent implements AfterViewInit {
             console.error(e);
         }
     }
-
+    Close(localtrack :LocalVideoTrack) {
+        debugger;
+        try {
+            if (localtrack) {
+                localtrack.detach().forEach(element => element.remove());
+            }
+            //this.videoTrack = null;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    ngOnDestroy(): void {
+debugger;;
+        
+        console.log("ngOnDestroy completed 1");
+      }
     private async initializeDevice(deviceId?: string) {
         try {
             this.isInitializing = true;
