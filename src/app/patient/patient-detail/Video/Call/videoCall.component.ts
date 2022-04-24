@@ -47,12 +47,6 @@ export class VideoCallComponent implements OnInit {
         public data: any,
         private activatedRoute: ActivatedRoute) {
             
-            dialogRef.afterClosed().subscribe((res)=> {
-                
-               alert('Called')
-          
-              });
-
         if (this.activatedRoute.snapshot.params.meetingId !== undefined) {
             this.clinicId = this.activatedRoute.snapshot.params.clinicId as number;
             this.patientId = this.activatedRoute.snapshot.params.patientId;
@@ -284,6 +278,7 @@ export class VideoCallComponent implements OnInit {
 
     onNoClick(): void {
         this.dialogRef.close();
+        
       }
 
       

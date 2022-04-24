@@ -32,7 +32,8 @@ export class CameraComponent implements AfterViewInit {
     finalizePreview() {
         try {
             if (this.videoTrack) {
-                this.videoTrack.detach().forEach(element => element.remove());
+                setTimeout(() => { this.videoTrack.detach().forEach(element => element.remove()); },1000)
+                
             }
             //this.videoTrack = null;
         } catch (e) {
@@ -43,7 +44,8 @@ export class CameraComponent implements AfterViewInit {
         debugger;
         try {
             if (localtrack) {
-                localtrack.detach().forEach(element => element.remove());
+                localtrack.stop();
+                
             }
             //this.videoTrack = null;
         } catch (e) {
@@ -51,9 +53,8 @@ export class CameraComponent implements AfterViewInit {
         }
     }
     ngOnDestroy(): void {
-debugger;;
-        
         console.log("ngOnDestroy completed 1");
+        this.Close(this.videoTrack);
       }
     private async initializeDevice(deviceId?: string) {
         try {
@@ -69,6 +70,7 @@ debugger;;
             this.renderer.setStyle(videoElement, 'height', '100%');
             this.renderer.setStyle(videoElement, 'width', '100%');            
             this.renderer.appendChild(this.previewElement.nativeElement, videoElement);
+            
         }
         catch (e) {
             alert(e);
